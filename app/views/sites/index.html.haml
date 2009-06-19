@@ -1,0 +1,16 @@
+%table
+  %tr
+    %th URL
+    %th State
+    %th Created At
+    %th Updated At
+    %th Image
+  - for site in @sites
+    %tr
+      %td= link_to site.url
+      %td= site.state.capitalize
+      %td= site.created_at
+      %td= site.updated_at
+      %td= link_to site.image.url, site.image.url if site.image
+
+= will_paginate @sites

@@ -20,4 +20,6 @@ class Site < ActiveRecord::Base
     transitions :from=>:processing, :to=>:failed
   end
   
+  default_scope :order=>'created_at desc'
+  
 end
