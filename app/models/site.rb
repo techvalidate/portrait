@@ -22,4 +22,6 @@ class Site < ActiveRecord::Base
   
   default_scope :order=>'created_at desc'
   
+  validates_format_of :url, :with=>/^((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,4}\/*$/i
+  
 end

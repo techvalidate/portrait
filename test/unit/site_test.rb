@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class SiteTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test 'validates an url' do
+    site = Site.new
+    assert !site.valid?
   end
+  
+  test 'validate url format' do
+    site = Site.new :url=>'invalid'
+    assert !site.valid?
+  end
+  
 end

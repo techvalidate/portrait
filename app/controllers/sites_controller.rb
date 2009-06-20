@@ -10,6 +10,9 @@ class SitesController < ApplicationController
     @site = Site.new params[:site]
     @site.save!
     redirect_to sites_path
+  rescue ActiveRecord::RecordInvalid
+    @sites = Site.paginate :page=>params[:page]
+    render :index
   end
   
 end

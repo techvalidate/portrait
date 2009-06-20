@@ -15,4 +15,20 @@ class SitesControllerTest < ActionController::TestCase
     end
   end
   
+  test 'submiting an empty url' do
+    assert_no_difference 'Site.count' do
+      post :create
+      assert_response :success
+      assert_template :index
+    end
+  end
+  
+  test 'submitting an invalid url' do
+    assert_no_difference 'Site.count' do
+      post :create, :site=>{:url=>'fake'}
+      assert_response :success
+      assert_template :index
+    end
+  end
+  
 end
