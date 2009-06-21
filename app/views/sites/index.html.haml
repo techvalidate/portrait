@@ -15,6 +15,6 @@
       %td= site.state.capitalize
       %td= site.created_at
       %td= site.updated_at
-      %td= link_to site.image.url, site.image.url if site.success?
+      %td= link_to site.image.url, site.image.url
 
 = will_paginate @sites

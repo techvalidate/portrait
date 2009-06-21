@@ -8,7 +8,7 @@ class Site < ActiveRecord::Base
   state :success
   state :failed
   
-  event :process do
+  event :started do
     transitions :from=>:submitted, :to=>:processing
   end
   
@@ -19,6 +19,35 @@ class Site < ActiveRecord::Base
   event :failed do
     transitions :from=>:processing, :to=>:failed
   end
+  
+  after_create 'process!'
+  def process!
+    started!
+    handle generate_png
+  end
+  
+  # Generate png and returns path
+  def generate_png
+    command = "python #{Rails.root}/lib/webkit2png -F -o #{id} -D #{Rails.root}/tmp #{url} "
+    logger.info "Executing #{command}"
+    system command
+    "#{Rails.root}/tmp/#{id}-full.png"
+  end
+  
+  # Set the png located at path to the image
+  def handle(path)
+    File.exist?(path) ? attach(path) : failed!
+  end
+  
+  def attach(path)
+    file = File.open path
+    update_attribute :image, file
+    file.close
+    succeeded!
+  ensure
+    FileUtils.rm path
+  end
+
   
   default_scope :order=>'created_at desc'
   
