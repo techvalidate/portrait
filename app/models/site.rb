@@ -28,7 +28,7 @@ class Site < ActiveRecord::Base
   
   # Generate png and returns path
   def generate_png
-    command = "python #{Rails.root}/lib/webkit2png -F -o #{id} -D #{Rails.root}/tmp --delay=2 #{url} "
+    command = "python #{Rails.root}/lib/webkit2png -F -o #{id} -D #{Rails.root}/tmp #{url} "
     logger.info "Executing #{command}"
     system command
     "#{Rails.root}/tmp/#{id}-full.png"
