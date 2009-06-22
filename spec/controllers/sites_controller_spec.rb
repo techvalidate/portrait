@@ -17,16 +17,14 @@ describe SitesController do
   it 'handles /sites with empty url and POST' do
     running {
       post :create
-      response.should be_success
-      response.should render_template(:index)
+      response.should redirect_to(sites_path)
     }.should_not change(Site, :count)
   end
   
   it 'handles /sites with invalid url and POST' do
     running {
       post :create, :site=>{:url=>'invalid'}
-      response.should be_success
-      response.should render_template(:index)
+      response.should redirect_to(sites_path)
     }.should_not change(Site, :count)
   end
 
