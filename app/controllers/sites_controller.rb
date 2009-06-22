@@ -1,12 +1,12 @@
 class SitesController < ApplicationController
   
-  # GET /
+  # GET /sites
   def index
     @sites = Site.paginate :page=>params[:page]
     @site  = Site.new
   end
   
-  # POST /sites
+  # POST /
   def create
     @site = Site.new params[:site]
     @site.save!
@@ -19,7 +19,6 @@ class SitesController < ApplicationController
       format.html { redirect_to sites_path }
       format.xml  { render :text=>@site.errors.to_xml, :status=>500 }
     end
-
   end
   
 end
