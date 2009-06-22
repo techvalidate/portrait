@@ -19,7 +19,7 @@ class SitesController < ApplicationController
   
   # POST /
   def api
-    @site = Site.new params[:site]
+    @site = Site.new :url=>params[:url]
     @site.save!
     render :xml=>@site.to_xml
   rescue ActiveRecord::RecordInvalid

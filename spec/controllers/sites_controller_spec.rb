@@ -33,7 +33,7 @@ describe SitesController do
   
   it 'handles / with valid parameters and POST' do
     running { 
-      post :api, :site=>{:url=>'http://google.com'}
+      post :api, :url=>'http://google.com'
       response.should be_success
       response.body.should == "<site>\n  <state>success</state>\n  <image_url>/sites/2/original/2-full.png</image_url>\n</site>\n"
     }.should change(Site, :count).by(1)
@@ -49,7 +49,7 @@ describe SitesController do
   
   it 'handles /sites with invalid url and POST' do
     running {
-      post :api, :site=>{:url=>'invalid'}
+      post :api, :url=>'invalid'
       response.response_code.should == 500
       response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n"
     }.should_not change(Site, :count)
