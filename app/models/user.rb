@@ -4,9 +4,14 @@ class User < ActiveRecord::Base
     User.find_by_name_and_password name, password
   end
   
-  has_many :sites
+  has_many :sites, :dependent=>:destroy
   
-  validates_presence_of   :name, :password
+  default_scope :order=>'name'
+  
+  def to_param() name end
+  
+  validates_presence_of   :password
   validates_uniqueness_of :name
+  validates_format_of     :name, :with=>/[a-z0-9]+/
   
 end

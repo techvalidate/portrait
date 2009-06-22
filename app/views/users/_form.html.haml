@@ -1,0 +1,13 @@
+%p
+  Name
+  %br
+  = form.text_field :name
+  
+%p
+  Password
+  %br
+  = form.text_field :password
+  
+%p
+  = form.check_box :admin
+  %label{:for=>'user[admin]'} Admin

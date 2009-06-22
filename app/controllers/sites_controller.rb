@@ -10,9 +10,9 @@ class SitesController < ApplicationController
   
   # POST /sites
   def create
-    @site = @user.sites.build params[:site]
+    @site = @current_user.sites.build params[:site]
     @site.save!
-    redirect_to sites_path
+    redirect_to sites_url
   rescue ActiveRecord::RecordInvalid
     @sites = Site.paginate :page=>params[:page]
     render :action=>:index
@@ -20,7 +20,7 @@ class SitesController < ApplicationController
   
   # POST /
   def api
-    @site = @user.sites.build :url=>params[:url]
+    @site = @current_user.sites.build :url=>params[:url]
     @site.save!
     render :xml=>@site.to_xml
   rescue ActiveRecord::RecordInvalid

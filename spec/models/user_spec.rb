@@ -27,6 +27,10 @@ describe User, 'validations' do
     User.new.should have(1).error_on(:name)
   end
   
+  it 'should have a name with valid characters' do
+    User.new(:name=>'INVALID').should have(1).error_on(:name)
+  end
+  
   it 'should have a password' do
     User.new.should have(1).error_on(:password)
   end
