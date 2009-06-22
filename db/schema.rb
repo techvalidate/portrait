@@ -28,7 +28,8 @@ ActiveRecord::Schema.define(:version => 20090622050758) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "password"
-    t.boolean  "admin",      :default => false
+    t.boolean  "admin",       :default => false
+    t.integer  "sites_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

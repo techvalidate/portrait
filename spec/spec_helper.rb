@@ -15,4 +15,9 @@ Spec::Runner.configure do |config|
   def running(&block)
     lambda &block
   end
+  
+  def login_as(username)
+    @user = users(username)
+    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
+  end
 end

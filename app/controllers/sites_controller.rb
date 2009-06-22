@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
-  before_filter :authenticate, :except=>:api
-  
+  before_filter      :user_required,  :only=>:api
+  skip_before_filter :admin_required, :only=>:api
+
   # GET /sites
   def index
     @sites = Site.paginate :page=>params[:page]
@@ -9,7 +10,7 @@ class SitesController < ApplicationController
   
   # POST /sites
   def create
-    @site = Site.new params[:site]
+    @site = @user.sites.build params[:site]
     @site.save!
     redirect_to sites_path
   rescue ActiveRecord::RecordInvalid
@@ -19,18 +20,11 @@ class SitesController < ApplicationController
   
   # POST /
   def api
-    @site = Site.new :url=>params[:url]
+    @site = @user.sites.build :url=>params[:url]
     @site.save!
     render :xml=>@site.to_xml
   rescue ActiveRecord::RecordInvalid
     render :text=>@site.errors.to_xml, :status=>500
   end
-  
-  protected
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      true
-    end
-  end
-  
+
 end

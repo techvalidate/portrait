@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SitesController do
-  before(:each) { controller.stub!(:authenticate).and_return(true) }
+  before(:each) { login_as :jordan }
 
   it 'handles / with GET' do
     get :index
@@ -11,6 +11,7 @@ describe SitesController do
   it 'handles /sites with valid parameters and POST' do
     running { 
       post :create, :site=>{:url=>'http://google.com'}
+      assigns(:site).user.should == @user
       response.should redirect_to(sites_path)
     }.should change(Site, :count).by(1)
   end
@@ -34,6 +35,7 @@ describe SitesController do
   it 'handles / with valid parameters and POST' do
     running { 
       post :api, :url=>'http://google.com'
+      assigns(:site).user.should == @user
       response.should be_success
       response.body.should == "<site>\n  <state>success</state>\n  <image_url>/sites/2/original/2-full.png</image_url>\n</site>\n"
     }.should change(Site, :count).by(1)
