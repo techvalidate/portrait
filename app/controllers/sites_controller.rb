@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  before_filter :authenticate, :except=>:api
   
   # GET /sites
   def index
@@ -23,6 +24,13 @@ class SitesController < ApplicationController
     render :xml=>@site.to_xml
   rescue ActiveRecord::RecordInvalid
     render :text=>@site.errors.to_xml, :status=>500
+  end
+  
+  protected
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      true
+    end
   end
   
 end

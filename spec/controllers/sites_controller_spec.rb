@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SitesController do
+  before(:each) { controller.stub!(:authenticate).and_return(true) }
 
   it 'handles / with GET' do
     get :index
