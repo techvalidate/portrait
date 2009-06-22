@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090619225703) do
+ActiveRecord::Schema.define(:version => 20090622050758) do
 
   create_table "sites", :force => true do |t|
     t.string   "url"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(:version => 20090619225703) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
+    t.integer  "user_id"
+  end
+
+  add_index "sites", ["user_id"], :name => "index_sites_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.boolean  "admin",      :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
