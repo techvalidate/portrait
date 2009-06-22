@@ -6,19 +6,23 @@ class SitesController < ApplicationController
     @site  = Site.new
   end
   
-  # POST /
+  # POST /sites
   def create
     @site = Site.new params[:site]
     @site.save!
-    respond_to do |format|
-      format.html { redirect_to sites_path    }
-      format.xml  { render :xml=>@site.to_xml }
-    end
+    redirect_to sites_path
   rescue ActiveRecord::RecordInvalid
-    respond_to do |format|
-      format.html { redirect_to sites_path }
-      format.xml  { render :text=>@site.errors.to_xml, :status=>500 }
-    end
+    @sites = Site.paginate :page=>params[:page]
+    render :action=>:index
+  end
+  
+  # POST /
+  def api
+    @site = Site.new params[:site]
+    @site.save!
+    render :xml=>@site.to_xml
+  rescue ActiveRecord::RecordInvalid
+    render :text=>@site.errors.to_xml, :status=>500
   end
   
 end
