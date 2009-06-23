@@ -1,1 +1,64 @@
-Portrait is a web service that turns an url into an image.
+= portrait
+
+Portrait is a web service which converts a website into a image. It is designed only for OS X. The actual hard work is handled by Paul Hammond's "webkit2png":http://www.paulhammond.org/webkit2png/ (available on "GitHub":http://github.com/paulhammond/webkit2png/tree/master).  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
+
+== Installation
+
+Portrait is a Rails 2.3+ application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
+
+After you checkout the project from GitHub, you'll need to configure @database.yml@. An example file is provided. Note: the session variables @session_key@ and @secret@ are configured in this file as well. (In a normal Rails project these would be configured elsewhere, but since this is open source, everyone needs their own key/secret)
+
+I'd suggest installing portrait on it's own subdomain like http://portrait.mydomain.com. The API endpoint is the root of the URL, so that'll make everything nice and easy.
+
+Use whatever database you want, but it'll work fine with SQLite.
+
+Create your first user with the console
+
+  $ script/console
+  
+Note: If you're setting this up for production, make sure you set your Rails environment variable to 'production' or force it in the console
+
+  $ script/console production
+  
+Once in the console, create a user. Make sure you're an admin
+
+  >> User.create :name=>'name', :password=>'password', :admin=>true
+  => #<User id: 1, name: "name", password: "password", admin: true...
+  
+And that's pretty much it
+
+== How it works
+
+Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named 'url'. You can test it with curl:
+
+  curl -X POST -d "url=http://google.com" http://name:password@portrait.mydomain.com
+  
+On a valid url, you'll get an XML response like this:
+
+  <site>
+    <state>success</success>
+    <image_url>sites/1/original/1-full.png</image_url>
+  </site>
+
+On an invalid url, you'll get something like this:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <errors>
+    <error>Url is invalid</error>
+  </errors>
+
+== Authorization
+
+Rather than open the service to the public, I opened up the source. I decided to go with basic user authentication just to be safe. I know it's not the most secure thing ever, but that's not really the point.
+
+== Admin
+
+If you're an admin user, you can login to /sites and /users to get an idea of what's going on. You can also add new sites and users there.
+
+== Author
+
+* portrait was created by Jordan McKible http://jordan.mckible.com
+
+* Available on GitHub http://github.com/jmckible/portrait
+
+* webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png/
