@@ -6,7 +6,7 @@ Portrait is a web service which converts a website into a image. It is designed 
 
 Portrait is a Rails 2.3+ application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
 
-After you checkout the project from GitHub, you'll need to configure +database.yml+. An example file is provided. Note: the session variables +session_key+ and +secret+ are configured in this file as well. (In a normal Rails project these would be configured elsewhere, but since this is open source, everyone needs their own key/secret)
+After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided. Note: the session variables +session_key+ and +secret+ are configured in this file as well. (In a normal Rails project these would be configured elsewhere, but since this is open source, everyone needs their own key/secret)
 
 I'd suggest installing portrait on it's own subdomain like http://portrait.mydomain.com. The API endpoint is the root of the URL, so that'll make everything nice and easy.
 
@@ -61,4 +61,4 @@ If you're an admin user, you can login to /sites and /users to get an idea of wh
 
 * Available on GitHub http://github.com/jmckible/portrait
 
-* webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png/
+* webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png
