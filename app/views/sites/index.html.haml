@@ -1,22 +1,20 @@
 - form_for @site do |f|
   = f.text_field :url
-  = f.submit 'Add'
+  = f.submit 'Capture URL'
 
 %table
   %tr
     %th User
     %th URL
     %th State
-    %th Created At
-    %th Updated At
+    %th Added
     %th Image
   - for site in @sites
     %tr
-      %td= h site.user.name
+      %td= link_to h(site.user.name), users_path
       %td= link_to site.url, site.url
       %td= site.state.capitalize
-      %td= site.created_at
-      %td= site.updated_at
+      %td= site.created_at.strftime '%B %e, %Y %I:%m %p'
       %td= link_to site.image.url, site.image.url
 
 = will_paginate @sites

@@ -1,13 +1,10 @@
-%p
-  Name
-  %br
-  = form.text_field :name
+%dl
+  %dt Name
+  %dd= form.text_field :name
+
+  %dt Password
+  %dd= form.text_field :password
   
-%p
-  Password
-  %br
-  = form.text_field :password
-  
-%p
-  = form.check_box :admin
-  %label{:for=>'user[admin]'} Admin
+  %dt
+    = form.check_box :admin
+    %label{:for=>'user[admin]'} Admin
