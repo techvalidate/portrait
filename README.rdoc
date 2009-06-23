@@ -46,6 +46,10 @@ On an invalid url, you'll get something like this:
   <errors>
     <error>Url is invalid</error>
   </errors>
+  
+== portrait_party
+
+If you're using Portrait within a Ruby project, you can use {portrait_party}[http://github.com/jmckible/portrait_party] to simplify the API calls. It's a simple wrapper around John Nunemaker's {HTTParty}[http://github.com/jnunemaker/httparty].
 
 == Authorization
 
