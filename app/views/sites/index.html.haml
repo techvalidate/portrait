@@ -4,6 +4,7 @@
 
 %table
   %tr
+    %th User
     %th URL
     %th State
     %th Created At
@@ -11,6 +12,7 @@
     %th Image
   - for site in @sites
     %tr
+      %td= h site.user.name
       %td= link_to site.url, site.url
       %td= site.state.capitalize
       %td= site.created_at
