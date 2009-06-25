@@ -86,6 +86,6 @@ class Site < ActiveRecord::Base
   #                               V A L I D A T I O N                         #
   #############################################################################
   validates_presence_of :user_id
-  validates_format_of   :url, :with=>/^((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,4}\/*$/i
+  validates_format_of   :url, :with=>/^((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*$/i
   
 end
