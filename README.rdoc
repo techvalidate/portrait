@@ -25,7 +25,7 @@ Once in the console, create a user. Make sure you're an admin
   >> User.create :name=>'name', :password=>'password', :admin=>true
   => #<User id: 1, name: "name", password: "password", admin: true...
   
-And that's pretty much it
+And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
 
 == How it works
 
