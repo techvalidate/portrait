@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'paperclip'
-  config.gem 'will_paginate'
+  config.gem 'mislav-will_paginate', :source=>'http://gems.github.com', :lib=>'will_paginate'
   
   config.gem 'rspec',       :lib => false, :version=>'>= 1.2.0'
   config.gem 'rspec-rails', :lib => false, :version=>'>= 1.2.0' 
