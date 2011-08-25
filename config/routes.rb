@@ -1,7 +1,11 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :sites, :collection=>{:api=>:post}
-  map.resources :users
+Portrait::Application.routes.draw do
+  resources :sites do
+    post 'api', :on=>:collection
+  end
   
-  map.api  '', :controller=>'sites', :action=>'api',   :conditions => { :method=>:post }
-  map.home '', :controller=>'home',  :action=>'index', :conditons  => { :method=>:get  }
+  resources :users
+  
+  post ''=>'sites#api',  :as=>'api'
+  root :to=>'home#index'
+  
 end
