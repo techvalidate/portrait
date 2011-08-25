@@ -37,7 +37,7 @@ describe UsersController do
   
   it 'handles /users/:id with invalid params and PUT' do
     user = users(:jordan)
-    put :update, :id=>user.to_param, :user=>{:name=>''}
+    put :update, :id=>user.to_param, :user=>{:password=>''}
     user.reload.name.should_not == ''
     response.should be_success
     response.should render_template(:show)

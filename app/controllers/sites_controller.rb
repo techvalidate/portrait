@@ -4,7 +4,7 @@ class SitesController < ApplicationController
 
   # GET /sites
   def index
-    @sites = Site.paginate :page=>params[:page]
+    @sites = Site.page(params[:page])
     @site  = Site.new
   end
   
@@ -22,7 +22,9 @@ class SitesController < ApplicationController
   def api
     @site = @current_user.sites.build :url=>params[:url]
     @site.save!
-    render :xml=>@site.to_xml
+    respond_to do |format|
+      format.xml
+    end
   rescue ActiveRecord::RecordInvalid
     render :text=>@site.errors.to_xml, :status=>500
   end

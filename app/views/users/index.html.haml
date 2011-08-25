@@ -1,6 +1,4 @@
-= error_messages_for :user
-
-- form_for @user do |f|
+= form_for @user do |f|
   = render f
   %p= f.submit 'Create User'
 
@@ -15,7 +13,7 @@
   - for user in @users
     %tr
       %td= link_to user.name, user
-      %td= h user.password
+      %td= user.password
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'
       

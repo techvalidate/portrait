@@ -38,14 +38,6 @@ class Site < ActiveRecord::Base
     image.try :url
   end
   
-  def to_xml
-    xml = Builder::XmlMarkup.new :indent=>2
-    xml.site do
-      xml.state state
-      xml.image_url image_url
-    end
-  end
-  
   #############################################################################
   #                             P R O C E S S I N G                           #
   #############################################################################
