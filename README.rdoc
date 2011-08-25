@@ -4,21 +4,19 @@ Portrait is a web service which converts a website into a image. It is designed 
 
 == Installation
 
-Portrait is a Rails 2.3+ application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
+Portrait is a Rails 3 application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
 
-After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided. Note: the session variables +session_key+ and +secret+ are configured in this file as well. (In a normal Rails project these would be configured elsewhere, but since this is open source, everyone needs their own key/secret)
+After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided.
 
 I'd suggest installing portrait on it's own subdomain like http://portrait.mydomain.com. The API endpoint is the root of the URL, so that'll make everything nice and easy.
 
-Use whatever database you want, but it'll work fine with SQLite.
+Use whatever database you want, but it'll work fine with SQLite. Begin by installing dependencies with bunder:
+
+  $ bundle
 
 Create your first user with the console
 
-  $ script/console
-  
-Note: If you're setting this up for production, make sure you set your Rails environment variable to 'production' or force it in the console
-
-  $ script/console production
+  $ rails console
   
 Once in the console, create a user. Make sure you're an admin
 
