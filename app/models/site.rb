@@ -1,3 +1,5 @@
+require 'builder'
+
 class Site < ActiveRecord::Base
   #############################################################################
   #                               P A P E R C L I P                           #
