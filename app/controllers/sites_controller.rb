@@ -22,9 +22,7 @@ class SitesController < ApplicationController
   def api
     @site = @current_user.sites.build :url=>params[:url]
     @site.save!
-    respond_to do |format|
-      format.xml
-    end
+    render :xml=>@site.to_xml
   rescue ActiveRecord::RecordInvalid
     render :text=>@site.errors.to_xml, :status=>500
   end
