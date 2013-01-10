@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.19'
 gem 'sqlite3'
 
 gem 'haml'
