@@ -1,11 +1,9 @@
-require 'builder'
-
 class Site < ActiveRecord::Base
   #############################################################################
   #                               P A P E R C L I P                           #
   #############################################################################
-  has_attached_file :image, :path => ':rails_root/public/sites/:id/:style/:basename.:extension',
-                            :url  => '/sites/:id/:style/:basename.:extension'
+  has_attached_file :image, path: ':rails_root/public/sites/:id/:style/:basename.:extension',
+                            url:  '/sites/:id/:style/:basename.:extension'
   
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
@@ -30,8 +28,9 @@ class Site < ActiveRecord::Base
   belongs_to :user, :counter_cache=>true
   
   #############################################################################
-  #                                    X M L                                  #
+  #                                   X M L                                   #
   #############################################################################
+  # Used as an attribute in xml result - See SitesController#api
   def image_url
     image.url.split('?').first if image
   end
@@ -48,9 +47,8 @@ class Site < ActiveRecord::Base
   # Generate png and returns path
   def generate_png
     command = "python #{Rails.root}/lib/webkit2png -F -o #{id} -D #{Rails.root}/tmp #{url} "
-    logger.info "Executing #{command}"
     system command
-    "#{Rails.root}/tmp/#{id}-full.png"
+    return "#{Rails.root}/tmp/#{id}-full.png"
   end
   
   # Set the png located at path to the image

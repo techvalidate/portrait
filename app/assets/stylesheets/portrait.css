@@ -34,6 +34,24 @@ input#site_url {
   width: 40em;
 }
 
+#ErrorModule {
+  width: 400px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #333;
+  font-size: 0.75em;
+}
+
+#ErrorModule h2{
+  
+  background-color: #333;
+  color: #fff;
+  margin: 0;
+  font-size: 100%;
+  font-weight: normal;
+  padding: 0.25em;
+}
+
 #Main {
   margin: 0 auto;
   width: 700px;

@@ -1,4 +1,10 @@
 = form_for @user do |f|
+  - if @user.errors.any?
+    #ErrorModule
+      %h2= "#{pluralize @user.errors.count, 'Error'} Prevented This User From Being Created"
+      %ol
+        - @user.errors.full_messages.each do |error|
+          %li= error
   = render f
   %p= f.submit 'Create User'
 

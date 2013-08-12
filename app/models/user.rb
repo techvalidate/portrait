@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   def self.authenticate(name, password)
-    User.find_by_name_and_password name, password
+    User.where(name: name, password: password).first
   end
   
   has_many :sites, :dependent=>:destroy
