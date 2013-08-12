@@ -10,22 +10,18 @@ class Site < ActiveRecord::Base
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
   #############################################################################           
-  acts_as_state_machine :initial=>:submitted
-  state :submitted
-  state :processing
-  state :success
-  state :failed
-  
-  event :started do
-    transitions :from=>:submitted, :to=>:processing
-  end
-  
-  event :succeeded do
-    transitions :from=>:processing, :to=>:success
-  end
-  
-  event :failed do
-    transitions :from=>:processing, :to=>:failed
+  state_machine :state, :initial=>:submitted do
+    event :started do
+      transition :submitted=>:processing
+    end
+    
+    event :succeeded do
+      transition :processing=>:success
+    end
+    
+    event :failed do
+      transition :processing=>:failed
+    end
   end
   
   #############################################################################
@@ -37,17 +33,7 @@ class Site < ActiveRecord::Base
   #                                    X M L                                  #
   #############################################################################
   def image_url
-    image.try :url
-  end
-  
-  def to_xml(options={})
-    options[:indent] ||= 2
-    xml = options[:builder] ||= Builder::XmlMarkup.new(:indent=>options[:indent])
-    xml.instruct! unless options[:skip_instruct]
-    xml.site do
-      xml.state state
-      xml.image_url image_url
-    end
+    image.url.split('?').first if image
   end
   
   #############################################################################
@@ -80,16 +66,11 @@ class Site < ActiveRecord::Base
   ensure
     FileUtils.rm path
   end
-
-  #############################################################################
-  #                                  S C O P I N G                            #
-  #############################################################################
-  default_scope :order=>'created_at desc'
   
   #############################################################################
   #                               V A L I D A T I O N                         #
   #############################################################################
-  validates_presence_of :user_id
-  validates_format_of   :url, :with=>/^((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*$/i
+  validates :user_id, presence: true
+  validates :url, :format=>/\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
   
 end

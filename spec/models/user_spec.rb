@@ -28,7 +28,7 @@ describe User, 'validations' do
   end
   
   it 'should have a name with valid characters' do
-    User.new(:name=>'INVALID').should have(1).error_on(:name)
+    User.new(name: 'INVALID').should have(1).error_on(:name)
   end
   
   it 'should have a password' do
@@ -36,6 +36,6 @@ describe User, 'validations' do
   end
   
   it 'should have a unique name' do
-    users(:jordan).clone.should have(1).error_on(:name)
+    User.new(name: users('jordan').name).should have(1).error_on(:name)
   end
 end

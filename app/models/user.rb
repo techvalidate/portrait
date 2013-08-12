@@ -6,12 +6,8 @@ class User < ActiveRecord::Base
   
   has_many :sites, :dependent=>:destroy
   
-  default_scope :order=>'name'
-  
   def to_param() name end
   
-  validates_presence_of   :password
-  validates_uniqueness_of :name
-  validates_format_of     :name, :with=>/[a-z0-9]+/
-  
+  validates :password, presence: true
+  validates :name, uniqueness: true, format: /[a-z0-9]+/
 end

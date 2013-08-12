@@ -9,35 +9,27 @@ describe UsersController do
   end
   
   it 'handles /users/:id with GET' do
-    get :show, :id=>users(:jordan).to_param
+    get :show, id: users(:jordan)
     response.should be_success
   end
   
   it 'handles /users with valid params and POST' do
     running {
-      post :create, :user=>{:name=>'name', :password=>'password'}
+      post :create, user: {name: 'name', password: 'password'}
       response.should redirect_to(users_path)
     }.should change(User, :count).by(1)
   end
   
-  it 'handles /users with invalid params and POST' do
-    running {
-      post :create
-      response.should be_success
-      response.should render_template(:index)
-    }.should_not change(User, :count)
-  end
-  
   it 'handles /users/:id with valid params and PUT' do
     user = users(:jordan)
-    put :update, :id=>user.to_param, :user=>{:name=>'new'}
+    put :update, id: user.to_param, user: {name: 'new'}
     user.reload.name.should == 'new'
     response.should redirect_to(user_path(user))
   end
   
   it 'handles /users/:id with invalid params and PUT' do
     user = users(:jordan)
-    put :update, :id=>user.to_param, :user=>{:password=>''}
+    put :update, id: user, user: {password: ''}
     user.reload.name.should_not == ''
     response.should be_success
     response.should render_template(:show)
@@ -45,7 +37,7 @@ describe UsersController do
   
   it 'handles /users/:id with DELETE' do
     running {
-      delete :destroy, :id=>users(:jordan).to_param
+      delete :destroy, id: users(:jordan)
       response.should redirect_to(users_path)
     }.should change(User, :count).by(-1)
   end

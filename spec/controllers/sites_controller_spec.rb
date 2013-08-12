@@ -10,23 +10,15 @@ describe SitesController do
   
   it 'handles /sites with valid parameters and POST' do
     running { 
-      post :create, :site=>{:url=>'http://google.com'}
+      post :create, site: {url: 'http://google.com'}
       assigns(:site).user.should == @user
       response.should redirect_to(sites_path)
     }.should change(Site, :count).by(1)
   end
   
-  it 'handles /sites with empty url and POST' do
-    running {
-      post :create
-      response.should be_success
-      response.should render_template(:index)
-    }.should_not change(Site, :count)
-  end
-  
   it 'handles /sites with invalid url and POST' do
     running {
-      post :create, :site=>{:url=>'invalid'}
+      post :create, site: {url: 'invalid'}
       response.should be_success
       response.should render_template(:index)
     }.should_not change(Site, :count)
@@ -34,10 +26,10 @@ describe SitesController do
   
   it 'handles / with valid parameters and POST' do
     running { 
-      post :api, :url=>'http://google.com'
+      post :api, url: 'http://google.com'
       assigns(:site).user.should == @user
-      #response.should be_success
-      #response.body.should == "<site>\n  <state>success</state>\n  <image_url>/sites/2/original/2-full.png</image_url>\n</site>\n"
+      response.should be_success
+      response.body.should ==  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <state>success</state>\n  <image-url>/sites/2/original/2-full.png</image-url>\n</site>\n"
     }.should change(Site, :count).by(1)
   end
   
