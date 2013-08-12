@@ -9,12 +9,12 @@
     %th State
     %th Added
     %th Image
-  - for site in @sites
+  - @sites.each do |site|
     %tr
       %td= link_to site.user.name, users_path
       %td= link_to site.url, site.url
       %td= site.state.capitalize
       %td= site.created_at.strftime '%B %e, %Y %I:%m %p'
-      %td= link_to site.image.url, site.image.url
+      %td= link_to(site.image.url, site.image.url) if site.image
 
 = will_paginate @sites

@@ -10,7 +10,7 @@
     %th Sites
     %th Admin
     
-  - for user in @users
+  - @users.each do |user|
     %tr
       %td= link_to user.name, user
       %td= user.password
