@@ -1,6 +1,8 @@
 .bundle
+bundler_stubs/*
 config/database.yml
 db/*.sqlite3
 log/*.log
 tmp/
 public/sites/*
+**/.DS_Store
