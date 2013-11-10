@@ -5,9 +5,10 @@ gem 'sqlite3', '1.3.8'
 
 gem 'haml', '4.0.4'
 gem 'paperclip', '3.5.2'
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '4.0.1'
 gem 'state_machine', '1.2.0'
 gem 'will_paginate', '3.0.5'
+gem 'devise', '3.2.0'
 
 group :development, :test do
   gem 'rspec-rails', '2.14.0'
