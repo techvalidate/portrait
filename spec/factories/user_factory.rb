@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:id)   { |n| n }
     sequence(:name) { |n| "user#{n}" }
-    password        "test"
+    password        "12345678"
     admin            false
 
     trait :admin do
