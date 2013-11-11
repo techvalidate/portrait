@@ -1,0 +1,14 @@
+%header.navbar.navbar-fixed-top{role: 'navigation'}
+  %div.navbar-inner
+    %div.container
+      %ul.nav.navbar-nav
+        %li= link_to 'Home', root_path
+        - if user_signed_in? && current_user.admin?
+          %li= link_to 'Captured Sites', sites_path
+          %li= link_to 'Manage Users', users_path
+      %ul.nav.navbar-nav.pull-right
+        -if user_signed_in?
+          %p.navbar-text.navbar-right Signed In as #{current_user.email} #{link_to "Sign Out", destroy_user_session_path, :method => :delete}
+        -else
+          %li= link_to "Sign Up", new_user_registration_path
+          %li= link_to "Sign In", new_user_session_path

@@ -4,8 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.order('name')
-    @user  = User.new
+    @users = User.order('email')
   end
 
   # GET /users/:id
