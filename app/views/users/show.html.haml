@@ -1,9 +1,9 @@
 = form_for @user do |f|
-  = f.label :email
+  = f.label      :email
   = f.text_field :email
-  = f.check_box :admin
-  = f.label :admin
-  %p= f.submit 'Save'
+  = f.check_box  :admin
+  = f.label      :admin
+  = f.submit     'Save'
 
 %div.row
   - @user.sites.each do |site|
