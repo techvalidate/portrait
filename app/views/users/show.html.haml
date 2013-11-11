@@ -1,5 +1,17 @@
 = form_for @user do |f|
-  = render f
+  = f.label :email
+  = f.text_field :email
+  = f.check_box :admin
+  = f.label :admin
   %p= f.submit 'Save'
-  
-%p= link_to 'Back', users_path
+
+%div.row
+  - @user.sites.each do |site|
+    - if site.state == 'success'
+      %div.col-lg-3
+        %a.thumbnail{:href => site.image.url}
+          %img{:src => site.image.url}
+
+%ul.pager
+  %li
+    = link_to(raw("&larr; Back"), users_path)
