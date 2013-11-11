@@ -26,6 +26,8 @@ class AddDeviseToUsers < ActiveRecord::Migration
   end
 
   def self.down
+    remove_index  :users, :reset_password_token
+    remove_index  :users, :email
     remove_column :users, :last_sign_in_ip
     remove_column :users, :current_sign_in_ip
     remove_column :users, :last_sign_in_at

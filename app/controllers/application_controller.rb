@@ -7,11 +7,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-
-  def user_required
-    authenticate_or_request_with_http_basic do |username, password|
-      @current_user = User.authenticate username, password
-      !@current_user.nil?
-    end
-  end
 end
