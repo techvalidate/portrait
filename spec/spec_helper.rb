@@ -47,6 +47,9 @@ Spork.prefork do
     # Exclude broken specs from running
     config.filter_run_excluding :broken => true
 
+    # Include Devise helpers
+    config.include Devise::TestHelpers, :type => :controller
+
     def running(&block)
       lambda &block
     end
