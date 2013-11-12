@@ -57,6 +57,8 @@ class SitesController < ApplicationController
     end
 
   rescue
+    # I've used the following pattern for consistency with api's error messages.
+    # Ultimately, I think creating an APIException class would be best.
     errors = ActiveModel::Errors.new(User.new)
     errors.add(*error)
     render xml: errors.to_xml, status: 500 and return
