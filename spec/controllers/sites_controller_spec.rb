@@ -46,34 +46,86 @@ describe SitesController do
     end
   end
 
-  context "through the api" do
-    before(:each) { sign_in user}
+  describe ".api" do
+    context "with valid user credentials" do
+      let(:valid_api_credentials) do
+        post :api, :url      => url,
+                   :email    => user.email,
+                   :password => user.password
+      end
+      context 'with a valid url' do
+        let(:url) { "http://google.com" }
 
-    it 'handles / with valid parameters and POST' do
-      running {
-        post :api, url: 'http://google.com'
-        assigns(:site).user.should == user
-        response.should be_success
-        # checking the entire return string is brittle and will break when code
-        # is refactored or tests are run in a different order. Use a regex to 
-        # validate the important part and leave the rest alone.
-        response.body.should =~  /<state>success<\/state>/
-      }.should change(Site, :count).by(1)
+        it 'succeeds, finds the right user, and adds a site to the database' do
+          running {
+            valid_api_credentials
+            # checking the entire return string is brittle and will break when code
+            # is refactored or tests are run in a different order. Use a regex to 
+            # validate the important part and leave the rest alone.
+            response.body.should =~  /<state>success<\/state>/
+            assigns(:site).user.should == user
+            response.should be_success
+          }.should change(Site, :count).by(1)
+        end
+      end
+      context 'with and empty url' do
+        let(:url) { "" }
+        it 'handles / with empty url and POST' do
+          running {
+            valid_api_credentials
+            response.response_code.should == 500
+            response.body.should =~ /<error>Url is invalid<\/error>/
+          }.should_not change(Site, :count)
+        end
+      end
+      context 'with an invalid url' do
+        let(:url) { 'invalid' }
+        it 'handles /sites with invalid url and POST' do
+          running {
+            valid_api_credentials
+            response.response_code.should == 500
+            response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n"
+          }.should_not change(Site, :count)
+        end
+      end
     end
-    it 'handles / with empty url and POST' do
-      running {
-        post :api
-        response.response_code.should == 500
-        response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n"
-      }.should_not change(Site, :count)
-    end
+    context 'with invalid credentials' do
+      let(:url)      { 'http://google.com' }
+      let(:email)    { user.email }
+      let(:password) { user.password }
+      let(:invalid_api_credentials) do
+        post :api, url: url, email: email, password: password
+      end
+      context 'without an email' do
+        let(:email) { }
 
-    it 'handles /sites with invalid url and POST' do
-      running {
-        post :api, :url=>'invalid'
-        response.response_code.should == 500
-        response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n"
-      }.should_not change(Site, :count)
+        it 'returns an error' do
+          invalid_api_credentials
+          response.body.should =~ /<error>Email is nil<\/error>/
+        end
+      end
+      context 'with an invalid email' do
+        let(:email) { 'INVALID' }
+
+        it 'returns email not found' do
+          invalid_api_credentials
+          response.body.should =~ /<error>Email not found<\/error>/
+        end
+      end
+      context 'without a password' do
+        let(:password) {}
+        it 'returns an error' do
+          invalid_api_credentials
+          response.body.should =~ /<error>Password is nil<\/error>/
+        end
+      end
+      context 'with an invalid password' do
+        let(:password) { 'INVALID' }
+        it 'returns invalid password' do
+          invalid_api_credentials
+          response.body.should =~ /<error>Password Invalid<\/error>/
+        end
+      end
     end
   end
 end
