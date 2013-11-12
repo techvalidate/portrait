@@ -4,7 +4,7 @@ class Site < ActiveRecord::Base
   #############################################################################
   has_attached_file :image, path: ':rails_root/public/sites/:id/:style/:basename.:extension',
                             url:  '/sites/:id/:style/:basename.:extension'
-  
+
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
   #############################################################################           
@@ -12,21 +12,21 @@ class Site < ActiveRecord::Base
     event :started do
       transition :submitted=>:processing
     end
-    
+
     event :succeeded do
       transition :processing=>:success
     end
-    
+
     event :failed do
       transition :processing=>:failed
     end
   end
-  
+
   #############################################################################
   #                         R E L A T I O N S H I P S                         #
   #############################################################################
   belongs_to :user, :counter_cache=>true
-  
+
   #############################################################################
   #                                   X M L                                   #
   #############################################################################
@@ -34,7 +34,7 @@ class Site < ActiveRecord::Base
   def image_url
     image.url.split('?').first if image
   end
-  
+
   #############################################################################
   #                             P R O C E S S I N G                           #
   #############################################################################
@@ -43,19 +43,19 @@ class Site < ActiveRecord::Base
     started!
     handle generate_png
   end
-  
+
   # Generate png and returns path
   def generate_png
     command = "python #{Rails.root}/lib/webkit2png -F -o #{id} -D #{Rails.root}/tmp #{url} "
     system command
     return "#{Rails.root}/tmp/#{id}-full.png"
   end
-  
+
   # Set the png located at path to the image
   def handle(path)
     File.exist?(path) ? attach(path) : failed!
   end
-  
+
   def attach(path)
     file = File.open path
     update_attribute :image, file
@@ -64,11 +64,11 @@ class Site < ActiveRecord::Base
   ensure
     FileUtils.rm path
   end
-  
+
   #############################################################################
   #                               V A L I D A T I O N                         #
   #############################################################################
   validates :user_id, presence: true
   validates :url, :format=>/\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
-  
+
 end

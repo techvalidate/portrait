@@ -1,8 +1,13 @@
 !!! Strict
 %html{html_attrs('en-US')}
   %head
-    = stylesheet_link_tag 'application'
     %title .portrait.
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
   %body
-    %h1 portrait
-    #Content= yield
+    = render 'layouts/nav'
+    %div.container
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: "alert alert-#{key}")
+      %div.center.jumbotron
+        = yield

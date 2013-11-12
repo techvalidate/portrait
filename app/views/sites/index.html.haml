@@ -11,7 +11,7 @@
     %th Image
   - @sites.each do |site|
     %tr
-      %td= link_to site.user.name, users_path
+      %td= link_to site.user.email, user_path(site.user)
       %td= link_to site.url, site.url
       %td= site.state.capitalize
       %td= site.created_at.strftime '%B %e, %Y %I:%m %p'

@@ -1,64 +1,61 @@
-a { color: #3c3; text-decoration: none; }
-a:hover { text-decoration: underline; }
+@import "bootstrap";
+
+html {
+  overflow-y: scroll;
+}
 
 body {
-  color: #666;
-  font-family: helvetica, sans-serif;
-  font-size: 125%;
+  padding-top: 60px;
 }
 
-#Content {
-  width: 900px;
-  margin: 0 auto;
+section {
+  overflow: auto;
 }
 
-dl {
-  font-size: 75%;
+textarea {
+  resize: vertical;
 }
-dl dt {
-  width: 5em;
-  float: left;
-  vertical-align: middle;
+
+.center {
+  text-align: center;
 }
-dl dd {
-  margin-bottom: 0.5em;
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
 }
 
 h1 {
-  font-size: 300%;
-  margin-top: 0;
-  color: #000;
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-input#site_url { 
-  width: 40em;
-}
-
-#ErrorModule {
-  width: 400px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #333;
-  font-size: 0.75em;
-}
-
-#ErrorModule h2{
-  
-  background-color: #333;
-  color: #fff;
-  margin: 0;
-  font-size: 100%;
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
   font-weight: normal;
-  padding: 0.25em;
+  color: #999;
 }
 
-#Main {
-  margin: 0 auto;
-  width: 700px;
-  padding: 1em 0 2em 2em;
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
 }
 
-p { line-height: 1.5em; }
+ul li {
+  list-style: none;
+  line-height: 1.5em;
+  margin: 0;
+}
 
 table {
   font-size: 75%;
@@ -81,11 +78,41 @@ table td {
 	padding: 8px 4px 8px 8px;
 	border-bottom: solid 1px #E6E6E6;
 	line-height: 16px;
+  text-align: left;
 }
 
-ul { margin-left: -2em; }
-ul li {
-  list-style: none;
-  line-height: 1.5em;
-  margin: 0;
+form {
+  font-size: 75%;
+}
+
+/* Style Devise Flash messages like Bootstrap */
+.alert-notice {
+  @extend .alert-info;
+}
+.alert-alert {
+  @extend .alert-warning;
+}
+.alert-error {
+  @extend .alert-danger;
+}
+
+/* thumbnail gallery */
+/* lifted from stack overflow answer */
+
+a.thumbnail {
+  overflow: hidden;
+  display:block;
+  position:relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 50% ; /* % of width, defines aspect ratio*/
+  margin-bottom: 1em;
+
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+form {
+  padding-bottom: 1em;
 }

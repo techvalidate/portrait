@@ -1,7 +1,0 @@
-google:
-  id: 1
-  image_content_type: image/png
-  image_file_name: google.png
-  state: success
-  url: http://google.com
-  user: jordan

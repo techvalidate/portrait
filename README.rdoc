@@ -1,3 +1,46 @@
+= Code Challenge
+
+I'm going to work on the user authentication model for my code challenge.
+There are a few setup steps that I'd like to take first (i.e. use FactoryGirl
+instead of fixtures, and configure the project directory for rvm so that I don't
+have to worry about gemsets or ruby versions).
+
+Next, I'm going to add devise to the project and use it for user and admin
+authentication. I'm a bit unsure how to handle api authentication with devise
+but I believe the token authentication should do the trick.
+
+Update:
+
+Re: test environment setup -- I've installed and configured spork so that tests can be run by connecting to an already running database
+server rather than needing to spin up the db each time.
+
+Completed Devise implementation. Support for lost passwords works well. Token authentication has been removed in recent versions.
+I was able to retool the api methods to support email and password login. An example would be:
+
+    $curl -X POST -d "url=http://google.com&email=test@test.com&password=12345678" http://0.0.0.0:3000
+
+I've also installed the `bootstrap-sass` gem to make things look a little nicer. I've updated the sass rules to style Devise's flash
+messages the same way Bootstrap's messages are formatted. I've placed the links to the site and user tools on the navbar so that they are
+always available to admins. Additionally, they are hidden from users who are not admins or those who are not signed in. It seems like a
+better experience to present valid actions rather than presenting the user with invalid actions and then throwing an error when they try
+to take those actions.
+
+I spent about 6 hours on the above work -- except for the api stuff. That was pretty much in line with what I'd planned on doing. I did spend
+a good deal of time writing specs that would exercise the main use cases (i.e User not signed in, User signed in, and Admin signed in). The api
+work turned out to be fairly straight forward -- spent an hour implementing current solution -- but I did go off on a tangent trying to
+configure Devise Token Authenticatable before figuring out that it has been depricated.
+
+Next Steps:
+
+Move URL capture to the navbar. Would need to implement as an AJAX form. I think users would appreciate being able to capture sites from
+any page on the app as that is the main thrust of this tool.
+
+Asynchronous capture would be a great feature to work on next. I'd look at tools like Resque, etc...
+
+Investigate using paper_trail gem for logging different versions of sites.
+
+Investigate using ActiveAdmin for CRUD workflows.
+
 = portrait
 
 Portrait is a web service which converts a website into a image. It is designed only for OS X. The actual hard work is handled by Paul Hammond's {webkit2png}[http://www.paulhammond.org/webkit2png/] (available on {GitHub}[http://github.com/paulhammond/webkit2png/tree/master]).  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
