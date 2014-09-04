@@ -46,7 +46,7 @@ class Site < ActiveRecord::Base
   
   # Generate png and returns path
   def generate_png
-    command = "python #{Rails.root}/lib/webkit2png --transparent --zoom=3.0 -F -o #{id} -D #{Rails.root}/tmp #{url} "
+    command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
     system command
     return "#{Rails.root}/tmp/#{id}-full.png"
   end
