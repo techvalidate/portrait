@@ -5,3 +5,4 @@ log/*.log
 tmp/
 public/sites/*
 .rvmrc
+.byebug_history
