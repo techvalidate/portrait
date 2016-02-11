@@ -34,7 +34,6 @@ Send a POST request to the root of the server (i.e. - http://portrait.mydomain.c
 On a valid url, you'll get an XML response like this:
 
   <site>
-    <state>success</success>
     <image_url>sites/1/original/1-full.png</image_url>
   </site>
 

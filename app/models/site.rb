@@ -5,27 +5,17 @@ class Site < ActiveRecord::Base
   has_attached_file :image, path: ':rails_root/public/sites/:id/:style/:basename.:extension',
                             url:  '/sites/:id/:style/:basename.:extension'
 
+  validates_attachment_file_name :image, matches: [/png\Z/i, /jpe?g\Z/i, /gif\Z/i]
+
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
   #############################################################################
-  state_machine :state, :initial=>:submitted do
-    event :started do
-      transition :submitted=>:processing
-    end
-
-    event :succeeded do
-      transition :processing=>:success
-    end
-
-    event :failed do
-      transition :processing=>:failed
-    end
-  end
+  enum status: [:submitted, :started, :succeeded, :failed]
 
   #############################################################################
   #                         R E L A T I O N S H I P S                         #
   #############################################################################
-  belongs_to :user, :counter_cache=>true
+  belongs_to :user, counter_cache: true
 
   #############################################################################
   #                                   X M L                                   #
@@ -69,6 +59,6 @@ class Site < ActiveRecord::Base
   #                               V A L I D A T I O N                         #
   #############################################################################
   validates :user_id, presence: true
-  validates :url, :format=>/\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
+  validates :url, format: /\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
 
 end

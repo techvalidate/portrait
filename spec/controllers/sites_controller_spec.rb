@@ -29,7 +29,7 @@ describe SitesController do
       post :api, url: 'https://google.com'
       expect(assigns(:site).user).to eq(@user)
       expect(response).to be_success
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <state>success</state>\n  <image-url>/sites/2/original/2-full.png</image-url>\n</site>\n")
+      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/sites/2/original/2-full.png</image-url>\n</site>\n")
     }.to change(Site, :count).by(1)
   end
 
