@@ -8,19 +8,19 @@ class Site < ActiveRecord::Base
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
   #############################################################################
-  # state_machine :state, :initial=>:submitted do
-  #   event :started do
-  #     transition :submitted=>:processing
-  #   end
-  #
-  #   event :succeeded do
-  #     transition :processing=>:success
-  #   end
-  #
-  #   event :failed do
-  #     transition :processing=>:failed
-  #   end
-  # end
+  state_machine :state, :initial=>:submitted do
+    event :started do
+      transition :submitted=>:processing
+    end
+
+    event :succeeded do
+      transition :processing=>:success
+    end
+
+    event :failed do
+      transition :processing=>:failed
+    end
+  end
 
   #############################################################################
   #                         R E L A T I O N S H I P S                         #
