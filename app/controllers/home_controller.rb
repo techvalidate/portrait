@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
-  skip_before_filter :admin_required
-  
+  skip_before_action :admin_required
+
   # GET /
   def index
   end
-  
+
 end

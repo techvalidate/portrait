@@ -1,10 +1,10 @@
 class SitesController < ApplicationController
-  before_filter      :user_required,  :only=>:api
-  skip_before_filter :admin_required, :only=>:api
+  before_action      :user_required,  only: :api
+  skip_before_action :admin_required, only: :api
 
   # GET /sites
   def index
-    @sites = Site.order('created_at DESC').page params[:page]
+    @sites = Site.order(created_at: :desc).page params[:page]
     @site  = Site.new
   end
 
@@ -14,7 +14,7 @@ class SitesController < ApplicationController
     @site.save!
     redirect_to sites_url
   rescue ActiveRecord::RecordInvalid
-    @sites = Site.order('created_at DESC').page params[:page]
+    @sites = Site.order(created_at: :desc).page params[:page]
     render action: 'index'
   end
 
