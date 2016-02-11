@@ -13,6 +13,7 @@
   %tr
     %th Name
     %th Email
+    %th Customer
     %th Sites
     %th Admin
     
@@ -20,6 +21,7 @@
     %tr
       %td= link_to user.name, user
       %td= user.email
+      %td= user.customer ? link_to(user.customer.name, customer_path(user.customer)) : 'n/a'
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'
       

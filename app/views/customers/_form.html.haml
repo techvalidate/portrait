@@ -1,0 +1,10 @@
+%dl
+  %dt Name
+  %dd= form.text_field :name
+
+  %dt Pricing Model
+  %dd= form.text_field :pricing_model
+
+  %dt
+    = form.check_box :blocked
+    %label{:for=>'customer[blocked]'} Blocked

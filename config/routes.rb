@@ -6,7 +6,8 @@ Portrait::Application.routes.draw do
   end
   
   resources :users
-  
+  resources :customers
+
   post '/'=>'sites#api',  as: 'api'
   get  '/'=>'home#index', as: 'root'
 end

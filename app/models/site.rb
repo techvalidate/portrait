@@ -70,5 +70,15 @@ class Site < ActiveRecord::Base
   #############################################################################
   validates :user_id, presence: true
   validates :url, :format=>/\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
-  
+
+  #############################################################################
+  #                               C A L L B A C K S                           #
+  #############################################################################
+  after_save :update_request_count
+
+  private
+
+  def update_request_count
+    user.update_request_count
+  end
 end
