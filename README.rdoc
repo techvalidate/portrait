@@ -17,24 +17,23 @@ Use whatever database you want, but it'll work fine with SQLite. Begin by instal
 Create your first user with the console
 
   $ rails console
-  
+
 Once in the console, create a user. Make sure you're an admin
 
   >> User.create name: 'name', password: 'password', admin: true
   => #<User id: 1, name: "name", password: "password", admin: true...
-  
+
 And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
 
 == How it works
 
 Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named 'url'. You can test it with curl:
 
-  curl -X POST -d "url=http://google.com" http://name:password@portrait.mydomain.com
-  
+  curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com
+
 On a valid url, you'll get an XML response like this:
 
   <site>
-    <state>success</success>
     <image_url>sites/1/original/1-full.png</image_url>
   </site>
 
@@ -44,7 +43,7 @@ On an invalid url, you'll get something like this:
   <errors>
     <error>Url is invalid</error>
   </errors>
-  
+
 == portrait_party
 
 If you're using Portrait within a Ruby project, you can use {portrait_party}[http://github.com/jmckible/portrait_party] to simplify the API calls. It's a simple wrapper around John Nunemaker's {HTTParty}[http://github.com/jnunemaker/httparty].
