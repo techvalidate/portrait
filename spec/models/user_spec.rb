@@ -2,40 +2,48 @@ require 'rails_helper'
 
 describe User, 'authentication' do
   it 'should authenticate a valid user' do
-    User.authenticate('jordan', 'password').should == users(:jordan)
+    expect(User.authenticate('jordan', 'password')).to eq users(:jordan)
   end
 
   it 'should not authenticate valid user with wrong password' do
-    User.authenticate('jordan', 'wrong').should be_nil
+    expect(User.authenticate('jordan', 'wrong')).to be_nil
   end
 
   it 'should not authenticate valid user with nil password' do
-    User.authenticate('jordan', nil).should be_nil
+    expect(User.authenticate('jordan', nil)).to be_nil
   end
 
   it 'should not authenticate with invalid user name' do
-    User.authenticate('invalid', 'anything').should be_nil
+    expect(User.authenticate('invalid', 'anything')).to be_nil
   end
 
   it 'should not authenticate with nil user name' do
-    User.authenticate(nil, nil).should be_nil
+    expect(User.authenticate(nil, nil)).to be_nil
   end
 end
 
 describe User, 'validations' do
   it 'should have a name' do
-    User.new.should have(1).error_on(:name)
+    user = User.new
+    user.valid?
+    expect(user.errors[:name]).not_to be_empty
   end
 
   it 'should have a name with valid characters' do
-    User.new(name: 'INVALID').should have(1).error_on(:name)
+    user = User.new name: 'INVALID'
+    user.valid?
+    expect(user.errors[:name]).not_to be_empty
   end
 
   it 'should have a password' do
-    User.new.should have(1).error_on(:password)
+    user = User.new
+    user.valid?
+    expect(user.errors[:password]).not_to be_empty
   end
 
   it 'should have a unique name' do
-    User.new(name: users('jordan').name).should have(1).error_on(:name)
+    user = User.new name: users(:jordan).name
+    user.valid?
+    expect(user.errors[:name]).not_to be_empty
   end
 end

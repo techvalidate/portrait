@@ -1,27 +1,29 @@
 require 'rails_helper'
 
-describe Site, 'relationships' do
-  it 'should belong to a user' do
-    sites(:google).user.should == users(:jordan)
-  end
-end
-
 describe Site do
-  it 'should have an image url' do
-    sites(:google).image_url.should == '/sites/1/original/google.png'
-  end
-end
-
-describe Site, 'validations' do
-  it 'should have an url' do
-    Site.new.should have(1).error_on(:url)
-  end
-
-  it 'should have a valid url' do
-    Site.new(url: 'invalid').should have(1).error_on(:url)
-  end
-
   it 'should belong to a user' do
-    Site.new.should have(1).error_on(:user_id)
+    expect(sites(:google).user).to eq(users(:jordan))
+  end
+
+  it 'should require a url' do
+    site = Site.new
+    site.valid?
+    expect(site.errors[:url]).not_to be_empty
+  end
+
+  it 'should require a valid url' do
+    site = Site.new url: 'invalid'
+    site.valid?
+    expect(site.errors[:url]).not_to be_empty
+  end
+
+  it 'should require a user' do
+    site = Site.new
+    site.valid?
+    expect(site.errors[:user_id]).not_to be_empty
+  end
+
+  it 'should have an image url' do
+    expect(sites(:google).image_url).to eq('/sites/1/original/google.png')
   end
 end
