@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210221827) do
+ActiveRecord::Schema.define(version: 20160211033436) do
 
   create_table "sites", force: true do |t|
     t.string   "url"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20160210221827) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "password"
     t.boolean  "admin",                  default: false
     t.integer  "sites_count",            default: 0
     t.datetime "created_at"
