@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
-  before_filter      :user_required,  :only=>:api
+  skip_before_filter :authenticate_user!, :only=>:api
   skip_before_filter :admin_required, :only=>:api
+  before_filter      :api_user_required,  :only=>:api
 
   # GET /sites
   def index
@@ -20,11 +21,23 @@ class SitesController < ApplicationController
   
   # POST /
   def api
-    @site = @current_user.sites.build url: params[:url]
+    @site = api_user.sites.build url: params[:url]
     @site.save!
     render xml: @site.to_xml(only: [:state], methods: [:image_url])
   rescue ActiveRecord::RecordInvalid
     render xml: @site.errors.to_xml, status: 500
   end
 
+  private
+
+  def api_user
+    @api_user
+  end
+
+  def api_user_required
+    authenticate_or_request_with_http_basic do |username, password|
+      @api_user = User.authenticate username, password
+      !@api_user.nil?
+    end
+  end
 end

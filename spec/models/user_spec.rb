@@ -2,7 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User, 'authentication' do
   it 'should authenticate a valid user' do
-    User.authenticate('jordan', 'password').should == users(:jordan)
+    jordan = User.create!(name: 'jordan2', email: 'jordan@example.com', password: 'password')
+    User.authenticate('jordan2', 'password').should == jordan # users(:jordan)
   end
   
   it 'should not authenticate valid user with wrong password' do

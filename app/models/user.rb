@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
+  # Include devise modules. Others available are:
+  # :rememberable, :trackable, :validatable, :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :recoverable
   
   def self.authenticate(name, password)
-    User.where(name: name, password: password).first
+    user = User.where(name: name).first
+    (user && user.valid_password?(password)) ? user : nil
   end
   
   has_many :sites, :dependent=>:destroy

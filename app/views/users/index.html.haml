@@ -12,6 +12,7 @@
 %table
   %tr
     %th Name
+    %th Email
     %th Password
     %th Sites
     %th Admin
@@ -19,6 +20,7 @@
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
+      %td= user.email
       %td= user.password
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'
