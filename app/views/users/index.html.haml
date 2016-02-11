@@ -12,14 +12,16 @@
 %table
   %tr
     %th Name
-    %th Password
+    %th Email
+    %th Customer
     %th Sites
     %th Admin
     
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
-      %td= user.password
+      %td= user.email
+      %td= user.customer ? link_to(user.customer.name, customer_path(user.customer)) : 'n/a'
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'
       

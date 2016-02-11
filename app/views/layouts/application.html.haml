@@ -4,5 +4,11 @@
     = stylesheet_link_tag 'application'
     %title .portrait.
   %body
+    #flash
+      %p.notice= notice
+      %p.alert= alert
+    #links
+      - if user_signed_in?
+        = link_to 'logout', destroy_user_session_path
     %h1 portrait
     #Content= yield

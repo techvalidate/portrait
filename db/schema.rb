@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20090622050758) do
+ActiveRecord::Schema.define(version: 20160211052427) do
+
+  create_table "customers", force: true do |t|
+    t.string  "name"
+    t.integer "request_count", default: 0
+    t.string  "pricing_model"
+    t.boolean "blocked",       default: false
+  end
 
   create_table "sites", force: true do |t|
     t.string   "url"
@@ -29,11 +36,19 @@ ActiveRecord::Schema.define(version: 20090622050758) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "password"
-    t.boolean  "admin",       default: false
-    t.integer  "sites_count", default: 0
+    t.boolean  "admin",                  default: false
+    t.integer  "sites_count",            default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.integer  "customer_id"
   end
+
+  add_index "users", ["customer_id"], name: "index_users_on_customer_id"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

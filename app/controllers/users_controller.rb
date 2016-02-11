@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  
+  before_filter :get_customers, except: [:destroy]
+
   # GET /users
   def index
     @users = User.order('name')
@@ -36,5 +37,10 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_url
   end
-  
+
+  private
+
+  def get_customers
+    @customers = Customer.all
+  end
 end

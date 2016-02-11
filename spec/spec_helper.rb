@@ -35,6 +35,9 @@ RSpec.configure do |config|
   
   def login_as(username)
     @user = users(username)
-    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
+    sign_in @user
   end
+
+  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :view
 end
