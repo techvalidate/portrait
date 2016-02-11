@@ -25,14 +25,14 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-  
+
   # Render views for controller tests
   config.render_views
-  
+
   def running(&block)
     lambda &block
   end
-  
+
   def login_as(username)
     @user = users(username)
     @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
