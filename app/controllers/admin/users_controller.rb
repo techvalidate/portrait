@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
 
   # GET /users
   def index
@@ -11,21 +11,11 @@ class UsersController < ApplicationController
     @user = User.find_by! name: params[:id]
   end
 
-  # POST /user
-  def create
-    @user = User.new user_params
-    @user.save!
-    redirect_to users_url
-  rescue ActiveRecord::RecordInvalid
-    @users = User.order('name')
-    render 'index'
-  end
-
   # PUT /users/:id
   def update
     @user = User.find_by! name: params[:id]
-    @user.update_attributes! params.require(:user).permit!
-    redirect_to @user
+    @user.update_attributes! user_params
+    redirect_to [:admin, @user]
   rescue ActiveRecord::RecordInvalid
     render 'show'
   end
@@ -34,11 +24,11 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by! name: params[:id]
     @user.destroy
-    redirect_to users_url
+    redirect_to admin_users_url
   end
 
   def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :admin)
   end
 
 end

@@ -34,7 +34,7 @@ input#site_url {
   width: 40em;
 }
 
-#ErrorModule {
+#ErrorModule, #error_explanation {
   width: 400px;
   margin: 0;
   padding: 0;
@@ -42,8 +42,8 @@ input#site_url {
   font-size: 0.75em;
 }
 
-#ErrorModule h2{
-  
+#ErrorModule h2,
+#error_explanation h2 {
   background-color: #333;
   color: #fff;
   margin: 0;
@@ -88,4 +88,15 @@ ul li {
   list-style: none;
   line-height: 1.5em;
   margin: 0;
+}
+
+nav {
+  ul {
+    list-style: none;
+    float: right;
+    li {
+      float: left;
+      margin-right: 15px;
+    }
+  }
 }

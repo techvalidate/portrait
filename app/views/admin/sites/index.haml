@@ -1,4 +1,4 @@
-= form_for @site do |f|
+= form_for [:admin, @site] do |f|
   = f.text_field :url
   = f.submit 'Capture URL'
 
@@ -11,7 +11,7 @@
     %th Image
   - @sites.each do |site|
     %tr
-      %td= link_to site.user.name, users_path
+      %td= link_to site.user.name, admin_user_path(site.user)
       %td= link_to site.url, site.url
       %td= site.status.capitalize
       %td= site.created_at.strftime '%B %e, %Y %I:%m %p'

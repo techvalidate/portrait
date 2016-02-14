@@ -1,21 +1,23 @@
 require 'rails_helper'
 
-describe User, 'validations' do
-  it 'should have a name' do
-    user = User.new
-    user.valid?
-    expect(user.errors[:name]).not_to be_empty
+describe User do
+  let (:user) { users(:joe) }
+
+  context 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+
+    it 'should have a name with valid characters' do
+      invalid_names = ['INVALID', 'foo-bar09', 'Joe Plumber', 'joe09!']
+      invalid_names.each do |invalid_name|
+        user.name = invalid_name
+        user.valid?
+        expect(user.errors[:name]).not_to be_empty
+      end
+    end
   end
 
-  it 'should have a name with valid characters' do
-    user = User.new name: 'INVALID'
-    user.valid?
-    expect(user.errors[:name]).not_to be_empty
-  end
-
-  it 'should have a unique name' do
-    user = User.new name: users(:jordan).name
-    user.valid?
-    expect(user.errors[:name]).not_to be_empty
+  context 'associations' do
+    it { should have_many(:sites) }
   end
 end

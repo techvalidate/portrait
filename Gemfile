@@ -13,4 +13,7 @@ gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails', '3.4.2'
+  gem 'shoulda-matchers', require: false
+  gem 'capybara'
+  gem 'database_cleaner'
 end

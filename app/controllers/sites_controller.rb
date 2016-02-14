@@ -1,22 +1,5 @@
 class SitesController < ApplicationController
   before_action  :authenticate_user!,  only: :api
-  skip_before_action :admin_required, only: :api
-
-  # GET /sites
-  def index
-    @sites = Site.order(created_at: :desc).page params[:page]
-    @site  = Site.new
-  end
-
-  # POST /sites
-  def create
-    @site = current_user.sites.build params.require(:site).permit(:url)
-    @site.save!
-    redirect_to sites_url
-  rescue ActiveRecord::RecordInvalid
-    @sites = Site.order(created_at: :desc).page params[:page]
-    render action: 'index'
-  end
 
   # POST /
   def api
