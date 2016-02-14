@@ -1,4 +1,5 @@
 Portrait::Application.routes.draw do
+  devise_for :users
   resources :sites do
     post 'api', on: :collection
   end

@@ -1,4 +1,5 @@
 jordan:
   name: jordan
-  password: password
+  email: jordan@techvalidate.com
+  encrypted_password: <%= Devise.bcrypt(User, 'password') %>
   admin: true

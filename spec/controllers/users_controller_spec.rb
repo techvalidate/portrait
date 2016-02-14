@@ -15,7 +15,8 @@ describe UsersController do
 
   it 'handles /users with valid params and POST' do
     expect {
-      post :create, user: { name: 'name', password: 'password' }
+      post :create, user: { email: 'example@techvalidate.com', name: 'name',
+                            password: 'password', password_confirmation: 'password' }
       expect(response).to redirect_to(users_path)
     }.to change(User, :count).by(1)
   end

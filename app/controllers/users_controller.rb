@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   # POST /user
   def create
-    @user = User.new params.require(:user).permit!
+    @user = User.new user_params
     @user.save!
     redirect_to users_url
   rescue ActiveRecord::RecordInvalid
@@ -35,6 +35,10 @@ class UsersController < ApplicationController
     @user = User.find_by! name: params[:id]
     @user.destroy
     redirect_to users_url
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :name, :password, :password_confirmation)
   end
 
 end

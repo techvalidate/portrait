@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  before_action      :user_required,  only: :api
+  before_action  :authenticate_user!,  only: :api
   skip_before_action :admin_required, only: :api
 
   # GET /sites
@@ -10,7 +10,7 @@ class SitesController < ApplicationController
 
   # POST /sites
   def create
-    @site = @current_user.sites.build params.require(:site).permit(:url)
+    @site = current_user.sites.build params.require(:site).permit(:url)
     @site.save!
     redirect_to sites_url
   rescue ActiveRecord::RecordInvalid
@@ -20,7 +20,7 @@ class SitesController < ApplicationController
 
   # POST /
   def api
-    @site = @current_user.sites.build url: params[:url]
+    @site = current_user.sites.build url: params[:url]
     @site.save!
     render xml: @site.to_xml(only: [], methods: [:image_url])
   rescue ActiveRecord::RecordInvalid

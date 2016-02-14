@@ -34,9 +34,10 @@ RSpec.configure do |config|
 
   config.render_views
   config.infer_spec_type_from_file_location!
+  config.include Devise::TestHelpers, :type => :controller
 
   def login_as(username)
     @user = users(username)
-    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
+    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.email+':password')}"
   end
 end
