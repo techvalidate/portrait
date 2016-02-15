@@ -7,7 +7,7 @@ feature "User Signin" do
     before do
       visit '/login'
 
-      fill_in 'Email', with: "joe@example.com"
+      fill_in 'Name', with: "joe"
       fill_in 'Password', with: "secret007"
 
       click_button 'Log in'
@@ -26,14 +26,14 @@ feature "User Signin" do
     before do
       visit '/login'
 
-      fill_in 'Email', with: "joe@example.com"
+      fill_in 'Name', with: "joe"
       fill_in 'Password', with: "forgot"
 
       click_button 'Log in'
     end
 
     it "should not login user" do
-      expect(page).to have_text('Invalid email or password')
+      expect(page).to have_text('Invalid name or password')
     end
 
     it "should leave user on the login page" do
