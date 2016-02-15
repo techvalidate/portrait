@@ -1,0 +1,18 @@
+%table
+  %tr
+    %th URL
+    %th Status
+    %th Added
+    %th Download image
+  - @sites.each do |site|
+    %tr
+      %td= link_to site.url, site.url
+      %td= site.status.capitalize
+      %td= site.created_at.strftime '%B %e, %Y %I:%m %p'
+      %td
+        - if site.image
+          = link_to site.image_url, site
+        - else
+          \----
+
+= will_paginate @sites

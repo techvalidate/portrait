@@ -1,4 +1,7 @@
 class Site < ActiveRecord::Base
+  # the "ultimate" url regex according to https://mathiasbynens.be/demo/url-regex
+  # with slight modifications
+  URL_REGEX = /\A(?:(?:https?):\/\/)(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?\z/
   #############################################################################
   #                               P A P E R C L I P                           #
   #############################################################################
@@ -59,6 +62,11 @@ class Site < ActiveRecord::Base
   #                               V A L I D A T I O N                         #
   #############################################################################
   validates :user, presence: true
-  validates :url, presence: true, format: /\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\z/i
+  validates :url, presence: true, format: URL_REGEX
+
+  #############################################################################
+  #                               S C O P E S                                 #
+  #############################################################################
+  default_scope { order(created_at: :desc) }
 
 end

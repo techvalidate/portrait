@@ -8,11 +8,20 @@ describe Site do
     it { should validate_presence_of(:user) }
 
     it 'should require a valid url' do
-      invalid_urls = ['invalid', 'http://foocom', 'http://foo.com1']
+      invalid_urls = ['invalid', 'http://foocom', 'http://foo.com1', 'http://', '.com', 'foo.org', 'http:// shouldfail.com']
       invalid_urls.each do |url|
         site.url = url
         site.valid?
         expect(site.errors[:url]).not_to be_empty
+      end
+    end
+
+    it 'should recognize a valid url' do
+      valid_urls = ['http://foo.com/blah_blah', 'http://shop.foo.com/bar/baz.do', 'https://foo.com/blah_(wikipedia)_blah#cite-1']
+      valid_urls.each do |url|
+        site.url = url
+        site.valid?
+        expect(site.errors[:url]).to be_empty
       end
     end
   end

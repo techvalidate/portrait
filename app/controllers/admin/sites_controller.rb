@@ -2,7 +2,7 @@ class Admin::SitesController < Admin::BaseController
 
   # GET /sites
   def index
-    @sites = Site.order(created_at: :desc).page params[:page]
+    @sites = Site.paginate page: params[:page] || 1, per_page: 30
     @site  = Site.new
   end
 

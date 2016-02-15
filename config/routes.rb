@@ -7,7 +7,7 @@ Portrait::Application.routes.draw do
     get 'signup', to: 'devise/registrations#new'
   end
 
-  resources :sites do
+  resources :sites, only: [:index, :show] do
     post 'api', on: :collection
   end
 
