@@ -28,25 +28,28 @@ class Site < ActiveRecord::Base
     image.url.split('?').first if image
   end
 
+  def msg
+    case status.to_sym
+      when :started
+        "Image creation started. It should be available shortly for download on the site."
+      when :succeeded
+        "Image successfully created: #{image_url}"
+      when :failed
+        "Image creation failed."
+      end
+  end
+
   #############################################################################
   #                             P R O C E S S I N G                           #
   #############################################################################
   after_create 'process!'
   def process!
     started!
-    handle generate_png
+    SiteCaptureJob.perform_async(id)
   end
 
-  # Generate png and returns path
-  def generate_png
-    command = "phantomjs --ignore-ssl-errors=true #{Rails.root}/lib/rasterize.js #{url} #{Rails.root}/tmp/#{id}-full.png"
-    system command
-    return "#{Rails.root}/tmp/#{id}-full.png"
-  end
-
-  # Set the png located at path to the image
-  def handle(path)
-    File.exist?(path) ? attach(path) : failed!
+  def tmp_image_file
+    "#{Rails.root}/tmp/#{id}-full.png"
   end
 
   def attach(path)

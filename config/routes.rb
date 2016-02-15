@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Portrait::Application.routes.draw do
   devise_for :users
 
@@ -16,6 +18,9 @@ Portrait::Application.routes.draw do
     resources :sites, only: [:index, :create]
   end
 
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   post '/'=>'sites#api',  as: 'api'
   get  '/'=>'home#index', as: 'root'

@@ -19,7 +19,7 @@ class SitesController < ApplicationController
   def api
     @site = current_user.sites.build url: params[:url]
     @site.save!
-    render xml: @site.to_xml(only: [], methods: [:image_url])
+    render xml: @site.to_xml(only: [], methods: [:status, :msg])
   rescue ActiveRecord::RecordInvalid
     render xml: @site.errors.to_xml, status: 500
   end
