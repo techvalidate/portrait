@@ -4,7 +4,10 @@ Portrait is a web service which converts a website into a image. It is designed 
 
 == Installation
 
-Portrait is a Rails 4 application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
+Portrait is a Rails 4 application. So you'll need some kind of Rails stack. It also depends on 'phantomjs', which is a headless cross-platform browser.
+You can find download and installation instructions for `phantomjs` here: http://phantomjs.org/download.html. If you're on a Mac, you can also install it via 'homebrew':
+
+  $ brew install phantomjs
 
 After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided.
 
@@ -23,7 +26,7 @@ Once in the console, create a user. Make sure you're an admin
   >> User.create name: 'name', password: 'password', admin: true
   => #<User id: 1, name: "name", password: "password", admin: true...
 
-And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
+And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for the screencapture to work.
 
 == How it works
 
@@ -62,4 +65,4 @@ If you're an admin user, you can login to /sites and /users to get an idea of wh
 
 * Available on GitHub http://github.com/jmckible/portrait
 
-* webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png
+* PhantomJS http://phantomjs.org/

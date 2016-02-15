@@ -36,7 +36,7 @@ class Site < ActiveRecord::Base
 
   # Generate png and returns path
   def generate_png
-    command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
+    command = "phantomjs --ignore-ssl-errors=true #{Rails.root}/lib/rasterize.js #{url} #{Rails.root}/tmp/#{id}-full.png"
     system command
     return "#{Rails.root}/tmp/#{id}-full.png"
   end
