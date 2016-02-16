@@ -9,9 +9,7 @@ Portrait::Application.routes.draw do
     get 'signup', to: 'devise/registrations#new'
   end
 
-  resources :sites, only: [:index, :show] do
-    post 'api', on: :collection
-  end
+  resources :sites, only: [:index, :show]
 
   namespace :admin do
     resources :users
@@ -22,6 +20,11 @@ Portrait::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  post '/'=>'sites#api',  as: 'api'
+  namespace :api do
+    namespace :v1 do
+      resources :sites, only: [:index, :show, :create]
+    end
+  end
+
   get  '/'=>'home#index', as: 'root'
 end

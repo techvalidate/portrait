@@ -34,14 +34,15 @@ And that's pretty much it. If you're planning to run portrait on a server-type s
 
 Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named 'url'. You can test it with curl:
 
-  curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com
+  curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com/api/v1/sites
 
 On a valid url, you'll get an XML response like this:
 
   <?xml version="1.0" encoding="UTF-8"?>
   <site>
+    <url>https://google.com</url>
     <status>started</status>
-    <msg>Image creation started. It should be available shortly for download on the site.</msg>
+    <link>http://portrait.mydomain.com/api/v1/sites/1</link>
   </site>
 
 On an invalid url, you'll get something like this:
@@ -50,6 +51,20 @@ On an invalid url, you'll get something like this:
   <errors>
     <error>Url is invalid</error>
   </errors>
+
+Since screencapture creation is handled by a background process, we supply the link to the resource in the API response so it can be accessed later. An example of a curl request to retrieve an existing record:
+
+  curl http://name:password@portrait.mydomain.com/api/v1/sites/11
+
+would return a structure like this:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <site>
+    <url>https://google.com</url>
+    <status>started</status>
+    <link>http://portrait.mydomain.com/api/v1/sites/1</link>
+    <image-url>/sites/1/original/google.png</image-url>
+  </site>
 
 == portrait_party
 

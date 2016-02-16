@@ -1,6 +1,5 @@
 class SitesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: :api
-  before_action  :authenticate_user!,  only: :api
+  before_action  :authenticate_user!
 
   def index
     @sites = current_user.sites.paginate page: params[:page] || 1, per_page: 30
@@ -13,15 +12,6 @@ class SitesController < ApplicationController
     else
       redirect_to sites_path, error: "You are not authorized to view this site"
     end
-  end
-
-  # POST /
-  def api
-    @site = current_user.sites.build url: params[:url]
-    @site.save!
-    render xml: @site.to_xml(only: [], methods: [:status, :msg])
-  rescue ActiveRecord::RecordInvalid
-    render xml: @site.errors.to_xml, status: 500
   end
 
 end

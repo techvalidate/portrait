@@ -28,17 +28,6 @@ class Site < ActiveRecord::Base
     image.url.split('?').first if image
   end
 
-  def msg
-    case status.to_sym
-      when :started
-        "Image creation started. It should be available shortly for download on the site."
-      when :succeeded
-        "Image successfully created: #{image_url}"
-      when :failed
-        "Image creation failed."
-      end
-  end
-
   #############################################################################
   #                             P R O C E S S I N G                           #
   #############################################################################
