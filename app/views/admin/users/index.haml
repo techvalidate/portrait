@@ -1,0 +1,13 @@
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Sites
+    %th Admin
+
+  - @users.each do |user|
+    %tr
+      %td= link_to user.name, [:admin, user]
+      %td= user.email
+      %td= number_with_delimiter user.sites.count
+      %td= user.admin? ? 'Yes' : 'No'

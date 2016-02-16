@@ -1,19 +1,16 @@
 class ApplicationController < ActionController::Base
-  before_action :admin_required
+  protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :user_is_admin?
 
   protected
-  def admin_required
-    authenticate_or_request_with_http_basic do |username, password|
-      @current_user = User.authenticate username, password
-      @current_user && @current_user.admin?
-    end
+
+  def user_is_admin?
+    current_user && current_user.admin?
   end
 
-  def user_required
-    authenticate_or_request_with_http_basic do |username, password|
-      @current_user = User.authenticate username, password
-      !@current_user.nil?
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up)        << [:email]
+    devise_parameter_sanitizer.for(:account_update) << [:email]
   end
-
 end

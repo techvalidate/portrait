@@ -1,49 +1,25 @@
 require 'rails_helper'
 
-describe User, 'authentication' do
-  it 'should authenticate a valid user' do
-    expect(User.authenticate('jordan', 'password')).to eq users(:jordan)
+describe User do
+  let (:user) { users(:joe) }
+
+  context 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name).case_insensitive }
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
+
+    it 'should have a name with valid characters' do
+      invalid_names = ['INVALID', 'foo-bar09', 'Joe Plumber', 'joe09!']
+      invalid_names.each do |invalid_name|
+        user.name = invalid_name
+        user.valid?
+        expect(user.errors[:name]).not_to be_empty
+      end
+    end
   end
 
-  it 'should not authenticate valid user with wrong password' do
-    expect(User.authenticate('jordan', 'wrong')).to be_nil
-  end
-
-  it 'should not authenticate valid user with nil password' do
-    expect(User.authenticate('jordan', nil)).to be_nil
-  end
-
-  it 'should not authenticate with invalid user name' do
-    expect(User.authenticate('invalid', 'anything')).to be_nil
-  end
-
-  it 'should not authenticate with nil user name' do
-    expect(User.authenticate(nil, nil)).to be_nil
-  end
-end
-
-describe User, 'validations' do
-  it 'should have a name' do
-    user = User.new
-    user.valid?
-    expect(user.errors[:name]).not_to be_empty
-  end
-
-  it 'should have a name with valid characters' do
-    user = User.new name: 'INVALID'
-    user.valid?
-    expect(user.errors[:name]).not_to be_empty
-  end
-
-  it 'should have a password' do
-    user = User.new
-    user.valid?
-    expect(user.errors[:password]).not_to be_empty
-  end
-
-  it 'should have a unique name' do
-    user = User.new name: users(:jordan).name
-    user.valid?
-    expect(user.errors[:name]).not_to be_empty
+  context 'associations' do
+    it { should have_many(:sites) }
   end
 end

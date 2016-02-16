@@ -1,0 +1,12 @@
+%nav
+  %ul
+    - if user_is_admin?
+      %li= link_to 'Sidekiq dashboard', '/sidekiq'
+      %li= link_to 'Captured Sites', admin_sites_path
+      %li= link_to 'Manage Users', admin_users_path
+    - if user_signed_in?
+      %li= link_to "My Sites", sites_path
+      %li= link_to "Log out", logout_path
+    - else
+      %li= link_to "Sign up", signup_path
+      %li= link_to "Log in", login_path

@@ -9,7 +9,13 @@ gem 'haml', '4.0.7'
 gem 'paperclip', '4.3.5'
 gem 'sass-rails', '5.0.4'
 gem 'will_paginate', '3.1.0'
+gem 'devise'
+gem 'sidekiq'
+gem 'sinatra' # used for sidekiq monitoring web UI
 
 group :development, :test do
   gem 'rspec-rails', '3.4.2'
+  gem 'shoulda-matchers', require: false
+  gem 'capybara'
+  gem 'database_cleaner'
 end

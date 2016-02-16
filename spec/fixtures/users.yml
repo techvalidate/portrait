@@ -1,4 +1,9 @@
-jordan:
+admin:
   name: jordan
-  password: password
+  email: jordan@techvalidate.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   admin: true
+joe:
+  name: joe
+  email: joe@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'secret007') %>

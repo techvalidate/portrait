@@ -4,4 +4,4 @@ google:
   image_file_name: google.png
   status: <%= Site.statuses[:succeeded] %>
   url: http://google.com
-  user: jordan
+  user: joe

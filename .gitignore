@@ -1,6 +1,10 @@
+.DS_Store
 .bundle
+.idea/
 config/database.yml
+config/initializers/sidekiq.rb
 db/*.sqlite3
 log/*.log
 tmp/
 public/sites/*
+public/.DS_Store

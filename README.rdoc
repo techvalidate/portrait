@@ -1,12 +1,17 @@
 = portrait
 
-Portrait is a web service which converts a website into a image. It is designed only for OS X. The actual hard work is handled by Paul Hammond's {webkit2png}[http://www.paulhammond.org/webkit2png/] (available on {GitHub}[http://github.com/paulhammond/webkit2png/tree/master]).  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
+Portrait is a web service which converts a website into a image. It works on all platforms. The actual hard work is handled by {PhantomJS}[http://phantomjs.org/].  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
 
 == Installation
 
-Portrait is a Rails 4 application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
+Portrait is a Rails 4 application. So you'll need some kind of Rails stack. It also depends on 'phantomjs', which is a headless cross-platform browser.
+You can find download and installation instructions for `phantomjs` here: http://phantomjs.org/download.html. If you're on a Mac, you can also install it via 'homebrew':
 
-After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided.
+  $ brew install phantomjs
+
+Another dependency is "redis" used by the background processing gem "sidekiq". You need to have a redis server installed and running.
+
+After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided. There is also a +sidekiq.rb.example+ initializer file to configure the redis url for sidekiq.
 
 I'd suggest installing portrait on it's own subdomain like http://portrait.mydomain.com. The API endpoint is the root of the URL, so that'll make everything nice and easy.
 
@@ -23,18 +28,21 @@ Once in the console, create a user. Make sure you're an admin
   >> User.create name: 'name', password: 'password', admin: true
   => #<User id: 1, name: "name", password: "password", admin: true...
 
-And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
+And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for the screencapture to work.
 
 == How it works
 
 Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named 'url'. You can test it with curl:
 
-  curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com
+  curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com/api/v1/sites
 
 On a valid url, you'll get an XML response like this:
 
+  <?xml version="1.0" encoding="UTF-8"?>
   <site>
-    <image_url>sites/1/original/1-full.png</image_url>
+    <url>https://google.com</url>
+    <status>started</status>
+    <link>http://portrait.mydomain.com/api/v1/sites/1</link>
   </site>
 
 On an invalid url, you'll get something like this:
@@ -43,6 +51,20 @@ On an invalid url, you'll get something like this:
   <errors>
     <error>Url is invalid</error>
   </errors>
+
+Since screencapture creation is handled by a background process, we supply the link to the resource in the API response so it can be accessed later. An example of a curl request to retrieve an existing record:
+
+  curl http://name:password@portrait.mydomain.com/api/v1/sites/11
+
+would return a structure like this:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <site>
+    <url>https://google.com</url>
+    <status>started</status>
+    <link>http://portrait.mydomain.com/api/v1/sites/1</link>
+    <image-url>/sites/1/original/google.png</image-url>
+  </site>
 
 == portrait_party
 
@@ -62,4 +84,4 @@ If you're an admin user, you can login to /sites and /users to get an idea of wh
 
 * Available on GitHub http://github.com/jmckible/portrait
 
-* webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png
+* PhantomJS http://phantomjs.org/

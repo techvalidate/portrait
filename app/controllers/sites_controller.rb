@@ -1,30 +1,17 @@
 class SitesController < ApplicationController
-  before_action      :user_required,  only: :api
-  skip_before_action :admin_required, only: :api
+  before_action  :authenticate_user!
 
-  # GET /sites
   def index
-    @sites = Site.order(created_at: :desc).page params[:page]
-    @site  = Site.new
+    @sites = current_user.sites.paginate page: params[:page] || 1, per_page: 30
   end
 
-  # POST /sites
-  def create
-    @site = @current_user.sites.build params.require(:site).permit(:url)
-    @site.save!
-    redirect_to sites_url
-  rescue ActiveRecord::RecordInvalid
-    @sites = Site.order(created_at: :desc).page params[:page]
-    render action: 'index'
-  end
-
-  # POST /
-  def api
-    @site = @current_user.sites.build url: params[:url]
-    @site.save!
-    render xml: @site.to_xml(only: [], methods: [:image_url])
-  rescue ActiveRecord::RecordInvalid
-    render xml: @site.errors.to_xml, status: 500
+  def show
+    @site = current_user.sites.find(params[:id])
+    if @site
+      send_file @site.image.path
+    else
+      redirect_to sites_path, error: "You are not authorized to view this site"
+    end
   end
 
 end
