@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_filter :admin_required, except: [:new]
   # GET /users
   def index
     @users = User.order('name')
@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     @user = User.find_by! name: params[:id]
   end
 
+  def new
+    @user = User.new
+  end
   # POST /user
   def create
     @user = User.new params.require(:user).permit!
@@ -35,6 +38,11 @@ class UsersController < ApplicationController
     @user = User.find_by! name: params[:id]
     @user.destroy
     redirect_to users_url
+  end
+
+  # POST /user/forgot_password
+  def forgot_password
+
   end
 
 end
