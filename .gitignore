@@ -6,3 +6,4 @@ tmp/
 public/sites/*
 .idea/*
 .DS_Store
+.byebug_history

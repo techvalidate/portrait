@@ -10,6 +10,8 @@ gem 'paperclip', '4.3.5'
 gem 'sass-rails', '5.0.4'
 gem 'will_paginate', '3.1.0'
 gem 'bcrypt', '3.1.11'
+gem 'jquery-rails'
 group :development, :test do
+  gem 'byebug'
   gem 'rspec-rails', '3.4.2'
 end

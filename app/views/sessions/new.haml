@@ -1,0 +1,15 @@
+- if @admin_required
+  %h2 Admin Login
+-else
+  %h2 Login
+=form_for(:session, url:login_path, method: 'post') do |f|
+  -if flash[:notice]
+    .notice=flash[:notice]
+  %dl
+    %dt Name
+    %dd=f.text_field :name
+    %dt Password
+    %dd=f.text_field :password
+    %p
+      =f.submit 'Login'
+      %a(href='/forgot_password') Forgot password?
