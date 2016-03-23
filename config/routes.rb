@@ -5,6 +5,10 @@ Portrait::Application.routes.draw do
 
   resources :users
 
+
+  get '/forgot_password'=>'users#forgot_password'
+  post '/reset_password'=>'users#reset_password'
   post '/'=>'sites#api',  as: 'api'
   get  '/'=>'home#index', as: 'root'
+
 end

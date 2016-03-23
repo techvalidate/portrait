@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :admin_required, except: [:new]
+  before_filter :admin_required, except: [:new, :forgot_password, :reset_password]
   # GET /users
   def index
     @users = User.order('name')
@@ -40,9 +40,27 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  # POST /user/forgot_password
+  #GET /forgot_password
   def forgot_password
+  end
+  # POST /reset_password
+  def reset_password
+    @user = User.find_by! name: params[:name]['name']
 
+    if @user.email == params[:email]['email']
+
+      random_password = User.generate_random_password
+      @user.password = random_password
+      @user.save!
+      UserMailer.create_and_send_password_change(@user, random_password).deliver_now
+      redirect_to root_url
+
+    else
+      redirect_to root_url
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_url
   end
 
 end

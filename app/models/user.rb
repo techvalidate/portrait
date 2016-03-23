@@ -6,9 +6,14 @@ class User < ActiveRecord::Base
     user.authenticate(password)
   end
 
+  def self.generate_random_password
+    Array.new(10).map { (65 + rand(58)).chr }.join
+  end
+
   has_many :sites, dependent: :destroy
 
   def to_param() name end
+
 
   validates :password, presence: true
   validates :email, uniqueness:true, presence: true, format: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
