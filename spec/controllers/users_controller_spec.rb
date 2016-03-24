@@ -23,6 +23,7 @@ describe UsersController do
   it 'handles /users/:id with valid params and PUT' do
     user = users(:jordan)
     put :update, id: user.to_param, user: { name: 'new' }
+
     expect(user.reload.name).to eq('new')
     expect(response).to redirect_to(user_path(user))
   end
@@ -40,6 +41,11 @@ describe UsersController do
       delete :destroy, id: users(:jordan)
       expect(response).to redirect_to(users_path)
     }.to change(User, :count).by(-1)
+  end
+
+  it 'handles /forgot_password with GET' do
+    get :forgot_password
+    expect(response).to be_success
   end
 
 end

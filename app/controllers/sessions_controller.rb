@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
-  before_filter :admin_required, except: [:new, :create]
+  skip_before_action :admin_required
+
   def new
   end
 
   def create
-    user = User.find_by! name: params[:session][:name]
+    allowed_params = params.permit(session: [:name, :password])
+    user = User.find_by! name: allowed_params[:session][:name]
 
-    if user && user.authenticate(params[:session][:password])
+    if user && user.authenticate(allowed_params[:session][:password])
       log_in user
       redirect_back_or user
     else

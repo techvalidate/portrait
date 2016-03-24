@@ -1,26 +1,32 @@
-require 'byebug'
 class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :admin_required
 
   protected
   def admin_required
-    # authenticate_or_request_with_http_basic do |username, password|
-    #   @current_user = User.authenticate username, password
-    #   @current_user && @current_user.admin?
-    # end
-    @admin_required = true
-
-    if current_user.nil? || current_user.admin? == false
-      store_location
+    ##########################################
+    # Admin access grants ability to manage  #
+    # users and captured websites            #
+    #########################################
+    if !logged_in?
+      store_location # Store destination to redirect after login
       redirect_to login_url
+    end
+
+    if logged_in? && !current_user.admin?
+      flash[:notice] = 'This user only has api access.'
+      redirect_to current_user
     end
   end
 
   def user_required
-    if current_user.nil
-      redirect_to login_url
+    #########################################
+    # Non-admin User credentials allow only #
+    # api access                            #
+    #########################################
+    authenticate_or_request_with_http_basic do | username, password |
+      current_user = User.authenticate username, password
+      current_user
     end
   end
-
 end

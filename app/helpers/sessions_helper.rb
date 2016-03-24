@@ -13,7 +13,7 @@ module SessionsHelper
   end
 
   def logged_in?
-    current_user != nil
+    !current_user.nil?
   end
 
   def redirect_back_or(default)

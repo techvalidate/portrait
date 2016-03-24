@@ -6,6 +6,7 @@
   %dd= form.text_field :password
   %dt Email
   %dd= form.text_field :email
-  %dt
-    = form.check_box :admin
-    %label{for: 'user[admin]'} Admin
+  -if @user.admin
+    %dt
+      = form.check_box :admin
+      %label{for: 'user[admin]'} Admin

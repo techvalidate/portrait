@@ -1,5 +1,9 @@
+- if flash[:notice]
+  .notice= flash[:notice]
+
 = form_for @user do |f|
   = render f
   %p= f.submit 'Save'
 
-%p= link_to 'Back', users_path
+- if @user.admin?
+  %p= link_to 'Back', users_path
