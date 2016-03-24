@@ -45,10 +45,11 @@ class UsersController < ApplicationController
   def forgot_password
   end
   # POST /reset_forgotten_password
-  def reset_forgotten_password
-    @user = User.find_by! name: params[:name]
+  def reset_password
+    safe_params = params.permit(:name, :email)
 
-    if @user.email == params[:email]
+    @user = User.find_by! name: safe_params[:name]
+    if @user.email == safe_params[:email]
 
       random_password = User.generate_random_password
       @user.password = random_password

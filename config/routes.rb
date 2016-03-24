@@ -13,7 +13,7 @@ Portrait::Application.routes.draw do
   delete 'logout'=>'sessions#destroy'
 
   get '/forgot_password'=>'users#forgot_password'
-  post '/reset_forgotten_password'=>'users#reset_forgotten_password'
+  post '/reset_password'=>'users#reset_password'
 
   post '/'=>'sites#api',  as: 'api'
   get  '/'=>'home#index', as: 'root'

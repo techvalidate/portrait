@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20160317180035) do
   add_index "sites", ["user_id"], name: "index_sites_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.boolean  "admin",           default: false
-    t.integer  "sites_count",     default: 0
+    t.string   "name",            limit: 255
+    t.boolean  "admin",                       default: false
+    t.integer  "sites_count",                 default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "email"
+    t.string   "password_digest", limit: 255
+    t.string   "email",           limit: 255
   end
 
 end
