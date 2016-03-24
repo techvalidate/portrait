@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :admin_required, only: [:new, :show, :forgot_password, :reset_forgotten_password]
+  skip_before_action :admin_required, only: [:new, :forgot_password, :reset_forgotten_password]
   # GET /users
   def index
     @users = User.order('name')

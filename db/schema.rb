@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(version: 20160317180035) do
 
   create_table "sites", force: :cascade do |t|
-    t.string   "url",                limit: 255
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
+    t.string   "url"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.datetime "created_at"
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20160317180035) do
   add_index "sites", ["user_id"], name: "index_sites_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.boolean  "admin",                       default: false
-    t.integer  "sites_count",                 default: 0
+    t.string   "name"
+    t.boolean  "admin",           default: false
+    t.integer  "sites_count",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"

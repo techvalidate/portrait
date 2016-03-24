@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   def to_param() name end
 
 
-  validates :password, presence: true
+  validates :password, presence: true, :unless => Proc.new { |user| !user.password_digest.nil? }
   validates :email, uniqueness:true, presence: true, format: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :name, uniqueness: true, presence: true, format: /[a-z0-9]+/
+  validates :name, uniqueness: true, format: /[a-z0-9]+/
 end
