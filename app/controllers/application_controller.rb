@@ -14,11 +14,10 @@ class ApplicationController < ActionController::Base
     end
 
     if logged_in? && !current_user.admin?
-      flash[:notice] = 'This user only has api access.'
-      redirect_to current_user
+      flash[:notice] = 'You currently only have api access.'
+      redirect_to root_url
     end
   end
-
   def user_required
     #########################################
     # Non-admin User credentials allow only #
