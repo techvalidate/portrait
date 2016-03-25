@@ -39,35 +39,4 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_url
   end
-
-
-  #GET /forgot_password
-  def forgot_password
-  end
-  # POST /reset_forgotten_password
-  def reset_password
-    safe_params = params.permit(:name, :email)
-
-    @user = User.find_by! name: safe_params[:name]
-    if @user.email == safe_params[:email]
-
-      random_password = User.generate_random_password
-      @user.password = random_password
-      @user.save!
-
-      UserMailer.create_and_send_password_change(@user, random_password).deliver_now
-
-      flash[:success] = "A new password has been emailed to #{@user.email}"
-      redirect_to '/forgot_password'
-
-    else
-      flash[:notice] = 'User with no such email could not be found'
-      redirect_to '/forgot_password'
-    end
-
-  rescue ActiveRecord::RecordNotFound
-    flash[:notice] = 'User could not be found'
-    redirect_to '/forgot_password'
-  end
-
 end

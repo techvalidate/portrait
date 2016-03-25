@@ -2,6 +2,8 @@
 =form_for(:session, url:login_path, method: 'post') do |f|
   -if flash[:notice]
     .notice=flash[:notice]
+  -if flash[:success]
+    .success=flash[:success]
   %dl
     %dt Name
     %dd=f.text_field :name
