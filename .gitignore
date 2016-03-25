@@ -7,3 +7,4 @@ public/sites/*
 .idea/*
 .DS_Store
 .byebug_history
+.ruby-version
