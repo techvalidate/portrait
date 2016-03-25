@@ -31,13 +31,13 @@ RSpec.configure do |config|
   config.fixture_path               = "#{::Rails.root}/spec/fixtures"
   config.global_fixtures            = :all
   config.use_transactional_fixtures = true
-
   config.render_views
   config.infer_spec_type_from_file_location!
 
   def login_as(username)
     @user = users(username)
-    session[:user_id] = @user.id
-    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password_digest)}"
+    @user.password = 'admin' # default password associated with fixture password_digests
+    session[:user_id] = @user.id # create logged in session
+    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
   end
 end

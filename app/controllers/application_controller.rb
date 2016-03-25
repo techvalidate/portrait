@@ -14,18 +14,19 @@ class ApplicationController < ActionController::Base
     end
 
     if logged_in? && !current_user.admin?
-      flash[:notice] = 'You currently only have api access.'
+      log_out
+      flash[:notice] = 'You do not have the right permissions'
       redirect_to root_url
     end
   end
   def user_required
-    #########################################
-    # Non-admin User credentials allow only #
-    # api access                            #
-    #########################################
+    ###########################################
+    # Use Basic HTTP for api reqs. Non admin  #
+    # users only have api access              #
+    ###########################################
     authenticate_or_request_with_http_basic do | username, password |
-      current_user = User.authenticate username, password
-      current_user
+      @current_user = User.authenticate username, password
+      @current_user
     end
   end
 end

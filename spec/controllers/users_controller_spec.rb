@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'byebug'
+
 describe UsersController do
   before{ login_as :jordan }
 

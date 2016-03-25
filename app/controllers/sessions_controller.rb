@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
-  skip_before_action :admin_required
+  skip_before_action :admin_required, except: [:destroy]
 
-
+  # GET sessions/new
   def new
   end
 
+  # POST sessions/create
   def create
     allowed_params = params.require(:session).permit!
     user = User.find_by! name: allowed_params[:name]
@@ -22,6 +23,7 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
 
+  # DELETE sessions/destroy
   def destroy
     log_out
     redirect_to root_url
