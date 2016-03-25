@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe SitesController do
-  before { login_as :jordan }
+  before{ login_as :jordan }
 
   it 'handles / with GET' do
     get :index

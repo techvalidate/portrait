@@ -1,5 +1,8 @@
 #Main
+  -if flash[:notice]
+    .notice= flash[:notice]
   %p Portrait is a web service for capturing a webpage as an image. This particular instance is password protected, but you can download your own copy. Portrait is design to run on OS X. If you'd like to use portrait within a ruby project, check out portrait_party.
+
 
   %ul
     %li= link_to 'Portrait on GitHub', 'http://github.com/jmckible/portrait'

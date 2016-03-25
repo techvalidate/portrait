@@ -1,4 +1,13 @@
 jordan:
   name: jordan
-  password: password
+  password_digest: $2a$10$HcoYXYXlvkp5GuDIEVGQTeMPcKk6NBBd1gScTJm3LwlpSWDL/fiHS #= password
+  email: test@test.com
   admin: true
+  password_reset_token: GQOnFHUfkNzthM_eqHnNTg
+
+non_admin_user:
+  name: tom
+  password_digest: $2a$10$HcoYXYXlvkp5GuDIEVGQTeMPcKk6NBBd1gScTJm3LwlpSWDL/fiHS #= password
+  email: test2@test.com
+  admin: false
+  password_reset_token: FFOnUIytkNzthM_aqHnTTg

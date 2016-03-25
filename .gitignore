@@ -4,3 +4,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 public/sites/*
+.idea/*
+.DS_Store
+.byebug_history
+.ruby-version

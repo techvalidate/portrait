@@ -1,0 +1,7 @@
+%h2 Reset Password
+=form_for @user, url: password_reset_path(params[:id]) do |f|
+  %dl
+    %dt Password
+    %dd= f.text_field :password
+
+    %p= f.submit 'Change password'

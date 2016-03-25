@@ -1,0 +1,12 @@
+= User Security Feature
+I chose to work on User Security because I considered it a feature I could finish in a few days that would
+provide critical functionality for building a solid User flow.
+
+I approached the feature into two parts: encrypted authentication and a password reset flow. I took some time to learn how the app worked, and consider how user roles would play into authentication.
+
+My approach keeps basic http authentication for api users, while providing a new login flow for admin users, and non-admin users to reset their passwords. Passwords can be reset via a token authenticated link provided in an email.
+
+From a login flow point of view, user roles was the largest challenge. It was important to build something quickly, without making code decisions that would hamper flushing out those roles in the future. For that reason when I built a Login Flow where users can discover the reset password flow, but only allow Admin users access beyond that. This allows for a future where non-admin users could potentially login, without the need to refactor a lot of code.
+
+My time estimate of three days was fairly accurate. I was hoping to tackle the Customer Model as well, if time allowed. Now that I know the code base I believe I could finish that feature with an extra day or two.
+

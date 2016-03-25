@@ -1,0 +1,13 @@
+%h2 Forgot Password
+- if flash[:notice]
+  .notice= flash[:notice]
+- if flash[:success]
+  .success= flash[:success]
+=form_tag('/reset_password', method: "post") do
+
+  %dl
+    %dt Email
+    %dd= text_field_tag :email
+    %p
+      =submit_tag 'Send reset instructions'
+

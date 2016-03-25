@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
-      t.string  :name, :password
+      t.string  :name, :password, limit: 255
       t.boolean :admin, :default=>false
       t.integer :sites_count, :default=>0
       t.timestamps
