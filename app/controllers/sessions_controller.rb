@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    allowed_params = params.permit(session: [:name, :password])
-    user = User.find_by! name: allowed_params[:session][:name]
+    allowed_params = params.require(:session).permit!
+    user = User.find_by! name: allowed_params[:name]
 
-    if user && user.authenticate(allowed_params[:session][:password])
+    if user && user.authenticate(allowed_params[:password])
       log_in user
       redirect_back_or user
     else

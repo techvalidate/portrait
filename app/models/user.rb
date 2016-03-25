@@ -8,10 +8,6 @@ class User < ActiveRecord::Base
     user.authenticate(password)
   end
 
-  def self.generate_random_password
-    Array.new(10).map { (65 + rand(58)).chr }.join
-  end
-
   # Associations
 
   has_many :sites, dependent: :destroy

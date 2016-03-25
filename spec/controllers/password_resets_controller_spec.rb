@@ -40,8 +40,16 @@ RSpec.describe PasswordResetsController, type: :controller do
     expect(flash[:notice]).to eq('No such user')
   end
 
-  it 'handles /password_resets/update with valid params and GET' do
-    
+  it 'handles /password_resets/update with valid params and PUT' do
+    user = users(:jordan)
+    user.password_reset_sent_at = Time.zone.now
+    user.save
+    put :update, id:user.password_reset_token, user: {name: user.name, password: 'newpassword', email: user.email}
+
+    expect(response).to redirect_to login_url
+    expect(flash[:success]).to eq('Password has been reset')
+    expect(user.reload.authenticate('newpassword')).to eq(user)
   end
+
 
 end
