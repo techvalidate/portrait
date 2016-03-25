@@ -36,8 +36,8 @@ RSpec.configure do |config|
 
   def login_as(username)
     @user = users(username)
-    @user.password = 'admin' # default password associated with fixture password_digests
+    default_password = 'password' # default password associated with fixture password_digests
     session[:user_id] = @user.id # create logged in session
-    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
+    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+default_password)}"
   end
 end

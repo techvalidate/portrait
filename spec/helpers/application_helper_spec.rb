@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 
-RSpec.describe SessionsHelper, type: :helper do
+RSpec.describe ApplicationHelper, type: :helper do
   it 'should create a session user_id when a user logs in' do
     user = users(:jordan)
     log_in user

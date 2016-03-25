@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     allowed_params = params.require(:session).permit!
     user = User.find_by! name: allowed_params[:name]
 
-    if user && user.authenticate(allowed_params[:password])
+    if User.authenticate(user.name, allowed_params[:password])
       log_in user
       redirect_back_or user
     else

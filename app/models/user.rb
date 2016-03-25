@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
 
   def self.authenticate(name, password)
     user = User.find_by name: name
-    user.authenticate(password)
+    if user
+      user.authenticate(password)
+    end
   end
 
   # Associations
