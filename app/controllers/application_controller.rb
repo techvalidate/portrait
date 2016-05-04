@@ -1,18 +1,24 @@
-class ApplicationController < ActionController::Base
-  before_action :admin_required
+require 'digest'
 
-  protected
-  def admin_required
-    authenticate_or_request_with_http_basic do |username, password|
-      @current_user = User.authenticate username, password
-      @current_user && @current_user.admin?
-    end
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
+  helper_method :current_user
+
+  protected
+
   def user_required
-    authenticate_or_request_with_http_basic do |username, password|
-      @current_user = User.authenticate username, password
-      !@current_user.nil?
+    redirect_to '/login' unless current_user
+  end
+
+  def admin_required
+    unless current_user && current_user.admin?
+      flash[:notice] = "Admin rights are required here."
+      redirect_to '/login'
     end
   end
 
