@@ -1,13 +1,19 @@
 class User < ActiveRecord::Base
 
-  def self.authenticate(name, password)
-    User.find_by name: name, password: password
-  end
+  has_secure_password
 
   has_many :sites, dependent: :destroy
 
   def to_param() name end
 
-  validates :password, presence: true
-  validates :name, uniqueness: true, format: /[a-z0-9]+/
+  validates :password_digest, presence: true
+  validates :name, uniqueness: true, format: /[a-zA-Z0-9]+/
+  validates :email, uniqueness: true, format: /^.+@.+\..+$/
+
+  def send_password_reset
+    self.password_reset_token = SecureRandom.urlsafe_base64
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
 end
