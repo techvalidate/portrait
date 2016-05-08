@@ -5,14 +5,3 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-
-if Rails.env == 'development'
-  %w(admin user).each do |user_name|
-    User.create!({
-        name: user_name,
-        password: 'password',
-        email: "#{user_name}@mail.com",
-        admin: user_name == 'admin'
-                 })
-  end
-end

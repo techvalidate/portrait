@@ -4,9 +4,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by name: params[:name]
-    if user && user.authenticate(params[:password])
+    user = User.find_by email: params[:email]
+    if user && user.active? && user.authenticate(params[:password])
       session[:user_id] = user.id
+      redirect_to '/'
+    elsif user && !user.active?
+      flash[:notice] = "Your account is not active yet. Please talk to your administrator."
       redirect_to '/'
     else
       redirect_to '/login'

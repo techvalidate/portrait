@@ -4,13 +4,13 @@ class SitesController < ApplicationController
 
   # GET /sites
   def index
-    @sites = Site.order(created_at: :desc).page params[:page]
+    @sites = Site.for_customer(current_customer.id).order(created_at: :desc).page params[:page]
     @site  = Site.new
   end
 
   # POST /sites
   def create
-    @site = @current_user.sites.build params.require(:site).permit(:url)
+    @site = current_user.sites.build params.require(:site).permit(:url)
     @site.save!
     redirect_to sites_url
   rescue ActiveRecord::RecordInvalid
@@ -20,7 +20,7 @@ class SitesController < ApplicationController
 
   # POST /
   def api
-    @site = @current_user.sites.build url: params[:url]
+    @site = current_user.sites.build url: params[:url]
     @site.save!
     render xml: @site.to_xml(only: [], methods: [:image_url])
   rescue ActiveRecord::RecordInvalid

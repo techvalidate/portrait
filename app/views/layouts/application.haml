@@ -5,7 +5,12 @@
     %title .portrait.
   %body
     %h1 portrait
-    %span
+    -if current_customer
+      - if current_user.admin?
+        %span.header-customer= link_to current_customer.name, edit_customer_path(current_customer)
+      - else
+        %span.header-customer= current_customer.name
+    %span.header-user
       -if current_user
         =link_to "Logout #{current_user.name}", '/logout'
       -else

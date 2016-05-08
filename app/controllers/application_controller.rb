@@ -1,5 +1,3 @@
-require 'digest'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -7,7 +5,19 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
-  helper_method :current_user
+  def current_customer
+    @current_customer ||= current_user.customer if current_user
+  end
+
+  def is_currently_canceled?
+    current_customer.canceled_at && (current_customer.reactivated_at.nil? || current_customer.canceled_at > current_customer.reactivated_at)
+  end
+
+  def is_currently_active?
+    current_customer.canceled_at.nil? || current_customer.canceled_at < current_customer.reactivated_at
+  end
+
+  helper_method :current_user, :current_customer, :is_currently_active?, :is_currently_canceled?
 
   protected
 

@@ -1,0 +1,12 @@
+%h1 Edit your company
+
+= form_for @customer do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = label_tag 'Cancel our service'
+    = check_box_tag :cancel, 'yes', is_currently_canceled?
+
+  = f.submit "Edit"

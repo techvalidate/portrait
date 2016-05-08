@@ -8,9 +8,15 @@ body {
   & > h1 {
     float: left;
   }
-  & > span {
+  .header-customer {
+    margin-left: 20px;
+    margin-top: 22px;
+    float: left;
+    font-size: 1.5em;
+  }
+  .header-user {
     float: right;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }
 
@@ -131,5 +137,17 @@ form {
   }
   input[type='text'], input[type='email'], input[type='password'] {
     width: 200px;
+  }
+  .info {
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    span {
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+  }
+  .contact {
+    margin-left: 30px;
+
   }
 }

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504225036) do
+ActiveRecord::Schema.define(version: 20160507230058) do
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "canceled_at"
+    t.datetime "reactivated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sites", force: :cascade do |t|
     t.string   "url"
@@ -38,6 +46,8 @@ ActiveRecord::Schema.define(version: 20160504225036) do
     t.string   "email"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.integer  "customer_id"
+    t.boolean  "active"
   end
 
 end

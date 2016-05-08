@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'digest_auth_helper'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -35,8 +36,6 @@ RSpec.configure do |config|
   config.render_views
   config.infer_spec_type_from_file_location!
 
-  def login_as(username)
-    @user = users(username)
-    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
-  end
+  config.include DigestAuthHelpers, type: :controller
+
 end
