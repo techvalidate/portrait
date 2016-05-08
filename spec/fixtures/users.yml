@@ -1,4 +1,14 @@
 jordan:
   name: jordan
-  password: password
+  email: jordan@customer.com
+  password_digest: $2a$04$GciyIL6MGqfvydTkq/td4OxJN8xQ3wzrDfdIk1XCdboSqauH1dJne
   admin: true
+  active: true
+  customer: company
+daniela:
+  name: daniela
+  email: daniela@customer.com
+  password_digest: $2a$04$GciyIL6MGqfvydTkq/td4OxJN8xQ3wzrDfdIk1XCdboSqauH1dJne
+  admin: false
+  active: true
+  customer: company

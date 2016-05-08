@@ -1,0 +1,27 @@
+%h1 Register your company
+
+= form_for @customer do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  = f.fields_for :user do |c|
+    .contact
+
+      .info
+        %span Contact:
+        This user will have admin rights and is able to add new user.
+      .field
+        = c.label :name
+        = c.text_field :name
+      .field
+        = c.label :email
+        = c.email_field :email
+      .field
+        = c.label :password
+        = c.password_field :password
+      .field
+        = c.label :password_confirmation
+        = c.password_field :password_confirmation
+
+  =f.submit "Register"

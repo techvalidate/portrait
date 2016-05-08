@@ -18,6 +18,11 @@ class Site < ActiveRecord::Base
   belongs_to :user, counter_cache: true
 
   #############################################################################
+  #                                 S C O P E S                               #
+  #############################################################################
+  scope :for_customer, -> (id) { joins(:user).where("users.customer_id= ?", id) }
+
+  #############################################################################
   #                                   X M L                                   #
   #############################################################################
   # Used as an attribute in xml result - See SitesController#api

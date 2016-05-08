@@ -1,10 +1,4 @@
 = form_for @user do |f|
-  - if @user.errors.any?
-    #ErrorModule
-      %h2= "#{pluralize @user.errors.count, 'Error'} Prevented This User From Being Created"
-      %ol
-        - @user.errors.full_messages.each do |error|
-          %li= error
   = render f
   %p= f.submit 'Create User'
 
@@ -12,13 +6,18 @@
 %table
   %tr
     %th Name
-    %th Password
+    %th Password set?
+    %th Email
     %th Sites
     %th Admin
+    %th Active
+    %th
 
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
-      %td= user.password
+      %td= user.password_digest?  ? 'Yes' : 'No'
+      %td= user.email
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'
+      %td= user.active ? 'Yes' : 'No'

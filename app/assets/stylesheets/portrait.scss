@@ -5,11 +5,36 @@ body {
   color: #666;
   font-family: helvetica, sans-serif;
   font-size: 125%;
+  & > h1 {
+    float: left;
+  }
+  .header-customer {
+    margin-left: 20px;
+    margin-top: 22px;
+    float: left;
+    font-size: 1.5em;
+  }
+  .header-user {
+    float: right;
+    margin-top: 30px;
+  }
 }
 
 #Content {
   width: 900px;
   margin: 0 auto;
+  clear: both;
+  .notice, .warn {
+    border-radius: 5px;
+    padding: 4px;
+  }
+  .notice {
+    background: #3c3;
+  }
+  .warn {
+    background: lightsalmon;
+  }
+  margin-bottom: 50px;
 }
 
 dl {
@@ -88,4 +113,41 @@ ul li {
   list-style: none;
   line-height: 1.5em;
   margin: 0;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  margin-top: 50px;
+  background: lightgrey;
+  padding: 20px;
+}
+
+form {
+  margin-left:  40px;
+  .field {
+    margin-bottom: 10px;
+  }
+  label {
+    width: 210px;
+    display: inline-block;
+  }
+  input[type='text'], input[type='email'], input[type='password'] {
+    width: 200px;
+  }
+  .info {
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    span {
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+  }
+  .contact {
+    margin-left: 30px;
+
+  }
 }

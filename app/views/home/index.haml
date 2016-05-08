@@ -5,5 +5,15 @@
     %li= link_to 'Portrait on GitHub', 'http://github.com/jmckible/portrait'
     %li= link_to 'portrait_party', 'http://github.com/jmckible/portrait_party'
     %li= link_to "Paul Hammond's webkit2png", 'http://github.com/paulhammond/webkit2png'
-    %li= link_to 'Captured Sites', sites_path
-    %li= link_to 'Manage Users', users_path
+
+    - if current_customer && is_currently_active?
+      %li= link_to 'Captured Sites', sites_path
+      -if current_user.admin?
+        %li= link_to 'Manage Users', users_path
+    - elsif current_customer && is_currently_canceled?
+      - if current_user.admin?
+        %li= link_to 'Reactivate this service', edit_customer_path(current_customer)
+      - else
+        This service is currently canceled.
+    - else
+      %li= link_to 'Get the service for your company', new_customer_path

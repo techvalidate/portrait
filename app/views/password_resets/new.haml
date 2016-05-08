@@ -1,0 +1,7 @@
+%h1 Reset Password
+= form_tag password_resets_path, :method => :post do
+
+  .field
+    = label_tag :email
+    = email_field_tag :email, params[:email]
+  = submit_tag "Reset Password"

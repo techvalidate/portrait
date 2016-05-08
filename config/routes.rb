@@ -4,6 +4,12 @@ Portrait::Application.routes.draw do
   end
 
   resources :users
+  resources :customers, except: [:index]
+  resources :password_resets, except: [:index, :show, :delete]
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
 
   post '/'=>'sites#api',  as: 'api'
   get  '/'=>'home#index', as: 'root'

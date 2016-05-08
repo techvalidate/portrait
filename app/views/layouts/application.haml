@@ -5,4 +5,25 @@
     %title .portrait.
   %body
     %h1 portrait
-    #Content= yield
+    -if current_customer
+      - if current_user.admin?
+        %span.header-customer= link_to current_customer.name, edit_customer_path(current_customer)
+      - else
+        %span.header-customer= current_customer.name
+    %span.header-user
+      -if current_user
+        =link_to "Logout #{current_user.name}", '/logout'
+      -else
+        = link_to "Login", '/login'
+
+    #Content
+      - if flash[:notice]
+        %p.notice= flash[:notice]
+      - if flash[:warn]
+        %p.warn= flash[:warn]
+
+      = yield
+
+    %footer
+      - unless params[:controller] == 'home'
+        = link_to "Home", root_path
