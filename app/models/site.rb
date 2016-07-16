@@ -6,11 +6,15 @@ class Site < ActiveRecord::Base
                             url:  '/sites/:id/:style/:basename.:extension'
 
   validates_attachment_file_name :image, matches: [/png\Z/i, /jpe?g\Z/i, /gif\Z/i]
+  
+  scope :duplicate_urls, ->(url) { where(:url => url, :status => Site.statuses[:succeeded]).created_after(1.day.ago) }
+  scope :created_after, -> (date) { where("created_at >= ?", date) }
 
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
   #############################################################################
   enum status: [:submitted, :started, :succeeded, :failed]
+  
 
   #############################################################################
   #                         R E L A T I O N S H I P S                         #
@@ -31,7 +35,17 @@ class Site < ActiveRecord::Base
   after_create 'process!'
   def process!
     started!
-    handle generate_png
+    already_processed? ? copy_from_duplicate_url : handle(generate_png)
+  end
+  
+  # a site is processed if it has the same url and a successful capture in the last 24 hours
+  def already_processed?
+    Site.duplicate_urls(self.url).exists?
+  end
+  
+  def copy_from_duplicate_url
+    dup = Site.duplicate_urls(self.url).first
+    self.image = dup.image
   end
 
   # Generate png and returns path
