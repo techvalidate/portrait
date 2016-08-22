@@ -29,7 +29,7 @@ describe UsersController do
 
   it 'handles /users/:id with invalid params and PUT' do
     user = users(:jordan)
-    put :update, id: user, user: { password: '' }
+    put :update, id: user, user: { password_digest: '' }
     expect(user.reload.name).not_to be_blank
     expect(response).to be_success
     expect(response).to render_template(:show)
