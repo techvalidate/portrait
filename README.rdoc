@@ -63,3 +63,11 @@ If you're an admin user, you can login to /sites and /users to get an idea of wh
 * Available on GitHub http://github.com/jmckible/portrait
 
 * webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png
+
+== Feature Implementation
+
+I wanted to tackle the features which can be implemented within a due time. First feature was fairly simple and I have used sha2 digest for the initial implementation.
+But eventually I've used bcrypt gem, since it provides the functionality of creating an encrypted password using salt out of the box.
+I've used bcrypt gem with ActiveModel has_secure_password method in model to implement secure password storing feature.
+It took me around 1 hour 30 minutes for this implementation.
+

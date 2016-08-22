@@ -37,6 +37,6 @@ RSpec.configure do |config|
 
   def login_as(username)
     @user = users(username)
-    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+@user.password)}"
+    @request.env['HTTP_AUTHORIZATION'] = "Basic #{Base64.encode64(@user.name+':'+'admin')}"
   end
 end

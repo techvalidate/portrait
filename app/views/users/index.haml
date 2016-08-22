@@ -19,6 +19,6 @@
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
-      %td= user.password
+      %td= user.password_digest
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'

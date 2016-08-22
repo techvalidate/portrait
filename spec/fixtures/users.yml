@@ -1,4 +1,4 @@
 jordan:
   name: jordan
-  password: password
+  password_digest: $2a$10$F92oAlBbe3r6lX5uTiZxIOhM4gAL2xBI2FlbNJyzzgnjFpiQOBE1C
   admin: true

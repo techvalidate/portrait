@@ -9,6 +9,7 @@ gem 'haml', '4.0.7'
 gem 'paperclip', '4.3.5'
 gem 'sass-rails', '5.0.4'
 gem 'will_paginate', '3.1.0'
+gem 'bcrypt-ruby', '~> 3.0', :require => 'bcrypt'
 
 group :development, :test do
   gem 'rspec-rails', '3.4.2'
