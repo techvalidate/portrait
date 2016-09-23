@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe UsersController do
-  before{ login_as :jordan }
+  before { login_as :jordan }
 
   it 'handles /users with GET' do
     get :index
@@ -15,7 +15,8 @@ describe UsersController do
 
   it 'handles /users with valid params and POST' do
     expect {
-      post :create, user: { name: 'name', password: 'password' }
+      post :create, user: { name: 'name', password: 'password',
+                            customer_id: customers(:company).id }
       expect(response).to redirect_to(users_path)
     }.to change(User, :count).by(1)
   end
@@ -41,5 +42,4 @@ describe UsersController do
       expect(response).to redirect_to(users_path)
     }.to change(User, :count).by(-1)
   end
-
 end

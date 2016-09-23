@@ -1,0 +1,5 @@
+#ErrorModule
+  %h2= "#{pluralize errors.count, 'Error'} Prevented This User From Being Created"
+  %ol
+    - errors.full_messages.each do |error|
+      %li= error

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_customers, only: [:index, :show, :create, :update]
 
   # GET /users
   def index
@@ -37,4 +38,9 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  protected
+
+  def set_customers
+    @customers = Customer.all
+  end
 end

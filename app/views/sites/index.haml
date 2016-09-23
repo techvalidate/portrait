@@ -5,6 +5,7 @@
 %table
   %tr
     %th User
+    %th Customer
     %th URL
     %th Status
     %th Added
@@ -12,6 +13,7 @@
   - @sites.each do |site|
     %tr
       %td= link_to site.user.name, users_path
+      %td= site.user.customer.name
       %td= link_to site.url, site.url
       %td= site.status.capitalize
       %td= site.created_at.strftime '%B %e, %Y %I:%m %p'

@@ -1,18 +1,14 @@
 = form_for @user do |f|
   - if @user.errors.any?
-    #ErrorModule
-      %h2= "#{pluralize @user.errors.count, 'Error'} Prevented This User From Being Created"
-      %ol
-        - @user.errors.full_messages.each do |error|
-          %li= error
+    = render partial: 'shared/errors', locals: { errors: @user.errors }
   = render f
   %p= f.submit 'Create User'
-
 
 %table
   %tr
     %th Name
     %th Password
+    %th Customer
     %th Sites
     %th Admin
 
@@ -20,5 +16,6 @@
     %tr
       %td= link_to user.name, user
       %td= user.password
+      %td= user.customer.name
       %td= number_with_delimiter user.sites.count
       %td= user.admin? ? 'Yes' : 'No'

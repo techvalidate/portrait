@@ -5,6 +5,9 @@
   %dt Password
   %dd= form.text_field :password
 
+  %dt Customer
+  %dd= form.select :customer_id, @customers.map { |c| [c.name, c.id] }
+
   %dt
     = form.check_box :admin
     %label{for: 'user[admin]'} Admin

@@ -18,10 +18,13 @@ Create your first user with the console
 
   $ rails console
 
-Once in the console, create a user. Make sure you're an admin
+Once in the console, create a customer and a user. Make sure you're an admin
 
-  >> User.create name: 'name', password: 'password', admin: true
-  => #<User id: 1, name: "name", password: "password", admin: true...
+  >> customer = Customer.create name: 'customer'
+  => #<Customer id: 1, name: "customer", canceled_at: nil...
+
+  >> User.create name: 'name', password: 'password', admin: true, customer: customer
+  => #<User id: 1, name: "name", password: "password", admin: true, customer_id: 1...
 
 And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
 
