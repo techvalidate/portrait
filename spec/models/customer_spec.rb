@@ -18,6 +18,12 @@ describe Customer, 'validations' do
     customer.valid?
     expect(customer.errors[:name]).not_to be_empty
   end
+
+  it 'should have a billing scheme' do
+    customer = Customer.new
+    customer.valid?
+    expect(customer.errors[:billing_scheme]).not_to be_empty
+  end
 end
 
 describe Customer, 'associations' do
@@ -30,7 +36,8 @@ describe Customer, 'associations' do
 
   it 'can have many users' do
     users = [users(:jordan), users(:matt)]
-    customer = Customer.create(name: 'customer', users: users)
+    customer = Customer.create(name: 'customer', users: users,
+                               billing_scheme: billing_schemes(:basic))
 
     expect(customer.errors[:customers]).to be_empty
     expect(customer.users.count).to eq(users.count)

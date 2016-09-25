@@ -1,2 +1,3 @@
 company:
   name: company
+  billing_scheme: basic

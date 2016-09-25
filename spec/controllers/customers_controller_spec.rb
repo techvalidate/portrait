@@ -15,7 +15,8 @@ describe CustomersController do
 
   it 'handles /customers with valid params and POST' do
     expect {
-      post :create, customer: { name: 'name' }
+      post :create, customer: { name: 'name',
+                                billing_scheme_id: billing_schemes(:basic).id }
       expect(response).to redirect_to(customers_path)
     }.to change(Customer, :count).by(1)
   end

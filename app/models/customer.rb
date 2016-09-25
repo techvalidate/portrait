@@ -1,6 +1,8 @@
 class Customer < ActiveRecord::Base
+  belongs_to :billing_scheme
   has_many :users, dependent: :destroy
 
+  validates :billing_scheme, presence: true
   validates :name, uniqueness: true, format: /[a-z0-9]+/
 
   def to_param() name end

@@ -8,11 +8,13 @@
 %table
   %tr
     %th Name
+    %th Billing Plan
     %th Cancelation Date
     %th
 
   - @customers.each do |customer|
     %tr
       %td= link_to customer.name, customer
+      %td= customer.billing_scheme.name
       %td= customer.canceled_at
       %td= button_to 'Cancel Customer', { action: 'cancel', id: customer }

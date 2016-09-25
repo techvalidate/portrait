@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+  before_action :set_billing_schemes, only: [:index, :show, :create, :update]
+
   # GET /customers
   def index
     @customers = Customer.order('name')
@@ -41,5 +43,11 @@ class CustomersController < ApplicationController
     @customer = Customer.find_by! name: params[:id]
     @customer.destroy
     redirect_to customers_url
+  end
+
+  protected
+
+  def set_billing_schemes
+    @billing_schemes = BillingScheme.all
   end
 end

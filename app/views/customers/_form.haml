@@ -2,5 +2,8 @@
   %dt Name
   %dd= form.text_field :name
 
+  %dt Billing plan
+  %dd= form.select :billing_scheme_id, @billing_schemes.map { |c| [c.name, c.id] }
+
   %dt Canceled
   %dd= form.text_field :canceled_at
