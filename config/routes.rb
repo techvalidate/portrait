@@ -4,7 +4,10 @@ Portrait::Application.routes.draw do
   end
 
   resources :customers do
-    post 'cancel', on: :member
+    member do
+      post 'bill'
+      post 'cancel'
+    end
   end
 
   resources :users

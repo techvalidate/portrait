@@ -9,6 +9,12 @@
   %tr
     %th Name
     %th Billing Plan
+    %th Sites This Month
+    %th Sites Last Month
+    %th Owed This Month
+    %th Owed Last Month
+    %th Balance
+    %th
     %th Cancelation Date
     %th
 
@@ -16,5 +22,22 @@
     %tr
       %td= link_to customer.name, customer
       %td= customer.billing_scheme.name
+      %td= customer.site_count_this_month
+      %td= customer.site_count_last_month
+      %td= number_to_currency(customer.owed_this_month)
+      %td= number_to_currency(customer.owed_last_month)
+      %td= number_to_currency(customer.balance)
+      %td= button_to 'Bill Last Month', { action: 'bill', id: customer }
       %td= customer.canceled_at
       %td= button_to 'Cancel Customer', { action: 'cancel', id: customer }
+  %tr
+    %td TOTAL
+    %td
+    %td= @totals[:site_count_this_month]
+    %td= @totals[:site_count_last_month]
+    %td= number_to_currency(@totals[:owed_this_month])
+    %td= number_to_currency(@totals[:owed_last_month])
+    %td= number_to_currency(@totals[:balance])
+    %td
+    %td
+    %td

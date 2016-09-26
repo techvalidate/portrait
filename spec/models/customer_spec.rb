@@ -26,12 +26,19 @@ describe Customer, 'validations' do
   end
 end
 
+describe Customer, 'initialization' do
+  it 'should have a default balance of zero' do
+    customer = Customer.new
+    expect(customer.balance).to eq(0)
+  end
+end
+
 describe Customer, 'associations' do
   it 'can have zero users' do
     customer = Customer.create(name: 'customer', users: [])
 
     expect(customer.errors[:customers]).to be_empty
-    expect(customer.users.count).to eq(0)
+    expect(customer.users.count).to eq(0.0)
   end
 
   it 'can have many users' do
@@ -64,5 +71,23 @@ describe Customer, 'status' do
     customer.cancel!
 
     expect(customer.canceled?).to be(true)
+  end
+end
+
+describe Customer, 'billing' do
+  it 'should count this month based on usage' do
+    expect(customers(:company).site_count_this_month).to eq(16)
+  end
+
+  it 'should count last month based on usage' do
+    expect(customers(:company).site_count_last_month).to eq(4)
+  end
+
+  it 'should calculate this month billing based on usage' do
+    expect(customers(:company).owed_this_month).to eq(0.63)
+  end
+
+  it 'should calculate last month billing based on usage' do
+    expect(customers(:company).owed_last_month).to eq(0.20)
   end
 end

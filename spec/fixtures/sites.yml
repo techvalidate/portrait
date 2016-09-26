@@ -5,3 +5,22 @@ google:
   status: <%= Site.statuses[:succeeded] %>
   url: http://google.com
   user: jordan
+
+<% for i in 1..15 %>
+this_month_site_<%= i %>:
+  image_content_type: image/png
+  image_file_name: duck.png
+  status: <%= Site.statuses[:succeeded] %>
+  url: http://duckduckgo.com
+  user: matt
+<% end %>
+
+<% for i in 1..4 %>
+last_month_site_<%= i %>:
+  created_at: <%= 1.month.ago.to_s(:db) %>
+  image_content_type: image/png
+  image_file_name: yahoo.png
+  status: <%= Site.statuses[:succeeded] %>
+  url: http://search.yahoo.com
+  user: matt
+<% end %>

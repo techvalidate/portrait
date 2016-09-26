@@ -14,4 +14,20 @@ class User < ActiveRecord::Base
   validates :customer, presence: true
 
   delegate :canceled?, to: :customer
+
+  def site_count_for(start, finish)
+    sites.within_dates(start, finish).count
+  end
+
+  def site_count_this_month
+    start = DateTime.current.beginning_of_month
+
+    site_count_for(start, start + 1.month)
+  end
+
+  def site_count_last_month
+    finish = DateTime.current.beginning_of_month
+
+    site_count_for(finish - 1.month, finish)
+  end
 end

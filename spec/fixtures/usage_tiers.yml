@@ -4,11 +4,11 @@ lower:
   billing_scheme: basic
 
 middle:
-  start: 100
+  start: 5
   price_per: 0.04
   billing_scheme: basic
 
 upper:
-  start: 1000
+  start: 10
   price_per: 0.03
   billing_scheme: basic

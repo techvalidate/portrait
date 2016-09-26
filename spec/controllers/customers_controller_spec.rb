@@ -48,4 +48,11 @@ describe CustomersController do
     expect(customer.reload.canceled?).to be true
     expect(response).to redirect_to(customers_path)
   end
+
+  it 'handles /customers/:id/bill with POST' do
+    customer = customers(:company)
+    post :bill, id: customer
+    expect(customer.reload.balance).to eq(0.20)
+    expect(response).to redirect_to(customers_path)
+  end
 end

@@ -5,5 +5,8 @@
   %dt Billing plan
   %dd= form.select :billing_scheme_id, @billing_schemes.map { |c| [c.name, c.id] }
 
+  %dt Balance
+  %dd= form.text_field :balance
+
   %dt Canceled
   %dd= form.text_field :canceled_at

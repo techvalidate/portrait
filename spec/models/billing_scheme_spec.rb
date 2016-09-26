@@ -30,3 +30,11 @@ describe BillingScheme, 'associations' do
     expect { billing.destroy }.to change{UsageTier.count}.from(tiers.count).to(0)
   end
 end
+
+describe Customer, 'billing' do
+  it 'should calculate billing based on count' do
+    billing = billing_schemes(:basic)
+
+    expect(billing.owed_for(12)).to eq(0.51)
+  end
+end

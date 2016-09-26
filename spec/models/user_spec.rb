@@ -61,4 +61,12 @@ describe User, 'status' do
 
     expect(user.canceled?).to be(true)
   end
+
+  it 'should count this month based on usage' do
+    expect(users(:matt).site_count_this_month).to eq(15)
+  end
+
+  it 'should count last month based on usage' do
+    expect(users(:matt).site_count_last_month).to eq(4)
+  end
 end

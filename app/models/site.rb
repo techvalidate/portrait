@@ -68,4 +68,8 @@ class Site < ActiveRecord::Base
   #############################################################################
 
   delegate :canceled?, to: :user, prefix: 'customer', allow_nil: true
+
+  scope :within_dates, ->(start, finish) {
+    where('created_at >= ? AND created_at < ?', start, finish)
+  }
 end
