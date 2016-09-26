@@ -1,0 +1,78 @@
+= Portrait features
+
+This document summarizes the work I did on the Portrait web service.
+
+== Choosing tasks
+
+I first started by scanning the list and making notes on each feature. My conclusion was that while some of the tasks may have been technically more rewarding, I wanted to go after the modeling tasks (customer, pricing, billing) for several reasons:
+* It demonstrates my knowledge of the Rails framework
+* Capturing a domain is an interesting challenge in its own right
+* Getting the models right early helps the rest of the project go smoothly
+* If we can't get paid, all the other features are moot
+
+== Roadblocks
+
+I ended up blocked on getting the python capture tool to build. It all started with a broken test:
+
+Failures:
+
+  1) SitesController handles / with valid parameters and POST
+     Failure/Error: expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/sites/2/original/2-full.png</image-url>\n</site>\n")
+
+       expected: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/sites/2/original/2-full.png</image-url>\n</site>\n"
+            got: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/images/original/missing.png</image-url>\n</site>\n"
+
+       (compared using ==)
+
+       Diff:
+       @@ -1,5 +1,5 @@
+        <?xml version="1.0" encoding="UTF-8"?>
+        <site>
+       -  <image-url>/sites/2/original/2-full.png</image-url>
+       +  <image-url>/images/original/missing.png</image-url>
+        </site>
+
+     # ./spec/controllers/sites_controller_spec.rb:32:in `block (3 levels) in <top (required)>'
+     # ./spec/controllers/sites_controller_spec.rb:28:in `block (2 levels) in <top (required)>'
+
+Finished in 0.55684 seconds (files took 1.74 seconds to load)
+26 examples, 1 failure
+
+Then I noticed lib/webkit2png wouldn't run because it was missing pyobjc:
+$ pip install -U pyobjc
+    /System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7/pymactoolbox.h:13:10: fatal error: 'QuickTime/QuickTime.h' file not found
+    #include <QuickTime/QuickTime.h>
+             ^
+    1 error generated.
+
+Apparently Xcode 8 has deprecated QuickTime, so the simplest thing to do was to downgrade to 7.3.1.
+
+== Results
+
+That cleared up, I began on the customer model. It took slightly longer than expected, owing to getting used to the new codebase and speaking RSpec again. Things settled out and the pricing and billing estimates were more accurate.
+
+  | Task           | Estimate (hours) | Actual (hours) |
+  |----------------+------------------+----------------|
+  | Customer model |                3 |            4.8 |
+  | Pricing        |                3 |            2.6 |
+  | Billing        |                3 |            2.7 |
+  |----------------+------------------+----------------|
+  | TOTAL          |                9 |           10.1 |
+
+I worked in three sessions, roughly one for each task. As such there are three commits for each task, respectively. I aimed for test coverage and much of the features were test-driven.
+
+The complex part of the customer model was disallowing user access to the API once the customer canceled. Since it seemed useful, I also added customer UI for admins.
+
+The challenge in the pricing task was allowing for arbitrary tiers for a given pricing scheme, which is done with a straightforward has_many relationship between BillingScheme and UsageTier. If there were going to be many BillingScheme records, then it would be worthwhile to switch to a join table. Since pricing likely isn't something that changes often, it would be premature to add the extra complexity.
+
+The Billing task is built on the work of the two previous tasks, adding a way to count the sites in a month and calculate the tiered pricing. I chose to have the tiered pricing share across the users of a customer, though the code is flexible enough that it could be changed to a per-user basis. I also added a balance to the customer object and a way to update it with the amount owed from the previous month. This way when customers don't pay, it's carried forward to the next month.
+
+== Next steps
+
+I had planned out the Fixed price add-on feature, and deferred it in the interest of time. I would implement with a has_one relationship on User, adjusting the pricing in BillingScheme.
+
+I didn't add UI for BillingScheme/UsageTier. To do it right, I would want to add javascript and have a dynamic experience to build out the tiers.
+
+The customer 'Bill Last Month' button is a place-holder. Some intelligence to avoid duplicate-billing is needed.
+
+At some point the dataset will get large and caching on the customer totals will be required.
