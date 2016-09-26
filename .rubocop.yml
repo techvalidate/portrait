@@ -203,7 +203,7 @@ Style/SpaceAfterColon:
 Style/SpaceAfterComma:
   Enabled: false
 
-Style/SpaceAfterControlKeyword:
+Style/SpaceAroundKeyword:
   Enabled: false
 
 Style/SpaceBeforeBlockBraces:

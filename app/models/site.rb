@@ -60,5 +60,16 @@ class Site < ActiveRecord::Base
   #############################################################################
   validates :user_id, presence: true
   validates :url, format: /\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
+  validates :customer_canceled?, exclusion: { in: [true],
+                                              message: 'Customer canceled!' }
 
+  #############################################################################
+  #                               D E L G A T I O N                           #
+  #############################################################################
+
+  delegate :canceled?, to: :user, prefix: 'customer', allow_nil: true
+
+  scope :within_dates, ->(start, finish) {
+    where('created_at >= ? AND created_at < ?', start, finish)
+  }
 end

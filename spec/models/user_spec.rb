@@ -41,9 +41,32 @@ describe User, 'validations' do
     expect(user.errors[:password]).not_to be_empty
   end
 
+  it 'should have a customer' do
+    user = User.new
+    user.valid?
+    expect(user.errors[:customer]).not_to be_empty
+  end
+
   it 'should have a unique name' do
     user = User.new name: users(:jordan).name
     user.valid?
     expect(user.errors[:name]).not_to be_empty
+  end
+end
+
+describe User, 'status' do
+  it 'follows customer cancelation' do
+    user = users(:jordan)
+    user.customer.cancel!
+
+    expect(user.canceled?).to be(true)
+  end
+
+  it 'should count this month based on usage' do
+    expect(users(:matt).site_count_this_month).to eq(15)
+  end
+
+  it 'should count last month based on usage' do
+    expect(users(:matt).site_count_last_month).to eq(4)
   end
 end

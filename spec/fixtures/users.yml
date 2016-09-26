@@ -2,3 +2,10 @@ jordan:
   name: jordan
   password: password
   admin: true
+  customer: company
+
+matt:
+  name: matt
+  password: password
+  admin: false
+  customer: company

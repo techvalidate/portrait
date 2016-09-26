@@ -26,4 +26,9 @@ describe Site do
   it 'should have an image url' do
     expect(sites(:google).image_url).to eq('/sites/1/original/google.png')
   end
+
+  it 'should be queryable by date range' do
+    expect(Site.within_dates(1.day.ago, 1.day.since).count).to eq(16)
+    expect(Site.within_dates(2.days.ago, 1.day.ago).count).to eq(0)
+  end
 end

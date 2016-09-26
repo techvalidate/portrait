@@ -1,0 +1,14 @@
+lower:
+  start: 0
+  price_per: 0.05
+  billing_scheme: basic
+
+middle:
+  start: 5
+  price_per: 0.04
+  billing_scheme: basic
+
+upper:
+  start: 10
+  price_per: 0.03
+  billing_scheme: basic

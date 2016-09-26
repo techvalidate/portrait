@@ -18,10 +18,20 @@ Create your first user with the console
 
   $ rails console
 
-Once in the console, create a user. Make sure you're an admin
+Once in the console, create a billing scheme with tiers, a customer and a user. Make sure you're an admin
 
-  >> User.create name: 'name', password: 'password', admin: true
-  => #<User id: 1, name: "name", password: "password", admin: true...
+  >> lower_tier = UsageTier.create start: 0, price_per: 0.05
+  => #<UsageTier id: 1, start: 0, price_per: 0.05...
+  >> upper_tier = UsageTier.create start: 100, price_per: 0.02
+  => #<UsageTier id: 2, start: 100, price_per: 0.02,
+  >> billing_scheme = BillingScheme.create name: 'Basic', usage_tiers: [lower_tier, upper_tier]
+  => #<BillingScheme id: 3, name: "Basic"...
+
+  >> customer = Customer.create name: 'customer', billing_scheme: billing_scheme
+  => #<Customer id: 1, name: "customer", canceled_at: nil...
+
+  >> User.create name: 'name', password: 'password', admin: true, customer: customer
+  => #<User id: 1, name: "name", password: "password", admin: true, customer_id: 1...
 
 And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
 

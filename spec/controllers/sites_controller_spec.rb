@@ -49,4 +49,13 @@ describe SitesController do
     }.not_to change(Site, :count)
   end
 
+  it 'handles /sites with canceled customer' do
+    customer = users(:jordan).customer
+    customer.cancel!
+
+    expect {
+      post :api, url: 'https://google.com'
+      expect(response.response_code).to eq(500)
+    }.not_to change(Site, :count)
+  end
 end
