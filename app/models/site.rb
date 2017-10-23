@@ -28,7 +28,7 @@ class Site < ActiveRecord::Base
   #############################################################################
   #                             P R O C E S S I N G                           #
   #############################################################################
-  after_create 'process!'
+  after_create :process!
   def process!
     started!
     handle generate_png
