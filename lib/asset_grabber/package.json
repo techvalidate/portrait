@@ -6,7 +6,7 @@
     "start": "node index"
   },
   "author": "TJ Downes - SurveyMonkey",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "minimist": "^1.2.0",
     "puppeteer": "^0.12.0"
