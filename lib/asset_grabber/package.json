@@ -1,7 +1,7 @@
 {
-  "name": "puppeteer",
-  "version": "1.0.0",
-  "description": "Pupeteer Project to get screenshots and PDFs",
+  "name": "assetGrabber",
+  "version": "0.1.0",
+  "description": "Node tasks leveraging Puppeteer to take screenshots and PDFs",
   "scripts": {
     "start": "node index"
   },
