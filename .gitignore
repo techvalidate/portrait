@@ -4,3 +4,5 @@ db/*.sqlite3
 log/*.log
 tmp/
 public/sites/*
+/portrait.iml
+/lib/asset_grabber/node_modules/
