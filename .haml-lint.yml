@@ -1,0 +1,31 @@
+linters:
+
+  ClassesBeforeIds:
+    enabled: false
+
+  ConsecutiveComments:
+    enabled: false
+
+  IdNames:
+    enabled: false
+
+  InlineStyles:
+    enabled: false
+
+  InstanceVariables:
+    enabled: false
+
+  LeadingCommentSpace:
+    enabled: false
+
+  LineLength:
+    enabled: false
+
+  ObjectReferenceAttributes:
+    enabled: false
+
+  SpaceInsideHashAttributes:
+    enabled: false
+
+  UnnecessaryStringOutput:
+    enabled: false
