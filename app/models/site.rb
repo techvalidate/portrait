@@ -36,11 +36,14 @@ class Site < ActiveRecord::Base
   end
 
   # Generate png and returns path
+  # RIP webkit2png: # command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
   def generate_png
+    node      = `which node`.chomp
     file_name = "#{id}-full.png"
-    command = "node lib/asset_grabber/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}' "
-    # command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
+    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}'"
+
     system command
+
     return "#{Rails.root}/tmp/#{file_name}"
   end
 

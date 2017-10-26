@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :sites, dependent: :destroy
 
+  scope :by_name, ->{ order(name: :asc) }
+
   def to_param() name end
 
   validates :password, presence: true
