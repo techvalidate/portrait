@@ -1,0 +1,14 @@
+{
+  "name": "puppeteer",
+  "version": "1.0.0",
+  "description": "Pupeteer Project to get screenshots and PDFs",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "TJ Downes - SurveyMonkey",
+  "license": "ISC",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "puppeteer": "^0.12.0"
+  }
+}

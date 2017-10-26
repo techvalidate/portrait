@@ -36,9 +36,11 @@ class Site < ActiveRecord::Base
 
   # Generate png and returns path
   def generate_png
-    command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
+    file_name = "#{id}-full.png"
+    command = "node lib/asset_grabber/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}' "
+    #command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
     system command
-    return "#{Rails.root}/tmp/#{id}-full.png"
+    return "#{Rails.root}/tmp/#{file_name}"
   end
 
   # Set the png located at path to the image
