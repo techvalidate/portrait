@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'activemodel-serializers-xml', '1.0.2'
 gem 'coffee-rails', '4.2.1'
 gem 'haml', '5.0.1'
 gem 'paperclip', '5.1.0'
@@ -21,4 +22,8 @@ group :development do
   gem 'rubocop', '0.47.1'
   gem 'spring-watcher-listen', '2.0.1'
   gem 'web-console', '3.5.1'
+end
+
+group :test do
+  gem 'rails-controller-testing', '1.0.2'
 end

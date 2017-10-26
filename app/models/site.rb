@@ -2,10 +2,11 @@ class Site < ActiveRecord::Base
   #############################################################################
   #                               P A P E R C L I P                           #
   #############################################################################
-  has_attached_file :image, path: ':rails_root/public/sites/:id/:style/:basename.:extension',
-                            url:  '/sites/:id/:style/:basename.:extension'
+  has_attached_file :image
 
-  validates_attachment_file_name :image, matches: [/png\Z/i, /jpe?g\Z/i, /gif\Z/i]
+  validates_attachment :image,
+    content_type: { content_type: /\Aimage\/.*\Z/ },
+    file_name: { matches: [/png\Z/, /PNG\Z/, /jpe?g\Z/, /JPE?G\Z/] }
 
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
@@ -22,7 +23,7 @@ class Site < ActiveRecord::Base
   #############################################################################
   # Used as an attribute in xml result - See SitesController#api
   def image_url
-    image.url.split('?').first if image
+    image.url.split('?').first if image.present?
   end
 
   #############################################################################
@@ -38,7 +39,7 @@ class Site < ActiveRecord::Base
   def generate_png
     file_name = "#{id}-full.png"
     command = "node lib/asset_grabber/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}' "
-    #command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
+    # command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
     system command
     return "#{Rails.root}/tmp/#{file_name}"
   end
