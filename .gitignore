@@ -1,8 +1,48 @@
-.bundle
+# Caches
+/.bundle
+.sass-cache
+.byebug_history
+
+# local config
 config/database.yml
+config/redis.yml
+config/s3.yml
+config/secrets.yml.key
 db/*.sqlite3
-log/*.log
-tmp/
-public/sites/*
-/portrait.iml
+
+# Paperclip files
+/public/system/*
+/public/sites/*
+
+# log and tempfiles
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Javascript
+/node_modules
+/yarn-error.log
+/public/packs-test
+/public/packs
+.eslintrc
 /lib/asset_grabber/node_modules/
+
+# OS X
+.DS_Store
+dump.rdb
+.ruby-gemset
+.powenv
+.rvmrc
+GuardFile
+/npm-debug.log
+
+# Editors & Development
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+*~
+/portrait.iml

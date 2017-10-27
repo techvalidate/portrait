@@ -24,6 +24,6 @@ describe Site do
   end
 
   it 'should have an image url' do
-    expect(sites(:google).image_url).to eq('/sites/1/original/google.png')
+    expect(sites(:google).image_url).to eq('/system/sites/images/000/000/001/original/google.png')
   end
 end

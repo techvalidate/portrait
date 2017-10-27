@@ -1,1 +1,0 @@
-system 'npm install --prefix lib/asset_grabber'
