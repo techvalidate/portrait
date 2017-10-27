@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Include:
     - 'app/**/*.rb'
     - 'lib/**/*.rb'
@@ -8,8 +8,11 @@ AllCops:
     - 'bin/**/*'
     - 'config/**/*.rb'
     - 'cookbooks/**/*.rb'
+    - 'cookbooks.v4/**/*.rb'
     - 'db/**/*.rb'
     - 'lib/geolocal.rb'
+    - 'node_modules/**/*.rb'
+    - 'vendor/**/*'
 
 Rails:
   Enabled: true
@@ -20,9 +23,6 @@ Lint/AmbiguousOperator:
 Lint/AssignmentInCondition:
   Enabled: false
 
-Lint/Eval:
-  Enabled: false
-
 Lint/HandleExceptions:
   Enabled: false
 
@@ -30,6 +30,9 @@ Lint/RescueException:
   Enabled: false
 
 Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false
 
 Metrics/BlockNesting:
@@ -65,10 +68,19 @@ Performance/Detect:
 Rails/HasAndBelongsToMany:
   Enabled: false
 
+Rails/FilePath:
+  Enabled: false
+
 Rails/FindEach:
   Enabled: false
 
+Rails/SkipsModelValidations:
+  Enabled: false
+
 Rails/Validation:
+  Enabled: false
+
+Security/Eval:
   Enabled: false
 
 Style/AccessorMethodName:
@@ -110,6 +122,9 @@ Style/CommentAnnotation:
 Style/ConditionalAssignment:
   Enabled: false
 
+Style/ConstantName:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
@@ -131,13 +146,22 @@ Style/EmptyLinesAroundClassBody:
 Style/EmptyLinesAroundModuleBody:
   Enabled: false
 
+Style/EmptyMethod:
+  Enabled: false
+
 Style/ExtraSpacing:
   Enabled: false
 
 Style/FileName:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/GuardClause:
+  Enabled: false
+
+Style/HashSyntax:
   Enabled: false
 
 Style/IfUnlessModifier:
@@ -147,6 +171,9 @@ Style/IndentHash:
   Enabled: false
 
 Style/Lambda:
+  Enabled: false
+
+Style/MethodMissing:
   Enabled: false
 
 Style/MultilineBlockChain:
@@ -191,6 +218,9 @@ Style/Semicolon:
 Style/SignalException:
   Enabled: false
 
+Style/SingleLineBlockParams:
+  Enabled: false
+
 Style/SingleLineMethods:
   Enabled: false
 
@@ -201,9 +231,6 @@ Style/SpaceAfterColon:
   Enabled: false
 
 Style/SpaceAfterComma:
-  Enabled: false
-
-Style/SpaceAfterControlKeyword:
   Enabled: false
 
 Style/SpaceBeforeBlockBraces:
@@ -225,4 +252,7 @@ Style/TrivialAccessors:
   Enabled: false
 
 Style/TrailingBlankLines:
+  Enabled: false
+
+Style/VariableNumber:
   Enabled: false

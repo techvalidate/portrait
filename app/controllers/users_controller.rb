@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  before_action :admin_required
 
   # GET /users
   def index
-    @users = User.order('name')
+    @users = User.by_name
     @user  = User.new
   end
 
@@ -17,8 +18,8 @@ class UsersController < ApplicationController
     @user.save!
     redirect_to users_url
   rescue ActiveRecord::RecordInvalid
-    @users = User.order('name')
-    render 'index'
+    @users = User.by_name
+    render :index
   end
 
   # PUT /users/:id
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
     @user.update_attributes! params.require(:user).permit!
     redirect_to @user
   rescue ActiveRecord::RecordInvalid
-    render 'show'
+    render :show
   end
 
   # DELETE /users/:id

@@ -1,18 +1,26 @@
 = portrait
 
-Portrait is a web service which converts a website into a image. It is designed only for OS X. The actual hard work is handled by Paul Hammond's {webkit2png}[http://www.paulhammond.org/webkit2png/] (available on {GitHub}[http://github.com/paulhammond/webkit2png/tree/master]).  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
+Portrait is a web service which converts a website into a image. The actual hard work is handled by Google's {Puppeteer}[https://github.com/GoogleChrome/puppeteer] API and headless Chromium.  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
+
+== Dependencies
+- NodeJS (installed by Yarn in some package managers, like Homebrew)
+- Yarn
 
 == Installation
 
-Portrait is a Rails 4 application. So you'll need some kind of Rails stack. Since it only runs on OS X, your best bet is to just use the included Apache install along with Passenger.
+Portrait is a Rails 5.1 application. So you'll need some kind of Rails stack. For OS X your best bet is to just use the included Apache install along with Passenger.
 
 After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided.
 
 I'd suggest installing portrait on it's own subdomain like http://portrait.mydomain.com. The API endpoint is the root of the URL, so that'll make everything nice and easy.
 
-Use whatever database you want, but it'll work fine with SQLite. Begin by installing dependencies with bunder:
+Use whatever database you want, but it'll work fine with SQLite. Begin by installing dependencies:
 
-  $ bundle
+  $ bin/setup
+
+Dependencies can be updated in bulk (gems, db, yarn packages) at any time using:
+
+  $ bin/update
 
 Create your first user with the console
 
@@ -23,7 +31,7 @@ Once in the console, create a user. Make sure you're an admin
   >> User.create name: 'name', password: 'password', admin: true
   => #<User id: 1, name: "name", password: "password", admin: true...
 
-And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for webkit2png to work.
+And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for Puppeteer to work.
 
 == How it works
 
@@ -62,4 +70,4 @@ If you're an admin user, you can login to /sites and /users to get an idea of wh
 
 * Available on GitHub http://github.com/jmckible/portrait
 
-* webkit2png by Paul Hammond http://www.paulhammond.org/webkit2png
+* {Puppeteer}[https://github.com/GoogleChrome/puppeteer] by Google

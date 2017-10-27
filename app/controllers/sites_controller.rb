@@ -1,6 +1,6 @@
 class SitesController < ApplicationController
-  before_action      :user_required,  only: :api
-  skip_before_action :admin_required, only: :api
+  before_action :user_required,    only: :api
+  before_action :admin_required, except: :api
 
   # GET /sites
   def index
