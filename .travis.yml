@@ -1,0 +1,21 @@
+langauge: ruby
+
+dist: trusty
+sudo: false
+
+cache:
+  yarn: true
+  bundler: true
+
+before_script:
+  - cp config/travis.database.yml config/database.yml
+  - nvm install 6
+  - npm install -g yarn
+  - ./bin/yarn
+
+branches:
+  only:
+    - master
+
+notifications:
+  email: false
