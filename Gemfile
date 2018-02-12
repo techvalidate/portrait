@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'activemodel-serializers-xml', '1.0.2'
+gem 'bootsnap', '1.1.8'
 gem 'coffee-rails', '4.2.2'
 gem 'haml', '5.0.4'
 gem 'paperclip', '5.2.1'

@@ -2,9 +2,13 @@ env:
   browser: true
   commonjs: true
   es6: true
-extends: 'eslint:recommended'
+extends:
+  - 'eslint:recommended'
+  - 'standard-preact'
 parserOptions:
   sourceType: module
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
 rules:
   array-bracket-spacing: error
   array-callback-return: error
@@ -46,7 +50,6 @@ rules:
   no-new-func: error
   no-new-object: error
   no-param-reassign: error
-  no-plusplus: error
   no-restricted-globals: error
   no-restricted-properties: error
   no-restricted-syntax: error
@@ -62,9 +65,6 @@ rules:
     - objectsInObjects: false
   object-shorthand: error
   one-var:
-    - error
-    - never
-  padded-blocks:
     - error
     - never
   prefer-arrow-callback: error
@@ -83,7 +83,7 @@ rules:
     - as-needed
   semi:
     - error
-    - always
+    - never
   space-before-blocks: error
   space-before-function-paren:
     - error
