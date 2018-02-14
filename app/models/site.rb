@@ -40,7 +40,7 @@ class Site < ApplicationRecord
   def generate_png
     node      = `which node`.chomp
     file_name = "#{id}-full.png"
-    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}' --no-sandbox"
+    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}'"
 
     system command
 

@@ -110,7 +110,7 @@ const argv = require('minimist')(process.argv.slice(2));
   }
 
   try {
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
     const page = await browser.newPage()
     await page.goto(argv.url)
     await page.screenshot(screenshotOptions)
