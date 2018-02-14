@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
 
   def self.authenticate(name, password)
     User.find_by name: name, password: password

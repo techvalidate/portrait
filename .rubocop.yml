@@ -6,16 +6,70 @@ AllCops:
     - 'specs/**/*.rb'
   Exclude:
     - 'bin/**/*'
-    - 'config/**/*.rb'
-    - 'cookbooks/**/*.rb'
-    - 'cookbooks.v4/**/*.rb'
+    - 'config/**/*'
     - 'db/**/*.rb'
-    - 'lib/geolocal.rb'
-    - 'node_modules/**/*.rb'
+    - 'node_modules/**/*'
     - 'vendor/**/*'
 
-Rails:
-  Enabled: true
+###############################################################################
+#                              L A Y O U T                                    #
+###############################################################################
+Layout/AlignArray:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Layout/IndentHash:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+Layout/SpaceAfterColon:
+  Enabled: false
+
+Layout/SpaceAfterComma:
+  Enabled: false
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+
+Layout/SpaceInsideBrackets:
+  Enabled: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Layout/TrailingBlankLines:
+  Enabled: false
 
 Lint/AmbiguousOperator:
   Enabled: false
@@ -29,6 +83,9 @@ Lint/HandleExceptions:
 Lint/RescueException:
   Enabled: false
 
+###############################################################################
+#                              M E T R I C S                                  #
+###############################################################################
 Metrics/AbcSize:
   Enabled: false
 
@@ -59,11 +116,38 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Enabled: false
 
+###############################################################################
+#                              N A M I N G                                    #
+###############################################################################
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/ConstantName:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+###############################################################################
+#                            P E R F O R M A N C E                            #
+###############################################################################
 Performance/Count:
   Enabled: false
 
 Performance/Detect:
   Enabled: false
+
+###############################################################################
+#                                  R A I L S                                  #
+###############################################################################
+Rails:
+  Enabled: true
 
 Rails/HasAndBelongsToMany:
   Enabled: false
@@ -77,25 +161,28 @@ Rails/FindEach:
 Rails/SkipsModelValidations:
   Enabled: false
 
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Enabled: false
+
 Rails/Validation:
   Enabled: false
 
+###############################################################################
+#                             S E C U R I T Y                                 #
+###############################################################################
 Security/Eval:
   Enabled: false
 
-Style/AccessorMethodName:
-  Enabled: false
-
-Style/AlignArray:
-  Enabled: false
-
-Style/AlignHash:
-  Enabled: false
-
-Style/AlignParameters:
-  Enabled: false
-
+###############################################################################
+#                                 S T Y L E                                   #
+###############################################################################
 Style/AndOr:
+  Enabled: false
+
+Style/AsciiComments:
   Enabled: false
 
 Style/BlockDelimiters:
@@ -122,37 +209,13 @@ Style/CommentAnnotation:
 Style/ConditionalAssignment:
   Enabled: false
 
-Style/ConstantName:
-  Enabled: false
-
 Style/Documentation:
   Enabled: false
 
 Style/EmptyElse:
   Enabled: false
 
-Style/EmptyLineBetweenDefs:
-  Enabled: false
-
-Style/EmptyLinesAroundAccessModifier:
-  Enabled: false
-
-Style/EmptyLinesAroundBlockBody:
-  Enabled: false
-
-Style/EmptyLinesAroundClassBody:
-  Enabled: false
-
-Style/EmptyLinesAroundModuleBody:
-  Enabled: false
-
 Style/EmptyMethod:
-  Enabled: false
-
-Style/ExtraSpacing:
-  Enabled: false
-
-Style/FileName:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
@@ -167,9 +230,6 @@ Style/HashSyntax:
 Style/IfUnlessModifier:
   Enabled: false
 
-Style/IndentHash:
-  Enabled: false
-
 Style/Lambda:
   Enabled: false
 
@@ -177,9 +237,6 @@ Style/MethodMissing:
   Enabled: false
 
 Style/MultilineBlockChain:
-  Enabled: false
-
-Style/MultilineOperationIndentation:
   Enabled: false
 
 Style/MutableConstant:
@@ -195,9 +252,6 @@ Style/OneLineConditional:
   Enabled: false
 
 Style/ParallelAssignment:
-  Enabled: false
-
-Style/PredicateName:
   Enabled: false
 
 Style/RedundantReturn:
@@ -224,35 +278,11 @@ Style/SingleLineBlockParams:
 Style/SingleLineMethods:
   Enabled: false
 
-Style/SpaceAroundOperators:
-  Enabled: false
-
-Style/SpaceAfterColon:
-  Enabled: false
-
-Style/SpaceAfterComma:
-  Enabled: false
-
-Style/SpaceBeforeBlockBraces:
-  Enabled: false
-
-Style/SpaceInsideBlockBraces:
-  Enabled: false
-
-Style/SpaceInsideBrackets:
-  Enabled: false
-
-Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
 Style/StringLiterals:
   Enabled: false
 
+Style/SymbolArray:
+  Enabled: false
+
 Style/TrivialAccessors:
-  Enabled: false
-
-Style/TrailingBlankLines:
-  Enabled: false
-
-Style/VariableNumber:
   Enabled: false

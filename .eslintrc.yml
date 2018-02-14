@@ -4,8 +4,8 @@ env:
   es6: true
 extends:
   - 'eslint:recommended'
-  - 'standard-preact'
 parserOptions:
+  ecmaVersion: 8
   sourceType: module
   ecmaFeatures:
     experimentalObjectRestSpread: true
@@ -41,6 +41,7 @@ rules:
   no-array-constructor: error
   no-case-declarations: error
   no-confusing-arrow: error
+  no-console: 0
   no-dupe-class-members: error
   no-duplicate-imports: error
   no-eval: error
@@ -54,6 +55,7 @@ rules:
   no-restricted-properties: error
   no-restricted-syntax: error
   no-undef: off
+  no-unexpected-multiline: 0
   no-unneeded-ternary: error
   no-useless-constructor: error
   no-useless-escape: error
