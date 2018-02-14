@@ -8,14 +8,8 @@ cache:
   bundler: true
 
 before_script:
-  - cp config/travis.database.yml config/database.yml
-  - nvm install 6
-  - npm install -g yarn
-  - ./bin/yarn
+  - ./bin/setup
 
 branches:
   only:
     - master
-
-notifications:
-  email: false

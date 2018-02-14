@@ -1,4 +1,4 @@
-class Site < ActiveRecord::Base
+class Site < ApplicationRecord
   #############################################################################
   #                               P A P E R C L I P                           #
   #############################################################################
@@ -11,7 +11,7 @@ class Site < ActiveRecord::Base
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
   #############################################################################
-  enum status: [:submitted, :started, :succeeded, :failed]
+  enum status: %i[submitted started succeeded failed]
 
   #############################################################################
   #                         R E L A T I O N S H I P S                         #
