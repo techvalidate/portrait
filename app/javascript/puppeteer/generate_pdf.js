@@ -1,5 +1,5 @@
-const puppeteer = require('puppeteer')
-const argv = require('minimist')(process.argv.slice(2))
+const puppeteer = require('puppeteer'); // eslint-disable-line semi
+const argv = require('minimist')(process.argv.slice(2));
 
 (async() => {
   // Required arguments

@@ -9,13 +9,11 @@ describe SitesController do
   end
 
   it 'handles /sites with valid parameters and POST' do
-    pending 'puppeteer fix'
-    fail
-    # expect {
-    #   pst :sites, site: { url: 'https://google.com' }
-    #   expect(assigns(:site).user).to eq(@user)
-    #   expect(response).to redirect_to(sites_path)
-    # }.to change(Site, :count).by(1)
+    expect {
+      pst :sites, site: { url: 'https://google.com' }
+      expect(assigns(:site).user).to eq(@user)
+      expect(response).to redirect_to(sites_path)
+    }.to change(Site, :count).by(1)
   end
 
   it 'handles /sites with invalid url and POST' do
@@ -27,14 +25,12 @@ describe SitesController do
   end
 
   it 'handles / with valid parameters and POST' do
-    pending 'puppeteer fix'
-    fail
-    # expect {
-    #   pst [:api, :sites], url: 'https://google.com'
-    #   expect(assigns(:site).user).to eq(@user)
-    #   expect(response).to be_success
-    #   expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/system/sites/images/000/000/002/original/2-full.png</image-url>\n</site>\n")
-    # }.to change(Site, :count).by(1)
+    expect {
+      pst [:api, :sites], url: 'https://google.com'
+      expect(assigns(:site).user).to eq(@user)
+      expect(response).to be_success
+      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/system/sites/images/000/000/002/original/2-full.png</image-url>\n</site>\n")
+    }.to change(Site, :count).by(1)
   end
 
   it 'handles / with empty url and POST' do
