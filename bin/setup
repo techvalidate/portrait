@@ -23,11 +23,11 @@ chdir APP_ROOT do
   if node
     puts "\nNode was found at #{node}"
   else
-    abort "\n== Node is missing. Please install and verify `which node`"
+    abort "\n Node is missing. Please install and verify `which node`"
   end
 
-  puts "\n== npm install =="
-  system! 'npm install'
+  # puts "\n== npm install =="
+  # system! 'npm install'
 
   # Install JavaScript dependencies if using Yarn
   puts "\n== Resetting Yarn =="

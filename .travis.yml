@@ -8,8 +8,6 @@ cache:
   bundler: true
 
 before_script:
-  - cp config/travis.database.yml config/database.yml
-  - nvm install 6
   - ./bin/setup
 
 branches:
