@@ -21,7 +21,7 @@ chdir APP_ROOT do
   puts "\n== Checking Node =="
   node = `which node`.chomp
   if node
-    puts "\nNode was found at #{node}"
+    puts "Node was found at #{node}"
   else
     abort "\n Node is missing. Please install and verify `which node`"
   end
