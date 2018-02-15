@@ -5,12 +5,12 @@ describe UsersController do
 
   it 'handles /users with GET' do
     gt :users
-    expect(response).to be_success
+    expect(response).to be_successful
   end
 
   it 'handles /users/:id with GET' do
     gt users(:jordan)
-    expect(response).to be_success
+    expect(response).to be_successful
   end
 
   it 'handles /users with valid params and POST' do
@@ -31,7 +31,7 @@ describe UsersController do
     user = users(:jordan)
     pt user, user: { password: '' }
     expect(user.reload.name).not_to be_blank
-    expect(response).to be_success
+    expect(response).to be_successful
     expect(response).to render_template(:show)
   end
 

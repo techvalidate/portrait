@@ -5,7 +5,7 @@ describe SitesController do
 
   it 'handles / with GET' do
     gt :sites
-    expect(response).to be_success
+    expect(response).to be_successful
   end
 
   it 'handles /sites with valid parameters and POST' do
@@ -19,7 +19,7 @@ describe SitesController do
   it 'handles /sites with invalid url and POST' do
     expect {
       pst :sites, site: { url: 'invalid' }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response).to render_template(:index)
     }.not_to change(Site, :count)
   end
@@ -28,7 +28,7 @@ describe SitesController do
     expect {
       pst [:api, :sites], url: 'https://google.com'
       expect(assigns(:site).user).to eq(@user)
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/system/sites/images/000/000/002/original/2-full.png</image-url>\n</site>\n")
     }.to change(Site, :count).by(1)
   end
