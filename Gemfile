@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'activemodel-serializers-xml', '1.0.2'
 gem 'bootsnap', '1.1.8', require: false
 gem 'haml', '5.0.4'
-gem 'paperclip', '5.2.1'
+gem 'jbuilder', '2.7.0'
 gem 'parser', '2.3.3.1'
 gem 'rails', '5.2.0.rc1'
 gem 'sass-rails', '5.0.7'

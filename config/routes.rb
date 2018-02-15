@@ -1,10 +1,6 @@
 Portrait::Application.routes.draw do
-  resources :sites do
-    post 'api', on: :collection
-  end
-
+  resources :sites
   resources :users
 
-  post '/'=>'sites#api',  as: 'api'
-  get  '/'=>'home#index', as: 'root'
+  root to: 'home#index'
 end
