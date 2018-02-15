@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe SitesController do
-  before { login_as :jordan }
+describe SitesController, 'html' do
+  before { login_as :admin }
 
   it 'handles / with GET' do
     gt :sites
-    expect(response).to be_success
+    expect(response).to be_successful
   end
 
   it 'handles /sites with valid parameters and POST' do
@@ -19,33 +19,36 @@ describe SitesController do
   it 'handles /sites with invalid url and POST' do
     expect {
       pst :sites, site: { url: 'invalid' }
-      expect(response).to be_success
-      expect(response).to render_template(:index)
+      expect(response).to redirect_to(sites_path)
     }.not_to change(Site, :count)
   end
+end
+
+describe SitesController, 'js api' do
+  before { login_as :admin }
 
   it 'handles / with valid parameters and POST' do
     expect {
-      pst [:api, :sites], url: 'https://google.com'
+      pst :sites, site: { url: 'https://google.com' }, format: :json
       expect(assigns(:site).user).to eq(@user)
-      expect(response).to be_success
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/system/sites/images/000/000/002/original/2-full.png</image-url>\n</site>\n")
+      expect(response).to be_successful
+      expect(response.body).to be_include('2.png')
     }.to change(Site, :count).by(1)
   end
 
   it 'handles / with empty url and POST' do
     expect {
-      pst [:api, :sites]
-      expect(response.response_code).to eq(500)
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n")
+      pst :sites, format: :json
+      expect(response).to be_successful
+      expect(response.body).to be_include(':{"errors":{"url":["is invalid"]}}')
     }.not_to change(Site, :count)
   end
 
   it 'handles /sites with invalid url and POST' do
     expect {
-      pst [:api, :sites], url: 'invalid'
-      expect(response.response_code).to eq(500)
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n")
+      pst :sites, site: { url: 'invalid' }, format: :json
+      expect(response).to be_successful
+      expect(response.body).to be_include(':{"errors":{"url":["is invalid"]}}')
     }.not_to change(Site, :count)
   end
 

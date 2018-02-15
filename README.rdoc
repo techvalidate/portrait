@@ -3,66 +3,32 @@
 Portrait is a web service which converts a website into a image. The actual hard work is handled by Google's {Puppeteer}[https://github.com/GoogleChrome/puppeteer] API and headless Chromium.  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
 
 == Dependencies
-- NodeJS (installed by Yarn in some package managers, like Homebrew)
+- NodeJS
 - Yarn
 
 == Installation
 
-Portrait is a Rails 5.1 application. So you'll need some kind of Rails stack. For OS X your best bet is to just use the included Apache install along with Passenger.
-
-After you checkout the project from GitHub, you'll need to configure +database.yml+ An example file is provided.
-
-I'd suggest installing portrait on it's own subdomain like http://portrait.mydomain.com. The API endpoint is the root of the URL, so that'll make everything nice and easy.
-
-Use whatever database you want, but it'll work fine with SQLite. Begin by installing dependencies:
+Portrait is a Rails 5.2 application. So you'll need some kind of Rails stack. The provided setup script will take care of the rest
 
   $ bin/setup
 
-Dependencies can be updated in bulk (gems, db, yarn packages) at any time using:
-
-  $ bin/update
-
-Create your first user with the console
-
-  $ rails console
-
-Once in the console, create a user. Make sure you're an admin
-
-  >> User.create name: 'name', password: 'password', admin: true
-  => #<User id: 1, name: "name", password: "password", admin: true...
-
-And that's pretty much it. If you're planning to run portrait on a server-type setup, keep in mind you need a user to be logged in for Puppeteer to work.
-
 == How it works
 
-Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named 'url'. You can test it with curl:
+Send a POST request like below. Use basic http authorization and provide a parameter named 'site[url[]'. You can test it with curl:
 
-  curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com
+  curl -X POST -d "site[url]=https://google.com" -H "Accept: application/json" http://admin:admin@localhost:3000/sites
 
-On a valid url, you'll get an XML response like this:
+On a valid url, you'll get a json response like this:
 
-  <site>
-    <image_url>sites/1/original/1-full.png</image_url>
-  </site>
-
-On an invalid url, you'll get something like this:
-
-  <?xml version="1.0" encoding="UTF-8"?>
-  <errors>
-    <error>Url is invalid</error>
-  </errors>
-
-== portrait_party
-
-If you're using Portrait within a Ruby project, you can use {portrait_party}[http://github.com/jmckible/portrait_party] to simplify the API calls. It's a simple wrapper around John Nunemaker's {HTTParty}[http://github.com/jnunemaker/httparty].
-
-== Authorization
-
-Rather than open the service to the public, I opened up the source. I decided to go with basic user authentication just to be safe. I know it's not the most secure thing ever, but that's not really the point.
-
-== Admin
-
-If you're an admin user, you can login to /sites and /users to get an idea of what's going on. You can also add new sites and users there.
+  {
+    "site": {
+      "id": 1,
+      "status": "succeeded",
+      "image": {
+        "url": ".../1.png"
+      }
+    }
+  }
 
 == Author
 

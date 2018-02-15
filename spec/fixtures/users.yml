@@ -1,4 +1,4 @@
-jordan:
-  name: jordan
+admin:
+  name: admin
   password: password
   admin: true

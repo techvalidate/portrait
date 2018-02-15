@@ -26,11 +26,7 @@ chdir APP_ROOT do
     abort "\n Node is missing. Please install and verify `which node`"
   end
 
-  # puts "\n== npm install =="
-  # system! 'npm install'
-
-  # Install JavaScript dependencies if using Yarn
-  puts "\n== Resetting Yarn =="
+  puts "\n== Creating a Yarn ball =="
   system! 'rm -rf ./node_modules'
   system! 'bin/yarn'
 
@@ -39,7 +35,7 @@ chdir APP_ROOT do
     cp 'config/database.yml.example', 'config/database.yml'
   end
 
-  puts "\n== Preparing database =="
+  puts "\n== Clearing database and re-seeding =="
   system! 'bin/rails db:setup'
 
   puts "\n== Removing old logs and tempfiles =="
@@ -47,4 +43,7 @@ chdir APP_ROOT do
 
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
+
+  puts "\n== Portrait is Ready =="
+  puts "Temporary user created. Username: admin Password: admin"
 end
