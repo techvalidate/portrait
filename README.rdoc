@@ -14,7 +14,7 @@ Portrait is a Rails 5.2 application. So you'll need some kind of Rails stack. Th
 
 == How it works
 
-Send a POST request like below. Use basic http authorization and provide a parameter named 'site[url[]'. You can test it with curl:
+Send a POST request like below. Use basic http authorization and provide a parameter named +site[url]+. You can test it with curl:
 
   curl -X POST -d "site[url]=https://google.com" -H "Accept: application/json" http://admin:admin@localhost:3000/sites
 
