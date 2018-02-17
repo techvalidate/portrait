@@ -1,5 +1,4 @@
 google:
-  id: 1
+  user: admin
   status: <%= Site.statuses[:succeeded] %>
   url: http://google.com
-  user: admin

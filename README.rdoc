@@ -10,16 +10,16 @@ You'll need to be able to run Puppeteer via Node.js. You'll also need to be able
 The provided setup script should take care of all the necessities: installing dependencies, setting up a database, and creating a temporary admin user.
 
   $ ./bin/setup
-  
+
 Once that completes successfully, spin up a rails server
-  
+
   $ rails server
-  
+
 And visit http://localhost:3000
 
 == How it works
 
-Send a POST request like below. Use basic http authorization and provide a parameter named 'site[url[]]'. You can test it with curl:
+Send a POST request like below. Use basic http authorization and provide a parameter named +site[url]+. You can test it with curl:
 
   curl -X POST -d "site[url]=https://google.com" -H "Accept: application/json" http://admin:admin@localhost:3000/sites
 

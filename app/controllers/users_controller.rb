@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :admin_required
+  before_action :user_required
 
   # GET /users
   def index
