@@ -1,16 +1,21 @@
 = portrait
 
-Portrait is a web service which converts a website into a image. The actual hard work is handled by Google's {Puppeteer}[https://github.com/GoogleChrome/puppeteer] API and headless Chromium.  Portrait is primarily designed to be used as a web service, but does have a minimal admin interface.
+Portrait is a web service which converts a website into a image. The actual hard work is handled by Google's {Puppeteer}[https://github.com/GoogleChrome/puppeteer].  Portrait is primarily designed to be used as a service, but does have a minimal admin interface.
 
 == Dependencies
-- NodeJS
-- Yarn
+You'll need to be able to run Puppeteer via Node.js. You'll also need to be able to run a Rails stack. Portrait is built on Ruby 2.3.3 and Rails 5.2
 
 == Installation
 
-Portrait is a Rails 5.2 application. So you'll need some kind of Rails stack. The provided setup script will take care of the rest
+The provided setup script should take care of all the necessities: installing dependencies, setting up a database, and creating a temporary admin user.
 
-  $ bin/setup
+  $ ./bin/setup
+
+Once that completes successfully, spin up a rails server
+
+  $ rails server
+
+And visit http://localhost:3000
 
 == How it works
 
@@ -34,6 +39,4 @@ On a valid url, you'll get a json response like this:
 
 * portrait was created by Jordan McKible http://jordan.mckible.com
 
-* Available on GitHub http://github.com/jmckible/portrait
-
-* {Puppeteer}[https://github.com/GoogleChrome/puppeteer] by Google
+* Available on GitHub http://github.com/techvalidate/portrait
