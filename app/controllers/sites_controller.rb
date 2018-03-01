@@ -8,7 +8,7 @@ class SitesController < ApplicationController
 
   def create
     @site = @current_user.sites.build params.fetch(:site, {}).permit(:url)
-    @site.save
+    @site.process! if @site.save
     respond_to do |format|
       format.html { redirect_to sites_url }
       format.json

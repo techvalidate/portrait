@@ -6,7 +6,6 @@ class Site < ApplicationRecord
 
   has_one_attached :image
 
-  after_create :process!
   def process!
     started!
     handle generate_png
