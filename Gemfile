@@ -10,6 +10,7 @@ gem 'sqlite3', '1.3.13'
 gem 'uglifier', '4.1.6'
 gem 'webpacker', '3.2.2'
 gem 'will_paginate', '3.1.6'
+gem 'delayed_job_active_record', '~> 4.1'
 
 group :development, :test do
   gem 'byebug', '10.0.0'

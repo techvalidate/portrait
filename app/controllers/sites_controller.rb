@@ -14,5 +14,4 @@ class SitesController < ApplicationController
       format.json
     end
   end
-
 end

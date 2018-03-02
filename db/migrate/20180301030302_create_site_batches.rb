@@ -3,6 +3,7 @@ class CreateSiteBatches < ActiveRecord::Migration[5.2]
     create_table :site_batches do |t|
       t.references :user, index: true
       t.integer :status
+      t.text :submitted_urls
       t.timestamps
     end
 
