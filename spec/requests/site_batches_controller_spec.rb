@@ -25,5 +25,20 @@ RSpec.describe SiteBatchesController, type: :request do
         expect(JSON.parse(response.body)['site_batch']).to include('id')
       end
     end
+
+    context 'to #show with GET' do
+      before do
+        @site_batch = site_batches(:site_batch_with_invalid_site)
+        @site_batch.sites << sites(:google)
+      end
+
+      it 'returns the site batch and generated sites' do
+        gt @site_batch, format: :json
+        expect(response).to be_successful
+        site_batch_json = JSON.parse(response.body)
+        expect(site_batch_json['site_batch']).to include('sites')
+        expect(site_batch_json['site_batch']).to include('id')
+      end
+    end
   end
 end

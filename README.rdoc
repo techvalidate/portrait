@@ -56,7 +56,27 @@ You'll receive the id of the `SiteBatch` object:
   }
 
 If you want to check the status of your batch, use that id like:
-TODO
+
+  curl -X GET -H "Accept: application/json" http://admin:admin@localhost:3000/site_batches/2
+
+You'll get a response that includes sites that have been generated for the batch:
+
+  {
+    "site_batch": {
+      "id": 2,
+      "status": "completed",
+      "submitted_urls": ["https://google.com","https://yahoo.com"],
+      "sites": [
+        {
+          "id": 2,
+          "status": "succeeded",
+          "image": {
+            "url": ".../1.png"
+          }
+        }
+      ]
+    }
+  }
 
 == Author
 

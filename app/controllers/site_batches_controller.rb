@@ -1,12 +1,17 @@
 class SiteBatchesController < ApplicationController
   before_action :user_required
 
+  def show
+    @site_batch = SiteBatch.find(params[:id])
+
+    respond_to { |format| format.json }
+  end
+
   def create
     @site_batch = SiteBatch.new(site_batch_params.merge(user: @current_user))
     @site_batch.save
-    respond_to do |format|
-      format.json
-    end
+
+    respond_to { |format| format.json }
   end
 
   private
