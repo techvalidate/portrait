@@ -1,0 +1,12 @@
+site_batch_valid_sites:
+  user: admin
+  status: <%= SiteBatch.statuses[:pending] %>
+  submitted_urls:
+    - https://google.com
+    - https://yahoo.com
+site_batch_with_invalid_site:
+  user: admin
+  status: <%= SiteBatch.statuses[:pending] %>
+  submitted_urls:
+    - https://google.com
+    - yahoo
