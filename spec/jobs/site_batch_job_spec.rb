@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SiteBatchJob, type: :job do
   context 'with an invalid url' do
-    it 'still process valid urls' do
+    it 'still processes valid urls' do
       site_batch = site_batches(:site_batch_with_invalid_site)
       SiteBatchJob.perform_now site_batch.id
       expect(site_batch.reload.status).to eq('completed')

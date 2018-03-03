@@ -43,9 +43,9 @@ You can submit multiple urls to be processed as a batch.
 
   curl -X POST -d '{"site_batch": {"submitted_urls": ["https://google.com","https://yahoo.com"]}}' -H "Content-Type: application/json" http://admin:admin@localhost:3000/site_batches
 
-All valid urls will be processed in a background job.
+All valid urls will be processed in a background job (remember to start delayed job on your machine).
 Invalid urls will not be processed, but will not cause the entire batch to fail.
-You'll receive the id of the `SiteBatch` object:
+You'll receive the id of the site batch object:
 
   {
     "site_batch": {

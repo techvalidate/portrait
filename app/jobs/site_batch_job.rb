@@ -13,8 +13,8 @@ class SiteBatchJob < ApplicationJob
   def process_sites
     @site_batch.submitted_urls.each do |url|
       begin
-        Site.create(user: @site_batch.user, url: url, site_batch: @site_batch).process!
-      rescue
+        Site.create(user: @site_batch.user, url: url, site_batch: @site_batch)
+      rescue StandardError
         next
       end
     end
