@@ -19,6 +19,8 @@ And visit http://localhost:3000
 
 == How it works
 
+=== Processing one site instantly
+
 Send a POST request like below. Use basic http authorization and provide a parameter named +site[url]+. You can test it with curl:
 
   curl -X POST -d "site[url]=https://google.com" -H "Accept: application/json" http://admin:admin@localhost:3000/sites
@@ -32,6 +34,47 @@ On a valid url, you'll get a json response like this:
       "image": {
         "url": ".../1.png"
       }
+    }
+  }
+
+=== Batch Processing multiple sites
+
+You can submit multiple urls to be processed as a batch.
+
+  curl -X POST -d '{"site_batch": {"submitted_urls": ["https://google.com","https://yahoo.com"]}}' -H "Content-Type: application/json" http://admin:admin@localhost:3000/site_batches
+
+All valid urls will be processed in a background job (remember to start delayed job on your machine).
+Invalid urls will not be processed, but will not cause the entire batch to fail.
+You'll receive the id of the site batch object:
+
+  {
+    "site_batch": {
+      "id": 2
+      "status": "pending",
+      "submitted_urls": ["https://google.com","https://yahoo.com"]
+    }
+  }
+
+If you want to check the status of your batch, use that id like:
+
+  curl -X GET -H "Accept: application/json" http://admin:admin@localhost:3000/site_batches/2
+
+You'll get a response that includes sites that have been generated for the batch:
+
+  {
+    "site_batch": {
+      "id": 2,
+      "status": "completed",
+      "submitted_urls": ["https://google.com","https://yahoo.com"],
+      "sites": [
+        {
+          "id": 2,
+          "status": "succeeded",
+          "image": {
+            "url": ".../1.png"
+          }
+        }
+      ]
     }
   }
 

@@ -1,3 +1,6 @@
 admin:
   name: admin
   password: password
+user:
+  name: user
+  password: password

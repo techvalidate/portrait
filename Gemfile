@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', '1.1.8', require: false
+gem 'delayed_job_active_record', '~> 4.1'
 gem 'haml', '5.0.4'
 gem 'jbuilder', '2.7.0'
 gem 'parser', '2.3.3.1'
