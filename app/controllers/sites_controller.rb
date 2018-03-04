@@ -2,7 +2,7 @@ class SitesController < ApplicationController
   before_action :user_required
 
   def index
-    @sites = Site.order(created_at: :desc).page params[:page]
+    @sites = Site.order(created_at: :desc).includes(:user).page params[:page]
     @site  = Site.new
   end
 
