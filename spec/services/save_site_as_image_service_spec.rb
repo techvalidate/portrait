@@ -21,8 +21,7 @@ describe SaveSiteAsImageService do
     end
 
     after(:each) do
-      # TODO: do we need this ? does ActiveStorage store the asset when testing ?
-      # delete the local images stored on disk
+      FileUtils.rm Dir.glob(Rails.root.to_s + '/spec/tmp/*')
     end
 
     it "should return true if the image was successfully created" do
