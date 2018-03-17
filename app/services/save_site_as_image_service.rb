@@ -11,6 +11,7 @@ class SaveSiteAsImageService
     File.exist?(path) ? attach(path, site) : false
   end
 
+  # TODO: break out into attach image service
   def self.attach(path, site)
     site.image.attach io: File.open(path), filename: "#{site.id}.png", content_type: 'image/png'
   ensure

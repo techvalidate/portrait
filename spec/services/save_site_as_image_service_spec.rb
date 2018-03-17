@@ -22,7 +22,7 @@ describe SaveSiteAsImageService do
 
     after(:each) do
       # TODO: do we need this ? does ActiveStorage store the asset when testing ?
-      # @site.image.destroy
+      # delete the local images stored on disk
     end
 
     it "should return true if the image was successfully created" do
