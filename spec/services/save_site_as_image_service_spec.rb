@@ -20,6 +20,11 @@ describe SaveSiteAsImageService do
       @site = create(:site, url: 'http://middlepathdevelopment.com')
     end
 
+    after(:each) do
+      # TODO: do we need this ? does ActiveStorage store the asset when testing ?
+      # @site.image.destroy
+    end
+
     it "should return true if the image was successfully created" do
       res = described_class.run(@site)
       expect(res).to be_truthy

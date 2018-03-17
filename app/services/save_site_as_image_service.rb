@@ -20,7 +20,7 @@ class SaveSiteAsImageService
   def self.generate_png(site)
     node      = `which node`.chomp
     file_name = "#{site.id}-full.png"
-    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}'"
+    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_screenshot.js --url='#{site.url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}'"
     system command
     return "#{Rails.root}/tmp/#{file_name}"
   end

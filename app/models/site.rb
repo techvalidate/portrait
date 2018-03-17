@@ -9,9 +9,7 @@ class Site < ApplicationRecord
   after_create :process!
   def process!
     started!
-    res = SaveSiteAsImageService.run(self)
-    res ? succeeded! : failed!
-    res
+    SaveSiteAsImageJob.perform_later(id)
   end
 
   validates :user_id, presence: true
