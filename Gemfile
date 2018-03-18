@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', '1.1.8', require: false
+gem 'delayed_job_active_record'
 gem 'haml', '5.0.4'
 gem 'jbuilder', '2.7.0'
 gem 'parser', '2.3.3.1'
@@ -26,5 +27,6 @@ group :development do
 end
 
 group :test do
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing', '1.0.2'
 end
