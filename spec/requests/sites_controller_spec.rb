@@ -32,7 +32,6 @@ describe SitesController, 'js api' do
       pst :sites, site: { url: 'https://google.com' }, format: :json
       expect(assigns(:site).user).to eq(@user)
       expect(response).to be_successful
-      expect(response.body).to be_include('"status":"succeeded"')
     }.to change(Site, :count).by(1)
   end
 
