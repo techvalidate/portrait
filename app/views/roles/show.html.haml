@@ -1,0 +1,29 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @role.name
+
+- if @role.users.active.present?
+
+  %table
+    %tr
+      %th Name
+      %th Action
+
+    - @role.users.active.each do |user|
+      %tr
+        %td= link_to user.name, user
+        %td= button_to 'Remove', users_role_path(user_id: user.id, role_id: @role.id), method: :delete, data: { confirm: 'Are you sure?' }
+
+- if @users.present?
+  %p
+    = form_tag users_roles_path, method: :post do |f|
+      %b Add User
+      = select_tag(:user_id, options_for_select(@users.map { |u| [u.name, u.id] }))
+      = hidden_field_tag 'role_id', @role.id
+      = submit_tag 'Add'
+
+= link_to 'Edit', edit_role_path(@role)
+\|
+= link_to 'Back', roles_path

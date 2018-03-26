@@ -35,7 +35,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   def authorization_header
-    { 'HTTP_AUTHORIZATION' => "Basic #{Base64.encode64(@user.name+':'+@user.password)}" } if @user
+    # password attribute overwritted by 'has_secure_password'
+    { 'HTTP_AUTHORIZATION' => "Basic #{Base64.encode64(@user.name+':'+@user.attributes["password"])}" } if @user
   end
 
   def login_as(username)

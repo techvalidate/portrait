@@ -6,11 +6,11 @@ describe User, 'authentication' do
   end
 
   it 'should not authenticate valid user with wrong password' do
-    expect(User.authenticate('admin', 'wrong')).to be_nil
+    expect(User.authenticate('admin', 'wrong')).to be_falsey
   end
 
   it 'should not authenticate valid user with nil password' do
-    expect(User.authenticate('admin', nil)).to be_nil
+    expect(User.authenticate('admin', nil)).to be_falsey
   end
 
   it 'should not authenticate with invalid user name' do

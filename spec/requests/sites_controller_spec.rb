@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 describe SitesController, 'html' do
-  before { login_as :admin }
+  before {
+    login_as :admin 
+  }
 
   it 'handles / with GET' do
     gt :sites

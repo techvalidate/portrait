@@ -5,5 +5,8 @@
     = javascript_pack_tag 'application'
     %title .portrait.
   %body
-    %h1 portrait
+    %p.right
+      Hello,
+      = link_to @current_user.name, @current_user
+    %h1= link_to 'portrait', root_path
     #Content= yield

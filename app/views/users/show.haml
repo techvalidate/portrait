@@ -1,4 +1,16 @@
-= form_with model: @user do |f|
+%p#notice= notice
+
+- if @user.groups.present?
+  %p
+    Groups:
+    = @user.print_groups
+
+- if @user.roles.present?
+  %p
+    Roles:
+    = @user.print_roles
+
+= form_with model: @user, method: :put do |f|
   = render f
   %p= f.submit 'Save'
 
