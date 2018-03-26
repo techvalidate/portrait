@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 describe UsersController do
-  before{ login_as :admin }
+  before do
+    login_as :admin
+    admin_role = Role.create name: 'Site Admin'
+    User.find_by(name: 'admin').roles << admin_role
+  end
 
   it 'handles /users with GET' do
     gt :users
@@ -15,14 +19,14 @@ describe UsersController do
 
   it 'handles /users with valid params and POST' do
     expect {
-      pst :users, user: { name: 'name', password: 'password' }
+      pst :users, user: { name: 'name', email: 'admin@email.com', password: 'password' }
       expect(response).to redirect_to(users_path)
     }.to change(User, :count).by(1)
   end
 
   it 'handles /users/:id with valid params and PUT' do
     user = users(:admin)
-    ptch user, user: { name: 'new' }
+    ptch user, user: { name: 'new', email: 'admin@email.com', password: 'password' }
     expect(user.reload.name).to eq('new')
     expect(response).to redirect_to(user_path(user))
   end

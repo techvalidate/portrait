@@ -4,4 +4,7 @@
   %ul
     %li= link_to 'Portrait on GitHub', 'http://github.com/jmckible/portrait'
     %li= link_to 'Captured Sites', sites_path
-    %li= link_to 'Manage Users', users_path
+    - if @current_user && @current_user.admin?
+      %li= link_to 'Manage Users', users_path
+      %li= link_to 'Manage Groups', groups_path
+      %li= link_to 'Manage Roles', roles_path

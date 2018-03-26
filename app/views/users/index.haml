@@ -12,11 +12,19 @@
 %table
   %tr
     %th Name
-    %th Password
+    %th Email
+    %th Groups
+    %th Roles
     %th Sites
 
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
-      %td= user.password
-      %td= number_with_delimiter user.sites.count
+      %td= user.email
+      %td
+        - user.groups.active.map do |g|
+          = link_to g.name, g
+      %td
+        - user.roles.active.map do |r|
+          = link_to r.name, r
+      %td= link_to number_with_delimiter(user.sites.count), sites_path
