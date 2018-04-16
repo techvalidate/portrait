@@ -1,4 +1,4 @@
-class ChangeStateToStatusEnum < ActiveRecord::Migration
+class ChangeStateToStatusEnum < ActiveRecord::Migration[4.2]
   def up
     add_column :sites, :status, :integer
     add_index  :sites, :status
