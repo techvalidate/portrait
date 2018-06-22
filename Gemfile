@@ -4,6 +4,7 @@ gem 'activemodel-serializers-xml', '1.0.2'
 gem 'coffee-rails', '4.2.1'
 gem 'haml', '5.0.1'
 gem 'paperclip', '5.1.0'
+gem 'parser', '2.3.3.1'
 gem 'rails', '5.1.4'
 gem 'sass-rails', '5.0.6'
 gem 'sqlite3', '1.3.11'
@@ -13,6 +14,7 @@ gem 'will_paginate', '3.1.6'
 
 group :development, :test do
   gem 'byebug', '9.0.6'
+  gem 'haml_lint', '0.25.1'
   gem 'puma', '3.8.2'
   gem 'rspec-rails', '3.7.1'
 end
