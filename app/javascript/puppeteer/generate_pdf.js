@@ -26,7 +26,7 @@ render = (async() => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     page.emulateMedia('screen')
-    await page.goto(argv.url, { waitUntil: 'networkidle2' })
+    await page.goto(argv.url)
 
     if (argv.selector && argv.selector.length > 0) {
       const selector = argv.selector
