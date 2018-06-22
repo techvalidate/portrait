@@ -15,7 +15,7 @@
         = link_to site.url, site.url
         = site.selector
       %td= link_to(site.format, site.image&.url)
-      %td= link_to site.created_at.strftime('%b %e %l:%m %p'), site.user
+      %td= link_to site.created_at.strftime('%b %e %l:%M %p'), site.user
       %td= site.status.capitalize
 
 = will_paginate @sites
