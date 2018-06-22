@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026170919) do
+ActiveRecord::Schema.define(version: 20180622170411) do
 
   create_table "sites", force: :cascade do |t|
     t.string "url"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20171026170919) do
     t.datetime "updated_at"
     t.integer "user_id"
     t.integer "status"
+    t.string "format", default: "png"
+    t.string "selector"
     t.index ["created_at"], name: "index_sites_on_created_at"
     t.index ["status"], name: "index_sites_on_status"
     t.index ["user_id"], name: "index_sites_on_user_id"

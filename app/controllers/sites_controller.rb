@@ -10,7 +10,7 @@ class SitesController < ApplicationController
 
   # POST /sites
   def create
-    @site = @current_user.sites.build params.require(:site).permit(:url)
+    @site = @current_user.sites.build params.require(:site).permit(:url, :format)
     @site.save!
     redirect_to sites_url
   rescue ActiveRecord::RecordInvalid

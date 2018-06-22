@@ -4,9 +4,12 @@ class Site < ActiveRecord::Base
   #############################################################################
   has_attached_file :image
 
+  SUPPORTED_FORMATS = %w(png pdf)
+  validates :format, inclusion: { in: SUPPORTED_FORMATS }
+
   validates_attachment :image,
-    content_type: { content_type: /\Aimage\/.*\Z/ },
-    file_name: { matches: [/png\Z/, /PNG\Z/, /jpe?g\Z/, /JPE?G\Z/] }
+    content_type: { content_type: [/\Aimage\/.*\Z/, 'application/pdf'] },
+    file_name: { matches: [/png\Z/, /PNG\Z/, /jpe?g\Z/, /JPE?G\Z/, /pdf\Z/] }
 
   #############################################################################
   #                           S T A T E    M A C H I N E                      #
@@ -32,18 +35,14 @@ class Site < ActiveRecord::Base
   after_create :process!
   def process!
     started!
-    handle generate_png
+    handle puppeteer
   end
 
-  # Generate png and returns path
-  # RIP webkit2png: # command = "python #{Rails.root}/lib/webkit2png --transparent -F -o #{id} -D #{Rails.root}/tmp #{url} "
-  def generate_png
+  def puppeteer
     node      = `which node`.chomp
-    file_name = "#{id}-full.png"
-    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_screenshot.js --url='#{url}' --fullPage=true --omitBackground=true --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}'"
-
+    file_name = "#{id}.#{format}"
+    command   = "#{node} #{Rails.root}/app/javascript/puppeteer/generate_#{format}.js --url='#{url}' --savePath='#{Rails.root}/tmp/' --fileName='#{file_name}' --selector='#{selector}'"
     system command
-
     return "#{Rails.root}/tmp/#{file_name}"
   end
 

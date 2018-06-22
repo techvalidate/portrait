@@ -26,4 +26,10 @@ describe Site do
   it 'should have an image url' do
     expect(sites(:google).image_url).to eq('/system/sites/images/000/000/001/original/google.png')
   end
+
+  it 'should only allow supported formats' do
+    site = Site.new url: 'https://google.com', format: 'tiff'
+    site.valid?
+    expect(site.errors[:format]).not_to be_empty
+  end
 end
