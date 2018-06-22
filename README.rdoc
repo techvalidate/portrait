@@ -35,9 +35,13 @@ And that's pretty much it. If you're planning to run portrait on a server-type s
 
 == How it works
 
-Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named 'url'. You can test it with curl:
+Send a POST request to the root of the server (i.e. - http://portrait.mydomain.com). Use basic http authorization and provide a parameter named +url+. You can test it with curl:
 
   curl -X POST -d "url=https://google.com" http://name:password@portrait.mydomain.com
+
+By default, a png will be generated. If you'd prefer a PDF, specify a +format+ parameter of +pdf+. For PDFs you can include an optional +selector+ param to capture only one element on the page.
+
+  curl -X POST -d "url=https://google.com&format=pdf&selector=#body" http://name:password@portrait.mydomain.com
 
 On a valid url, you'll get an XML response like this:
 

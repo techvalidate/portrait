@@ -20,9 +20,9 @@ class SitesController < ApplicationController
 
   # POST /
   def api
-    @site = @current_user.sites.build url: params[:url]
+    @site = @current_user.sites.build url: params[:url], format: (params[:format] || 'png'), selector: params[:selector]
     @site.save!
-    render xml: @site.to_xml(only: [], methods: [:image_url])
+    render xml: @site.to_xml(only: %w(format selector), methods: [:image_url])
   rescue ActiveRecord::RecordInvalid
     render xml: @site.errors.to_xml, status: 500
   end

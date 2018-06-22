@@ -30,7 +30,7 @@ render = (async() => {
     await page.goto(argv.url)
     await page.screenshot(screenshotOptions)
     await browser.close()
-    console.log(`screenshot generated: ${screenshotOptions.path}`)
+    // console.log(`screenshot generated: ${screenshotOptions.path}`)
   } catch (err) {
     console.warn(err)
     process.exit()

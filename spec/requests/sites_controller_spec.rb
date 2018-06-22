@@ -29,7 +29,31 @@ describe SitesController do
       pst [:api, :sites], url: 'https://google.com'
       expect(assigns(:site).user).to eq(@user)
       expect(response).to be_success
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<site>\n  <image-url>/system/sites/images/000/000/002/original/2.png</image-url>\n</site>\n")
+      expect(response.body).to be_include("<image-url>/system/sites/images/000/000/002/original/2.png</image-url>")
+      expect(response.body).to be_include("<format>png</format>")
+      expect(response.body).to be_include('<selector nil="true"/>')
+    }.to change(Site, :count).by(1)
+  end
+
+  it 'handles / with PDF and no selector and POST' do
+    expect {
+      pst [:api, :sites], url: 'https://google.com', format: 'pdf'
+      expect(assigns(:site).user).to eq(@user)
+      expect(response).to be_success
+      expect(response.body).to be_include("<image-url>/system/sites/images/000/000/002/original/2.pdf</image-url>")
+      expect(response.body).to be_include("<format>pdf</format>")
+      expect(response.body).to be_include('<selector nil="true"/>')
+    }.to change(Site, :count).by(1)
+  end
+
+  it 'handles / with PDF and selector and POST' do
+    expect {
+      pst [:api, :sites], url: 'https://google.com', format: 'pdf', selector: '#body'
+      expect(assigns(:site).user).to eq(@user)
+      expect(response).to be_success
+      expect(response.body).to be_include("<image-url>/system/sites/images/000/000/002/original/2.pdf</image-url>")
+      expect(response.body).to be_include("<format>pdf</format>")
+      expect(response.body).to be_include("<selector>#body</selector>")
     }.to change(Site, :count).by(1)
   end
 
@@ -37,7 +61,7 @@ describe SitesController do
     expect {
       pst [:api, :sites]
       expect(response.response_code).to eq(500)
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n")
+      expect(response.body).to be_include("<error>Url is invalid</error>")
     }.not_to change(Site, :count)
   end
 
@@ -45,7 +69,7 @@ describe SitesController do
     expect {
       pst [:api, :sites], url: 'invalid'
       expect(response.response_code).to eq(500)
-      expect(response.body).to eq("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<errors>\n  <error>Url is invalid</error>\n</errors>\n")
+      expect(response.body).to be_include("<error>Url is invalid</error>")
     }.not_to change(Site, :count)
   end
 
