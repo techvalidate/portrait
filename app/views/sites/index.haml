@@ -1,20 +1,21 @@
 = form_for @site do |f|
   = f.text_field :url
+  = f.collection_select :format, Site::SUPPORTED_FORMATS, :to_s, :to_s
   = f.submit 'Capture URL'
 
 %table
   %tr
-    %th User
     %th URL
+    %th Capture
+    %th Date
     %th Status
-    %th Added
-    %th Image
   - @sites.each do |site|
     %tr
-      %td= link_to site.user.name, users_path
-      %td= link_to site.url, site.url
+      %td
+        = link_to site.url, site.url
+        = site.selector
+      %td= link_to(site.format, site.image&.url)
+      %td= link_to site.created_at.strftime('%b %e %l:%M %p'), site.user
       %td= site.status.capitalize
-      %td= site.created_at.strftime '%B %e, %Y %I:%m %p'
-      %td= link_to(site.image.url, site.image.url) if site.image
 
 = will_paginate @sites
