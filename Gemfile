@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', '1.1.8', require: false
-gem 'haml', '5.0.4'
+# gem 'haml', '5.0.4'
+
+gem 'bcrypt'
+gem'jquery-rails'
+gem 'bootstrap'
+
 gem 'jbuilder', '2.7.0'
 gem 'parser', '2.3.3.1'
 gem 'rails', '5.2.0.rc1'
@@ -27,4 +32,8 @@ end
 
 group :test do
   gem 'rails-controller-testing', '1.0.2'
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'faker'
+  gem 'database_cleaner'
 end

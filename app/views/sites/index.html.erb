@@ -1,0 +1,37 @@
+
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="form-group">
+    <h2> Capture Site </h2>
+    </div>
+    <div class="form-group">
+<%= form_with model: @site do |f| %>
+  <%= f.text_field :url %>
+  <%= f.submit 'Capture URL', class: "btn btn-primary" %>
+  <% end %>
+    </div>
+
+<h2>Captured Sites</h2>
+<table class="table table-sm table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+        <th>URL</th>
+        <th>Status</th>
+        <th>Added</th>
+        <th>Image</th>
+      </tr>
+  </thead>
+    <tbody>
+    <% @sites.each do |site| %>
+        <tr class="text-center">
+          <td><%= link_to site.url, site.url, target: 'blank'%></td>
+          <td><%= site.status.capitalize %></td>
+          <td><%= site.created_at.strftime('%B %e, %Y %I:%m %p') %></td>
+          <td><%= link_to(site.image.filename, url_for(site.image)) if site.image.attached? %></td>
+        </tr>
+      <% end %>
+  </tbody>
+  </table>
+  </div>
+</div>

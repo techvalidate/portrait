@@ -1,0 +1,25 @@
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Manage Users</h2>
+
+<table class="table table-sm table-bordered">
+    <thead class="thead-light text-center">
+    <tr>
+        <th class="text-left">Name</th>
+        <th>Email</th>
+        <th>No. of Sites Captured</th>
+      </tr>
+  </thead>
+    <tbody>
+    <% @users.each do |user| %>
+        <tr class="text-center">
+          <td class="text-left"><%= link_to user.name, user_path(user.id) %></td>
+          <td><%= user.email %></td>
+          <td><%= number_with_delimiter user.sites.count %></td>
+        </tr>
+      <% end %>
+  </tbody>
+  </table>
+  </div>
+</div>

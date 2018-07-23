@@ -1,0 +1,28 @@
+<!--<div class="row">-->
+<!--  <div class="col-md-6 col-md-offset-3">-->
+    <%#= link_to "HOME" , root_path%>
+    <%#= link_to "Users", users_path%>
+    <%#= link_to "logout", logout_path if logged_in?%>
+<!--  </div>-->
+<!--</div>-->
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to "TechValidate" ,root_path, :class => "navbar-brand"%>
+<!--      <a class="navbar-brand" href="#">TechValidate</a>-->
+    </div>
+    <ul class="nav navbar-nav">
+
+      <li>
+        <%= link_to "Users", users_path%>
+      </li>
+      <li>
+      <%= link_to "My sites", sites_path if logged_in?%>
+      </li>
+      <li>
+        <%= link_to "logout", logout_path if logged_in?%>
+      </li>
+    </ul>
+  </div>
+</nav>

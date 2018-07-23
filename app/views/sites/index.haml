@@ -17,4 +17,4 @@
       %td= site.created_at.strftime '%B %e, %Y %I:%m %p'
       %td= link_to(site.image.filename, url_for(site.image)) if site.image.attached?
 
-= will_paginate @sites
+-#= will_paginate @sites
