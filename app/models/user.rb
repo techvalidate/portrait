@@ -6,9 +6,6 @@ class User < ApplicationRecord
   validates_presence_of :name, :email, :password_digest
   validates :email, uniqueness: true
 
-  # def self.authenticate(name, password)
-  #   User.find_by name: name, password: password
-  # end
 
   has_many :sites, dependent: :destroy
 
@@ -34,6 +31,4 @@ class User < ApplicationRecord
   def self.new_token
     SecureRandom.urlsafe_base64
   end
-  # validates :password, presence: true
-  # validates :name, uniqueness: true, format: /[a-z0-9]+/
 end

@@ -17,17 +17,6 @@ class SitesController < ApplicationController
     else
       render 'index'
     end
-
-
-
-
-
-    # @site = @current_user.sites.build params.fetch(:site, {}).permit(:url)
-    # @site.save
-    # respond_to do |format|
-    #   format.html { redirect_to sites_url }
-    #   format.json
-    # end
   end
 
   private

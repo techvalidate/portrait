@@ -29,12 +29,6 @@ class UsersController < ApplicationController
       render 'new'
     end
 
-  #   @user = User.new params.require(:user).permit!
-  #   @user.save!
-  #   redirect_to users_url
-  # rescue ActiveRecord::RecordInvalid
-  #   @users = User.by_name
-  #   render :index
   end
 
   # PUT /users/:id
