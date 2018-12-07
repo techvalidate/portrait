@@ -2,12 +2,12 @@
   "name": "portrait",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.2",
+    "@rails/webpacker": "^3.5.3",
     "minimist": "^1.2.0",
     "puppeteer": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^4.17.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^3.1.10"
   }
 }
