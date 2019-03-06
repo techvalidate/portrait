@@ -4,7 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "^3.5.3",
     "minimist": "^1.2.0",
-    "puppeteer": "^1.0.0"
+    "puppeteer": "^1.0.0",
+    "puppeteer-core": "^1.13.0"
   },
   "devDependencies": {
     "eslint": "^4.17.0",
