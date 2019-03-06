@@ -1,3 +1,29 @@
 admin:
+  customer: active
   name: admin
   password: password
+  admin: true
+
+active_admin:
+  customer: active
+  name: activeAdmin
+  password: activePassword
+  admin: true
+
+cancelled_admin:
+  customer: cancelled
+  name: cancelledAdmin
+  password: cancelledPassword
+  admin: true
+
+active_user:
+  customer: active
+  name: activeUser
+  password: activePassword
+  admin: false
+
+cancelled_user:
+  customer: cancelled
+  name: cancelledUser
+  password: cancelledPassword
+  admin: false

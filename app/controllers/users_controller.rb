@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # POST /user
   def create
     @user = User.new params.require(:user).permit!
+    @user.customer = @current_user.customer
     @user.save!
     redirect_to users_url
   rescue ActiveRecord::RecordInvalid

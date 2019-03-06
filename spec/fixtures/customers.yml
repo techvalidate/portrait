@@ -1,0 +1,7 @@
+active:
+  name: Active Customer
+  status: <%= Customer.statuses[:active]
+
+cancelled:
+  name: Cancelled Customer
+  status: <%= Customer.statuses[:cancelled]
