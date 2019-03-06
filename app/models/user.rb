@@ -5,6 +5,7 @@ class User < ApplicationRecord
   end
 
   has_many :sites, dependent: :destroy
+  belongs_to :customer
 
   scope :by_name, ->{ order(name: :asc) }
 
