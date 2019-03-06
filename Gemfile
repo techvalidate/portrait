@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'bootsnap', '1.1.8', require: false
 gem 'haml', '5.0.4'
 gem 'jbuilder', '2.7.0'
-gem 'parser', '2.3.3.1'
+gem 'parser', '2.6.0.0'
 gem 'rails', '5.2.2'
 gem 'sass-rails', '5.0.7'
 gem 'sqlite3', '1.3.13'
