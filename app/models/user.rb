@@ -8,6 +8,7 @@ class User < ApplicationRecord
   belongs_to :customer
 
   scope :by_name, ->{ order(name: :asc) }
+  scope :by_name_for_customer, ->(customer) { where(customer: customer) }
 
   def to_param() name end
 

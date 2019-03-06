@@ -16,6 +16,12 @@ cancelled_admin:
   password: cancelledPassword
   admin: true
 
+different_admin:
+  customer: different
+  name: differentAdmin
+  password: differentPassword
+  admin: true
+
 active_user:
   customer: active
   name: activeUser
