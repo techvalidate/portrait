@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :user_required
+  # TODO I feel like there should be a more elegant way to express this before action
+  # but I can't figure it out right now :(
+  before_action do
+    user_required(%w[index show].none?(action_name))
+  end
+
 
   # GET /users
   def index
