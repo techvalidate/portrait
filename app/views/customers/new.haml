@@ -1,0 +1,11 @@
+%h2 New Customer
+
+= form_with model: @customer do |f|
+  - if @customer.errors.any?
+    #ErrorModule
+      %h2= "#{pluralize @customer.errors.count, 'Error'} Prevented This Customer From Being Created"
+      %ol
+        - @customer.errors.full_messages.each do |error|
+          %li= error
+  = render f
+  %p= f.submit 'Create Customer'

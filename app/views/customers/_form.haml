@@ -1,0 +1,10 @@
+%dl
+  %dt Customer name
+  %dd= form.text_field :name
+
+  = form.fields_for :users do |user|
+    %dt User name
+    %dd= user.text_field :name
+
+    %dt User password
+    %dd= user.text_field :password
