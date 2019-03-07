@@ -1,0 +1,14 @@
+%h2 Log in
+
+= form_tag sessions_create_path do
+  %dl
+    %dt Customer name
+    %dd= text_field_tag :customer_name
+
+    %dt User name
+    %dd= text_field_tag :user_name
+
+    %dt User password
+    %dd= text_field_tag :user_password
+
+  %p= submit_tag "Login"

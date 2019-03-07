@@ -12,6 +12,10 @@ class User < ApplicationRecord
 
   def to_param() name end
 
+  def authenticate(name, password)
+    return name == self.name && password == self.password
+  end
+
   validates :password, presence: true
   validates :name, uniqueness: { scope: :customer }, format: /\A[a-z0-9]+\Z/ 
 end
