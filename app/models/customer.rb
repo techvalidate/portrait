@@ -8,5 +8,5 @@ class Customer < ApplicationRecord
 
   accepts_nested_attributes_for :users
 
-  validates :name, uniqueness: true, format: /[a-z0-9]+/ 
+  validates :name, uniqueness: true, format: /\A[A-Za-z0-9\s]+\Z/ 
 end
