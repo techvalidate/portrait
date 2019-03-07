@@ -2,3 +2,13 @@ google:
   user: admin
   status: <%= Site.statuses[:succeeded] %>
   url: http://google.com
+
+youtube:
+  user: admin
+  status: <%= Site.statuses[:succeeded] %>
+  url: http://yahoo.com
+
+wikipedia:
+  user: different_admin
+  status: <%= Site.statuses[:succeeded] %>
+  url: https://en.wikipedia.org

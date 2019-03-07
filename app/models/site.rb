@@ -3,6 +3,7 @@ class Site < ApplicationRecord
   enum status: %i[submitted started succeeded failed]
 
   belongs_to :user, counter_cache: true
+  has_one :customer, through: :user
 
   has_one_attached :image
 
