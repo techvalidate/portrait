@@ -41,9 +41,13 @@ describe User, 'validations' do
     expect(user.errors[:password]).not_to be_empty
   end
 
-  it 'should have a unique name' do
-    user = User.new name: users(:admin).name
+  it 'should have a unique name per customer' do
+    user = User.new name: users(:admin).name, customer: users(:admin).customer
     user.valid?
     expect(user.errors[:name]).not_to be_empty
+
+    user = User.new name: users(:admin).name, customer: users(:different_admin).customer
+    user.valid?
+    expect(user.errors[:name]).to be_empty
   end
 end
