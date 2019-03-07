@@ -30,7 +30,7 @@ describe User, 'validations' do
   end
 
   it 'should have a name with valid characters' do
-    user = User.new name: 'INVALID'
+    user = User.new name: 'Invalid!'
     user.valid?
     expect(user.errors[:name]).not_to be_empty
   end

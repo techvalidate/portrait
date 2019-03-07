@@ -13,5 +13,5 @@ class User < ApplicationRecord
   def to_param() name end
 
   validates :password, presence: true
-  validates :name, uniqueness: { scope: :customer }, format: /[a-z0-9]+/ 
+  validates :name, uniqueness: { scope: :customer }, format: /\A[a-z0-9]+\Z/ 
 end
