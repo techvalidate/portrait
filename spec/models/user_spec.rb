@@ -1,27 +1,5 @@
 require 'rails_helper'
 
-describe User, 'authentication' do
-  it 'should authenticate a valid user' do
-    expect(User.authenticate('admin', 'password')).to eq users(:admin)
-  end
-
-  it 'should not authenticate valid user with wrong password' do
-    expect(User.authenticate('admin', 'wrong')).to be_nil
-  end
-
-  it 'should not authenticate valid user with nil password' do
-    expect(User.authenticate('admin', nil)).to be_nil
-  end
-
-  it 'should not authenticate with invalid user name' do
-    expect(User.authenticate('invalid', 'anything')).to be_nil
-  end
-
-  it 'should not authenticate with nil user name' do
-    expect(User.authenticate(nil, nil)).to be_nil
-  end
-end
-
 describe User, 'validations' do
   it 'should have a name' do
     user = User.new

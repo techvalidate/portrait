@@ -79,7 +79,7 @@ describe UsersController do
   it 'handles /users/:id with invalid params and PUT' do
     login_as :active_admin
     user = users(:admin)
-    ptch user, user: { password: '' }
+    ptch user, user: { name: '!!!' }
     expect(user.reload.name).not_to be_blank
     expect(response).to be_successful
     expect(response).to render_template(:show)

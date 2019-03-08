@@ -33,8 +33,8 @@ class UsersController < ApplicationController
   # PUT /users/:id
   def update
     @user = User.find_by! name: params[:id], customer: @current_customer
-    if @user == current_user
-      flash[:error] = "You cannot edit yourself."
+    if updating_self_to_be_non_admin(@user, params)
+      flash[:error] = "You cannot remove administrator privileges from yourself."
     else
       @user.update_attributes! params.require(:user).permit!
     end
@@ -54,4 +54,10 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  private
+
+  def updating_self_to_be_non_admin(user, params)
+    update_user = User.new params.require(:user).permit!
+    user == current_user && !update_user.admin?
+  end
 end

@@ -1,35 +1,35 @@
 admin:
   customer: active
   name: admin
-  password: password
+  password_digest: <%= BCrypt::Password.create(common_fixture_password) %>
   admin: true
 
 active_admin:
   customer: active
   name: activeAdmin
-  password: activePassword
+  password_digest: <%= BCrypt::Password.create(common_fixture_password) %>
   admin: true
 
 cancelled_admin:
   customer: cancelled
   name: cancelledAdmin
-  password: cancelledPassword
+  password_digest: <%= BCrypt::Password.create(common_fixture_password) %>
   admin: true
 
 different_admin:
   customer: different
   name: differentAdmin
-  password: differentPassword
+  password_digest: <%= BCrypt::Password.create(common_fixture_password) %>
   admin: true
 
 active_user:
   customer: active
   name: activeUser
-  password: activePassword
+  password_digest: <%= BCrypt::Password.create(common_fixture_password) %>
   admin: false
 
 cancelled_user:
   customer: cancelled
   name: cancelledUser
-  password: cancelledPassword
+  password_digest: <%= BCrypt::Password.create(common_fixture_password) %>
   admin: false

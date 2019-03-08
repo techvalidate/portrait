@@ -13,7 +13,7 @@ RSpec.describe SessionsController, type: :controller do
     it "sets session and redirects when successful" do
       user = users(:active_user)
       customer = user.customer
-      post :create, params: { customer_name: customer.name, user_name: user.name, user_password: user.password }
+      post :create, params: { customer_name: customer.name, user_name: user.name, user_password: common_fixture_password }
       expect(response).to redirect_to(root_url)
       expect(session[:user_id]).to eq(user.id)
     end

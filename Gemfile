@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '1.1.8', require: false
 gem 'haml', '5.0.4'
 gem 'jbuilder', '2.7.0'

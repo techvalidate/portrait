@@ -40,6 +40,10 @@ RSpec.configure do |config|
 
   def login_as(username)
     @user = users(username)
-    post sessions_create_url, params: { customer_name: @user.customer.name, user_name: @user.name, user_password: @user.password }
+    post sessions_create_url, params: { customer_name: @user.customer.name, user_name: @user.name, user_password: common_fixture_password }
+  end
+
+  def common_fixture_password
+    "password"
   end
 end
