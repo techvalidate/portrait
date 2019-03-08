@@ -8,7 +8,7 @@
     %h1 portrait
 
     - if current_user
-      %span Logged into #{@current_customer.name} as #{current_user.name}.
+      %span Logged into #{current_customer.name} as #{current_user.name}.
       %div= link_to 'Logout now', sessions_destroy_url, method: :delete
     - else
       %span Not logged in.
