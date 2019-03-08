@@ -85,6 +85,17 @@ describe UsersController do
     expect(response).to render_template(:show)
   end
 
+  it 'handles /user/:id with self and PUT' do
+    login_as :active_admin
+    user = users(:active_admin)
+    expected_name = user.name
+
+    ptch user, user: { name: 'newname'}
+
+    expect(user.reload.name).to eq(expected_name)
+    expect(flash[:error]).to be_present
+  end
+
   it 'handles /users/:id with DELETE' do
     login_as :active_admin
     expect {

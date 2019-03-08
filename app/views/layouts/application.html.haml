@@ -5,7 +5,7 @@
     = javascript_pack_tag 'application'
     %title .portrait.
   %body
-    %h1 portrait
+    %h1= link_to 'portrait', root_url
 
     - if current_user
       %span Logged into #{current_customer.name} as #{current_user.name}.

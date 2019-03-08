@@ -33,7 +33,11 @@ class UsersController < ApplicationController
   # PUT /users/:id
   def update
     @user = User.find_by! name: params[:id], customer: @current_customer
-    @user.update_attributes! params.require(:user).permit!
+    if @user == current_user
+      flash[:error] = "You cannot edit yourself."
+    else
+      @user.update_attributes! params.require(:user).permit!
+    end
     redirect_to @user
   rescue ActiveRecord::RecordInvalid
     render :show
