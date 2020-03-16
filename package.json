@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.6.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "puppeteer": "^1.17.0"
   },
   "devDependencies": {
