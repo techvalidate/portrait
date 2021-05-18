@@ -14,7 +14,7 @@ gem 'will_paginate', '3.1.6'
 group :development, :test do
   gem 'byebug', '10.0.0'
   gem 'haml_lint', '0.25.1'
-  gem 'puma', '3.12.4'
+  gem 'puma', '4.3.8'
   gem 'rspec-rails', '3.7.2'
 end
 
